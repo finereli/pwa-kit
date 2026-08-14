@@ -890,6 +890,34 @@ Set `preload='metadata'` on create, upgrade to `'auto'` inside `play()`.
 
 Play UI sounds (bells, notifications) through the Web Audio API, never a second `<audio>` element. The main element must keep exclusive ownership of MediaSession.
 
+## Date & time formatting
+
+Never show raw ISO strings to users. Format dates for the context.
+
+### Patterns by context
+
+| Context | Format | Example |
+|---------|--------|---------|
+| Admin lists, cards, metadata | dd/mm/yyyy | 14/08/2026 |
+| User-facing Hebrew dates | Intl day + month (he-IL) | 14 באוגוסט |
+| User-facing Hebrew dates, other year | Intl day + month + year | 14 באוגוסט 2025 |
+| Recent events | Intl.RelativeTimeFormat | לפני 3 שעות, אתמול |
+| Duration / playback time | m:ss | 8:55 |
+| Remaining time | m:ss with label | נשארו 3:42 |
+
+### Rules
+
+- Store dates as ISO 8601 in the database (`2026-08-14`, `2026-08-14T20:32:00Z`).
+- Admin/internal UIs use numeric dd/mm/yyyy - compact and scannable.
+- User-facing apps use Hebrew prose dates via `Intl.DateTimeFormat('he-IL')` - warmer and more natural.
+- Duration is always `m:ss`: no leading zero on minutes, zero-padded seconds.
+- Use `font-variant-numeric: tabular-nums` on any time or date display to prevent layout jitter.
+- For relative times, use a ladder: just now / Xm / Xh / yesterday / Hebrew date. `Intl.RelativeTimeFormat('he', { numeric: 'auto' })` handles the Hebrew naturally.
+
+### Shared helpers
+
+Extract date/time formatting into a shared module per project so every component renders consistently. Don't inline ad-hoc formatting.
+
 ## Timing constants
 
 These are the house timing signature. Use them consistently.
