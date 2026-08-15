@@ -1,7 +1,7 @@
 // Version-update flow for an installable PWA (spec: reference/updates.md).
 //
 // The service worker takes over as soon as it has downloaded (skipWaiting +
-// clientsClaim, see build/pwa-build.js), so the newest version always serves the
+// clientsClaim, see build/pwa-build.ts), so the newest version always serves the
 // next page load and a plain reload can never be stuck on an old one. What
 // this module decides is *when the page reloads into it*:
 //
@@ -11,7 +11,7 @@
 //     reloads on the spot. Otherwise `available` turns on, the drawer's
 //     reload icon lights up (a tap reloads now), and sending the app to the
 //     background applies the update silently.
-//     Wire it in main.js: `updates.init({ canReload: () => !player.playing })`.
+//     Wire it in main.ts: `updates.init({ canReload: () => !player.playing })`.
 //   - the host can veto the silent moments via `canReload` (audio playing,
 //     upload in flight); the update just waits for the next one.
 //   - the app checks for a new version on launch, on every return to the
@@ -34,12 +34,12 @@ const QUIET_LAUNCH_MS = 10_000
 class Updates {
   available = $state(false)
   resetting = $state(false)
-  #reg = null
-  #canReload = () => true
+  #reg: ServiceWorkerRegistration | null = null
+  #canReload: () => boolean = () => true
   #interacted = false
   #reloading = false
 
-  init({ canReload = () => true } = {}) {
+  init({ canReload = () => true }: { canReload?: () => boolean } = {}) {
     if (!('serviceWorker' in navigator)) return
     this.#canReload = canReload
 
@@ -49,7 +49,7 @@ class Updates {
 
     // The worker this page considers current. `undefined` until registration
     // resolves; null on a first visit (nothing active yet).
-    let current
+    let current: ServiceWorker | null | undefined
 
     navigator.serviceWorker.addEventListener('controllerchange', () => {
       const controller = navigator.serviceWorker.controller

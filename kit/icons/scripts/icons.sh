@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenerate src/lib/icons.js from the material-symbols font. See scripts/icons.py.
+# Regenerate src/lib/icons.ts from the material-symbols font. See scripts/icons.py.
 # Add icons:  npm run icon <name> [<name>...]      List icons:  npm run icon
 set -euo pipefail
 cd "$(dirname "$0")/.."

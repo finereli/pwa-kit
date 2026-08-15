@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
   // Always-visible autosave indicator next to an editor. Idle state is the
   // hint that changes save themselves; then saving / saved / a tappable
   // retry on failure. States are grid-stacked so a swap never shifts layout.
   // Seams: the four strings.
   import { fade } from 'svelte/transition'
+  import type { SaveTracker } from '../lib/save-tracker.svelte'
 
   let {
     tracker,
@@ -11,7 +12,7 @@
     savingText = 'Saving...',
     savedText = '✓ Saved',
     errorText = 'Save failed · retry',
-  } = $props()
+  }: { tracker: SaveTracker; idleText?: string; savingText?: string; savedText?: string; errorText?: string } = $props()
 </script>
 
 <span class="save-status">

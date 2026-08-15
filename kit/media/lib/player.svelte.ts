@@ -8,7 +8,7 @@
 // When the screen comes back on we resync it. Nothing to hand off, nothing to
 // race.
 //
-// The app instantiates it once (src/lib/player.svelte.js):
+// The app instantiates it once (src/lib/player.svelte.ts):
 //
 //   export const player = new Player({
 //     audioUrl: (item) => `${MEDIA_BASE}/${item.mediaKey}.m4a`,
@@ -18,14 +18,32 @@
 //     beforePlay: async () => {}, onEnded: () => {}, onLoad: () => {},
 //   })
 //
-// Wire the rest in App.svelte / main.js:
+// Wire the rest in App.svelte / main.ts:
 //   document.addEventListener('visibilitychange', () => !document.hidden && player.resync())
 //   addEventListener('pagehide', () => player.flush())
 //   updates.init({ canReload: () => !player.playing })
 // and for video items: <video bind:this={el} muted playsinline {src}> with
 // player.attachVideo(el) on mount, detachVideo(el) on unmount.
 
-import { progressFor, recordProgress } from './progress.js'
+import { progressFor, recordProgress } from './progress'
+
+export interface PlayableItem {
+  id: string
+  title: string
+  duration?: number
+  series?: string
+  [key: string]: unknown
+}
+
+export interface PlayerOptions<T extends PlayableItem = PlayableItem> {
+  audioUrl: (item: T) => string
+  artist?: string
+  album?: string
+  artwork?: MediaImage[]
+  beforePlay?: (() => Promise<unknown>) | null
+  onEnded?: (() => void) | null
+  onLoad?: (() => void) | null
+}
 
 // Don't resume from the very first moments; you'd rather just start over.
 const RESUME_FLOOR = 10
@@ -47,27 +65,27 @@ const NUDGE = 0.06
 const HARD = 0.5
 const NUDGE_RATE = 0.04
 
-export class Player {
-  item = $state(null)
-  queue = $state([])
+export class Player<T extends PlayableItem = PlayableItem> {
+  item = $state<T | null>(null)
+  queue = $state<T[]>([])
   playing = $state(false)
   position = $state(0)
   duration = $state(0)
   waiting = $state(false)
 
-  #audio = null
-  #video = null
+  #audio: HTMLAudioElement | null = null
+  #video: HTMLVideoElement | null = null
   #raf = 0
   #lastSave = 0
   #seeking = false
   // A resume position waiting for metadata to arrive.
-  #pending = null
+  #pending: number | null = null
   // What the user asked for, as distinct from what the element is doing. The
   // two come apart when the browser pauses us behind our back.
   #wanted = false
-  #opts
+  #opts: Required<PlayerOptions<T>>
 
-  constructor({ audioUrl, artist = '', album, artwork = [], beforePlay = null, onEnded = null, onLoad = null } = {}) {
+  constructor({ audioUrl, artist = '', album = '', artwork = [], beforePlay = null, onEnded = null, onLoad = null }: PlayerOptions<T>) {
     if (!audioUrl) throw new Error('Player: audioUrl(item) is required')
     this.#opts = { audioUrl, artist, album, artwork, beforePlay, onEnded, onLoad }
   }
@@ -84,7 +102,7 @@ export class Player {
     return this.index >= 0 && this.index < this.queue.length - 1
   }
 
-  #el() {
+  #el(): HTMLAudioElement {
     if (this.#audio) return this.#audio
     const a = new Audio()
     a.preload = 'metadata'
@@ -147,7 +165,7 @@ export class Player {
 
   // ── video follows audio ────────────────────────────────────────────────────
 
-  attachVideo(el) {
+  attachVideo(el: HTMLVideoElement | null) {
     this.#video = el
     if (!el) return
     el.muted = true
@@ -159,7 +177,7 @@ export class Player {
     }
   }
 
-  detachVideo(el) {
+  detachVideo(el: HTMLVideoElement) {
     if (this.#video !== el) return
     this.#video = null
     this.#stopLoop()
@@ -241,7 +259,7 @@ export class Player {
 
   // ── transport ──────────────────────────────────────────────────────────────
 
-  load(item, queue) {
+  load(item: T, queue?: T[]) {
     if (queue) this.queue = queue
     if (this.item?.id === item.id) return
 
@@ -301,7 +319,7 @@ export class Player {
     else this.play()
   }
 
-  seek(seconds) {
+  seek(seconds: number) {
     const a = this.#el()
     const target = Math.max(0, Math.min(seconds, this.duration || seconds))
     this.position = target
@@ -314,7 +332,7 @@ export class Player {
     this.#save()
   }
 
-  skip(delta) {
+  skip(delta: number) {
     this.seek(this.position + delta)
   }
 
@@ -323,16 +341,16 @@ export class Player {
     this.#seeking = true
   }
 
-  scrubTo(seconds) {
+  scrubTo(seconds: number) {
     this.position = seconds
   }
 
-  endScrub(seconds) {
+  endScrub(seconds: number) {
     this.#seeking = false
     this.seek(seconds)
   }
 
-  go(offset) {
+  go(offset: number): T | null {
     const next = this.queue[this.index + offset]
     if (!next) return null
     const wasPlaying = this.playing
@@ -365,7 +383,7 @@ export class Player {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: this.item.title,
       artist: this.#opts.artist,
-      album: this.item.series || this.#opts.album || this.#opts.artist,
+      album: (this.item.series as string | undefined) || this.#opts.album || this.#opts.artist,
       artwork: this.#opts.artwork,
     })
   }
@@ -377,7 +395,7 @@ export class Player {
   bindMediaSession() {
     if (!('mediaSession' in navigator)) return
     const ms = navigator.mediaSession
-    const set = (action, handler) => {
+    const set = (action: MediaSessionAction, handler: MediaSessionActionHandler) => {
       try {
         ms.setActionHandler(action, handler)
       } catch {

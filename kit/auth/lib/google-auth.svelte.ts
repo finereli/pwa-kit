@@ -5,7 +5,7 @@
 // From then on the session token is the credential. The page URL never
 // changes, so hash-based deep links survive sign-in untouched.
 //
-// Each app instantiates this once (src/lib/auth.svelte.js):
+// Each app instantiates this once (src/lib/auth.svelte.ts):
 //
 //   export const auth = new GoogleAuth({
 //     clientId: '….apps.googleusercontent.com',
@@ -16,7 +16,34 @@
 // Seams: clientId (required), storageKey, devHostSuffix, devUser (defaults to
 // the dev identity; must match devBypassUser on the server).
 
-export const DEFAULT_DEV_USER = {
+export interface AuthUser {
+  id: string
+  name: string
+  email: string
+  picture: string
+  isAdmin: boolean
+  credential: string
+}
+
+export interface GoogleAuthOptions {
+  clientId: string
+  storageKey: string
+  devHostSuffix?: string
+  devUser?: AuthUser
+}
+
+// Minimal typing for the bits of Google Identity Services we touch.
+declare const google: {
+  accounts: {
+    id: {
+      initialize(opts: { client_id: string; callback: (r: { credential: string }) => void; auto_select?: boolean }): void
+      prompt(cb?: (n: { isNotDisplayed(): boolean; isSkippedMoment(): boolean }) => void): void
+      disableAutoSelect(): void
+    }
+  }
+}
+
+export const DEFAULT_DEV_USER: AuthUser = {
   id: '100000000000000000001',
   name: 'Dev User',
   email: 'dev@example.com',
@@ -26,16 +53,16 @@ export const DEFAULT_DEV_USER = {
 }
 
 export class GoogleAuth {
-  user = $state(null)
+  user = $state<AuthUser | null>(null)
   #ready = $state(false)
-  #clientId
-  #storageKey
-  #devHostSuffix
-  #devUser
+  #clientId: string
+  #storageKey: string
+  #devHostSuffix: string | undefined
+  #devUser: AuthUser
   // Sign-in/out listeners, so stores holding per-user data can reset.
-  #listeners = []
+  #listeners: Array<(u: AuthUser | null) => void> = []
 
-  constructor({ clientId, storageKey, devHostSuffix, devUser = DEFAULT_DEV_USER }) {
+  constructor({ clientId, storageKey, devHostSuffix, devUser = DEFAULT_DEV_USER }: GoogleAuthOptions) {
     if (!clientId) throw new Error('GoogleAuth: clientId is required')
     this.#clientId = clientId
     this.#storageKey = storageKey
@@ -61,7 +88,7 @@ export class GoogleAuth {
     return h === 'localhost' || h === '127.0.0.1' || (this.#devHostSuffix && h.endsWith(this.#devHostSuffix))
   }
 
-  onChange(fn) {
+  onChange(fn: (u: AuthUser | null) => void) {
     this.#listeners.push(fn)
   }
 
@@ -125,8 +152,8 @@ export class GoogleAuth {
     try { google.accounts.id.prompt() } catch {}
   }
 
-  async #onCredential(response) {
-    const payload = JSON.parse(atob(response.credential.split('.')[1]))
+  async #onCredential(response: { credential: string }) {
+    const payload = JSON.parse(atob(response.credential.split('.')[1])) as { sub: string; name: string; email: string; picture: string }
     const res = await fetch('/api/auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -134,7 +161,7 @@ export class GoogleAuth {
     })
     // Even if the server is unreachable the local decode can sign the user in;
     // API calls that need the server will 401 and re-prompt.
-    const data = res.ok ? await res.json() : {}
+    const data = (res.ok ? await res.json() : {}) as { session?: string; is_admin?: number }
 
     this.user = {
       id: payload.sub,
@@ -185,14 +212,14 @@ export class GoogleAuth {
     }, 200)
   }
 
-  #loadGsi() {
-    return new Promise((resolve, reject) => {
+  #loadGsi(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
       if (typeof google !== 'undefined' && google.accounts) { resolve(); return }
       const s = document.createElement('script')
       s.src = 'https://accounts.google.com/gsi/client'
       s.async = true
-      s.onload = resolve
-      s.onerror = reject
+      s.onload = () => resolve()
+      s.onerror = () => reject(new Error('GSI failed to load'))
       document.head.appendChild(s)
     })
   }

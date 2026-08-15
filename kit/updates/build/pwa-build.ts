@@ -1,6 +1,6 @@
-// Build-time half of the update flow, imported by vite.config.js:
+// Build-time half of the update flow, imported by vite.config.ts:
 //
-//   import { buildNumber, pwaOptions } from '../shared/build/pwa-build.js'
+//   import { buildNumber, pwaOptions } from '../shared/build/pwa-build'
 //   export default defineConfig({
 //     define: { __BUILD__: JSON.stringify(buildNumber(1)) },
 //     plugins: [svelte(), VitePWA(pwaOptions({ manifest: {…}, includeAssets: ['fonts/*.woff2', 'icons/*.png'] }))],
@@ -14,8 +14,9 @@
 // otherwise carry the same number.
 
 import { execSync } from 'node:child_process'
+import type { VitePWAOptions } from 'vite-plugin-pwa'
 
-export function buildNumber(major = 1) {
+export function buildNumber(major = 1): string {
   let build = process.env.BUILD_NUMBER || 'dev'
   if (!process.env.BUILD_NUMBER) {
     try {
@@ -27,8 +28,17 @@ export function buildNumber(major = 1) {
 
 // vite-plugin-pwa options. The worker takes over as soon as it has downloaded
 // (skipWaiting + clientsClaim); the page decides when to reload into it - see
-// lib/updates.svelte.js, which also does the registration, so nothing is
+// lib/updates.svelte.ts, which also does the registration, so nothing is
 // injected here (injectRegister: null).
+export interface PwaOptionsInput {
+  manifest: VitePWAOptions['manifest']
+  includeAssets?: string[]
+  globPatterns?: string[]
+  maxFileSizeMB?: number
+  navigateFallbackDenylist?: RegExp[]
+  workbox?: Partial<NonNullable<VitePWAOptions['workbox']>>
+}
+
 export function pwaOptions({
   manifest,
   includeAssets = [],
@@ -43,7 +53,7 @@ export function pwaOptions({
   // precached, so it works even when the app itself is stuck.
   navigateFallbackDenylist = [/^\/api\//, /^\/icons\//, /^\/fonts\//, /^\/reset(\.html)?$/],
   workbox = {},
-} = {}) {
+}: PwaOptionsInput): Partial<VitePWAOptions> {
   return {
     registerType: 'autoUpdate',
     injectRegister: null,

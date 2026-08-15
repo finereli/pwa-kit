@@ -11,10 +11,14 @@ const KEY = 'app.progress.v1'
 // recording you sat through to the closing word doesn't sit there at 98%.
 const DONE_TAIL = 20
 
-const localBackend = {
+export interface Progress { position: number; completed: boolean; updatedAt?: number }
+export type ProgressState = Record<string, Progress>
+export interface ProgressBackend { load(): ProgressState; save(state: ProgressState): void }
+
+const localBackend: ProgressBackend = {
   load() {
     try {
-      return JSON.parse(localStorage.getItem(KEY)) || {}
+      return JSON.parse(localStorage.getItem(KEY) ?? 'null') || {}
     } catch {
       return {}
     }
@@ -28,31 +32,31 @@ const localBackend = {
   },
 }
 
-let backend = localBackend
-let state = backend.load()
+let backend: ProgressBackend = localBackend
+let state: ProgressState = backend.load()
 
-export function setBackend(next) {
+export function setBackend(next: ProgressBackend) {
   backend = next
   state = backend.load()
 }
 
-export function progressFor(id) {
+export function progressFor(id: string): Progress {
   return state[id] || { position: 0, completed: false }
 }
 
-export function recordProgress(id, position, duration) {
+export function recordProgress(id: string, position: number, duration: number) {
   if (!Number.isFinite(position)) return
   const completed = Number.isFinite(duration) && duration > 0 && position >= duration - DONE_TAIL
   state = {
     ...state,
     // Restarting a finished item shouldn't drop it back to "in progress" until
     // you're actually somewhere new in it.
-    [id]: { position, completed: completed || (state[id]?.completed && position < 5), updatedAt: Date.now() },
+    [id]: { position, completed: completed || (!!state[id]?.completed && position < 5), updatedAt: Date.now() },
   }
   backend.save(state)
 }
 
-export function clearProgress(id) {
+export function clearProgress(id: string) {
   const next = { ...state }
   delete next[id]
   state = next

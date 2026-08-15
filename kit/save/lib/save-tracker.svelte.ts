@@ -8,14 +8,16 @@
 // and publication, and a done-button on an autosaving editor is labeled
 // "Done", never "Save". Init form fields once per entity id, or a slow
 // round-trip clobbers what the user typed next.
+export type SaveStatus = 'idle' | 'saving' | 'saved' | 'error'
+
 export class SaveTracker {
-  status = $state('idle') // idle | saving | saved | error
+  status = $state<SaveStatus>('idle')
   #pending = 0
-  #lastFn = null
+  #lastFn: (() => Promise<unknown>) | null = null
 
   // Run one save. Overlapping runs are counted so the status only settles
   // to 'saved' when the last in-flight write lands.
-  async run(fn) {
+  async run(fn: () => Promise<unknown>) {
     this.#lastFn = fn
     this.#pending++
     this.status = 'saving'

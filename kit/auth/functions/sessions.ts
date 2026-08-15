@@ -5,7 +5,18 @@
 // long-lived credential. /api/auth exchanges a verified Google credential for
 // one of these instead: 90 days, revocable by deleting the row.
 
-export async function createSession(db, googleId) {
+export interface SessionUser {
+  google_id: string
+  email: string
+  is_admin: number
+}
+export interface DevUser {
+  sub: string
+  email: string
+  is_admin: number
+}
+
+export async function createSession(db: D1Database, googleId: string): Promise<string> {
   const bytes = crypto.getRandomValues(new Uint8Array(32))
   const token = 'sess_' + [...bytes].map((b) => b.toString(16).padStart(2, '0')).join('')
   await db.batch([
@@ -19,21 +30,21 @@ export async function createSession(db, googleId) {
 }
 
 // Returns { google_id, email, is_admin } for a live session token, else null.
-export async function validateSession(db, token) {
+export async function validateSession(db: D1Database, token: string | undefined): Promise<SessionUser | null> {
   if (!token?.startsWith('sess_')) return null
   try {
     const row = await db.prepare(
       `SELECT s.google_id, u.email, u.is_admin
        FROM sessions s JOIN users u ON u.google_id = s.google_id
        WHERE s.token = ?1 AND s.expires_at > datetime('now')`
-    ).bind(token).first()
+    ).bind(token).first<SessionUser>()
     return row ?? null
   } catch {
     return null
   }
 }
 
-export async function deleteSession(db, token) {
+export async function deleteSession(db: D1Database, token: string | undefined): Promise<void> {
   if (!token?.startsWith('sess_')) return
   try {
     await db.prepare('DELETE FROM sessions WHERE token = ?').bind(token).run()
@@ -48,10 +59,10 @@ export async function deleteSession(db, token) {
 // A hostname check alone is NOT an auth boundary: previews once bound the
 // production database, and any preview URL was full admin access.
 //
-// `devUser` must match the client's devUser (lib/google-auth.svelte.js).
-export const DEFAULT_DEV_USER = { sub: '100000000000000000001', email: 'dev@example.com', is_admin: 1 }
+// `devUser` must match the client's devUser (lib/google-auth.svelte.ts).
+export const DEFAULT_DEV_USER: DevUser = { sub: '100000000000000000001', email: 'dev@example.com', is_admin: 1 }
 
-export function devBypassUser(token, url, env, devUser = DEFAULT_DEV_USER) {
+export function devBypassUser(token: string | undefined, url: URL, env: { DEV_AUTH?: string }, devUser: DevUser = DEFAULT_DEV_USER): DevUser | null {
   if (token !== 'dev-token') return null
   if (env.DEV_AUTH !== 'allow') return null
   const h = url.hostname

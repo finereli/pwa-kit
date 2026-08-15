@@ -9,15 +9,18 @@
 // app. Server side: a POST sink that appends { level, msg, ts } rows to its
 // own log.
 //
-//   import { initRemoteLog } from '$shared/lib/remote-log.js'
+//   import { initRemoteLog } from '$shared/lib/remote-log'
 //   initRemoteLog({ url: '/api/client-log', headers: () => ({ Authorization: `Bearer ${auth.token}` }) })
 
 const FLUSH_INTERVAL = 2000
 const MAX_BUFFER = 50
 
-let buffer = []
-let flushTimer = null
-let opts = null
+interface LogRow { level: string; msg: string; ts: number }
+interface RemoteLogOptions { url?: string; headers?: () => Record<string, string> }
+
+let buffer: LogRow[] = []
+let flushTimer: ReturnType<typeof setTimeout> | null = null
+let opts: Required<Pick<RemoteLogOptions, 'url'>> & RemoteLogOptions | null = null
 
 function flush() {
   if (!buffer.length || !opts) return
@@ -37,8 +40,8 @@ function scheduleFlush() {
   }, FLUSH_INTERVAL)
 }
 
-function intercept(level, original) {
-  return (...args) => {
+function intercept(level: string, original: (...args: unknown[]) => void) {
+  return (...args: unknown[]) => {
     original.apply(console, args)
     const msg = args.map((a) => (typeof a === 'string' ? a : safeJson(a))).join(' ')
     if (!msg.startsWith('[')) return
@@ -47,11 +50,11 @@ function intercept(level, original) {
   }
 }
 
-function safeJson(v) {
+function safeJson(v: unknown): string {
   try { return JSON.stringify(v) } catch { return String(v) }
 }
 
-export function initRemoteLog({ url = '/api/client-log', headers } = {}) {
+export function initRemoteLog({ url = '/api/client-log', headers }: RemoteLogOptions = {}) {
   opts = { url, headers }
   console.log = intercept('log', console.log)
   console.warn = intercept('warn', console.warn)

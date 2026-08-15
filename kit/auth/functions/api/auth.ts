@@ -8,13 +8,15 @@
 // where the app keeps shared code (`../../../shared/functions/…` in a repo
 // with app/ and admin/ siblings).
 
-import { verifyGoogleToken } from '../../shared/functions/google-token.js'
-import { createSession, deleteSession } from '../../shared/functions/sessions.js'
-import { CLIENT_ID } from './_config.js'
+import { verifyGoogleToken } from '../../shared/functions/google-token'
+import { createSession, deleteSession } from '../../shared/functions/sessions'
+import { CLIENT_ID } from './_config'
 
-export async function onRequestPost({ request, env }) {
+interface Env { DB: D1Database; DEV_AUTH?: string }
+
+export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   try {
-    const { credential } = await request.json()
+    const { credential } = (await request.json()) as { credential?: string }
     if (!credential) {
       return Response.json({ error: 'missing credential' }, { status: 400 })
     }
@@ -33,7 +35,7 @@ export async function onRequestPost({ request, env }) {
 
     const row = await env.DB.prepare(
       'SELECT is_admin FROM users WHERE google_id = ?'
-    ).bind(payload.sub).first()
+    ).bind(payload.sub).first<{ is_admin: number }>()
     const isAdmin = row?.is_admin ?? 0
 
     const session = await createSession(env.DB, payload.sub)
@@ -47,11 +49,11 @@ export async function onRequestPost({ request, env }) {
       session,
     })
   } catch (err) {
-    return Response.json({ error: err.message }, { status: 401 })
+    return Response.json({ error: (err as Error).message }, { status: 401 })
   }
 }
 
-export async function onRequestDelete({ request, env }) {
+export const onRequestDelete: PagesFunction<Env> = async ({ request, env }) => {
   const token = request.headers.get('Authorization')?.replace('Bearer ', '')
   await deleteSession(env.DB, token)
   return Response.json({ ok: true })

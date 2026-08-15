@@ -1,5 +1,5 @@
-// src/lib/auth.svelte.js in the app - the one instance everything imports.
-import { GoogleAuth } from '$shared/lib/google-auth.svelte.js'
+// src/lib/auth.svelte.ts in the app - the one instance everything imports.
+import { GoogleAuth } from '$shared/lib/google-auth.svelte'
 
 export const auth = new GoogleAuth({
   clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com',

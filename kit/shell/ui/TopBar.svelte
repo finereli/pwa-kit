@@ -1,10 +1,13 @@
-<script>
+<script lang="ts">
+  import type { Snippet } from 'svelte'
   // The one bar at the top of every screen. `leading` decides whether it opens
   // the menu or goes back; everything else stays put, which is what makes it
   // read as an app rather than a page. Colours come from the host app's
   // tokens, so the same bar is sage in one app and amber in its sibling.
   // Seams: the two aria labels; `trailing` snippet for an optional action.
-  let { leading = 'menu', title = '', onleading, menuLabel = 'Menu', backLabel = 'Back', trailing } = $props()
+  let { leading = 'menu', title = '', onleading, menuLabel = 'Menu', backLabel = 'Back', trailing }: {
+    leading?: 'menu' | 'back'; title?: string; onleading?: () => void; menuLabel?: string; backLabel?: string; trailing?: Snippet
+  } = $props()
 </script>
 
 <header class="topbar">

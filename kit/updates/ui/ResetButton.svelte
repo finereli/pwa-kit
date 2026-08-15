@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   // The drawer's reload control, drawn as the Material "autorenew" glyph.
   // Two jobs, one icon: normally it is the manual escape hatch (forget the
   // cached app, load it fresh - updates.reset()); when a new version is
@@ -7,9 +7,9 @@
   // spins while a reset runs so the tap visibly did something.
   // Seams: the two labels (updateLabel is an imperative - "tap to update";
   // resetLabel names the action - "reload").
-  import { updates } from '../lib/updates.svelte.js'
+  import { updates } from '../lib/updates.svelte'
 
-  let { tabindex = 0, updateLabel = 'Tap to update', resetLabel = 'Reload' } = $props()
+  let { tabindex = 0, updateLabel = 'Tap to update', resetLabel = 'Reload' }: { tabindex?: number; updateLabel?: string; resetLabel?: string } = $props()
   const label = $derived(updates.available ? updateLabel : resetLabel)
 </script>
 

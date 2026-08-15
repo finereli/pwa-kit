@@ -3,9 +3,10 @@
 // function the app supplies plus a few history rules that are easy to get
 // wrong.
 //
-//   // src/lib/router.svelte.js
-//   import { Router } from '$shared/lib/router.svelte.js'
-//   export const router = new Router({
+//   // src/lib/router.svelte.ts
+//   import { Router } from '$shared/lib/router.svelte'
+//   type Route = { view: 'library' } | { view: 'about' } | { view: 'play'; id: string }
+//   export const router = new Router<Route>({
 //     home: '/',
 //     parse(path) {
 //       const play = path.match(/^\/play\/([\w-]+)$/)
@@ -23,13 +24,13 @@
 //   - unknown paths resolve to whatever parse() returns for them - make it home
 //   - the drawer/overlay closes on any navigation: subscribe with onChange()
 
-export class Router {
-  route = $state({})
-  #parse
-  #home
-  #listeners = []
+export class Router<R extends object = Record<string, unknown>> {
+  route = $state({}) as R
+  #parse: (path: string) => R | null | undefined
+  #home: string
+  #listeners: Array<(r: R) => void> = []
 
-  constructor({ parse, home = '/' }) {
+  constructor({ parse, home = '/' }: { parse: (path: string) => R | null | undefined; home?: string }) {
     this.#parse = parse
     this.#home = home
   }
@@ -37,25 +38,25 @@ export class Router {
   start() {
     const apply = () => {
       const path = location.hash.replace(/^#/, '') || this.#home
-      this.route = this.#parse(path) ?? this.#parse(this.#home)
+      this.route = (this.#parse(path) ?? this.#parse(this.#home)) as R
       for (const fn of this.#listeners) fn(this.route)
     }
     apply()
     addEventListener('hashchange', apply)
   }
 
-  onChange(fn) { this.#listeners.push(fn) }
+  onChange(fn: (r: R) => void) { this.#listeners.push(fn) }
 
-  go(path) { location.hash = path }
+  go(path: string) { location.hash = path }
 
   // Replace rather than push, so skipping through five items doesn't leave
   // five entries to back out of.
-  replace(path) {
+  replace(path: string) {
     history.replaceState(null, '', `#${path}`)
-    this.route = this.#parse(path) ?? this.#parse(this.#home)
+    this.route = (this.#parse(path) ?? this.#parse(this.#home)) as R
   }
 
-  back(fallback = this.#home) {
+  back(fallback: string = this.#home) {
     if (history.length > 1) history.back()
     else location.hash = fallback
   }

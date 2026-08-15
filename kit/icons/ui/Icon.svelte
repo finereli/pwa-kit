@@ -1,10 +1,10 @@
-<script>
-  // Inline SVG icon. Draws a Material Symbols glyph from src/lib/icons.js with
+<script lang="ts">
+  // Inline SVG icon. Draws a Material Symbols glyph from src/lib/icons.ts with
   // no font to download, so it renders instantly. `size` is in px; colour comes
   // from the surrounding `color` (fill: currentColor), same as the old font.
-  import { icons } from '../lib/icons.js'
+  import { icons } from '../lib/icons'
 
-  let { name, size = 24 } = $props()
+  let { name, size = 24 }: { name: string; size?: number } = $props()
   const d = $derived(icons[name])
 </script>
 

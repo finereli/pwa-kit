@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+  import type { Snippet } from 'svelte'
   // The button. Variants: primary (solid accent), outline, ghost, danger,
   // danger-ghost. Sizes sm/md/lg. `block` fills the row.
   let {
@@ -9,6 +10,14 @@
     onclick,
     children,
     ...rest
+  }: {
+    variant?: 'primary' | 'outline' | 'ghost' | 'danger' | 'danger-ghost'
+    size?: 'sm' | 'md' | 'lg'
+    block?: boolean
+    disabled?: boolean
+    onclick?: (e: MouseEvent) => void
+    children?: Snippet
+    [key: string]: unknown
   } = $props()
 </script>
 

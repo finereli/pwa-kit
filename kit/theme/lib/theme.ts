@@ -26,18 +26,18 @@
 const DARK_KEY = 'app.dark.v1'
 const DARK_SURFACE = '#1e1e2e' // Catppuccin Mocha base
 
-export function isDark() {
+export function isDark(): boolean {
   return document.documentElement.classList.contains('dark')
 }
 
-export function setDarkMode(on, accentHex = null) {
+export function setDarkMode(on: boolean, accentHex: string | null = null) {
   document.documentElement.classList.toggle('dark', on)
   localStorage.setItem(DARK_KEY, on ? '1' : '0')
   if (accentHex) applyAccent(accentHex, on)
   else setThemeColorMeta(on ? DARK_SURFACE : getComputedStyle(document.documentElement).getPropertyValue('--accent').trim())
 }
 
-export function hexToHsl(hex) {
+export function hexToHsl(hex: string): [number, number, number] {
   const r = parseInt(hex.slice(1, 3), 16) / 255
   const g = parseInt(hex.slice(3, 5), 16) / 255
   const b = parseInt(hex.slice(5, 7), 16) / 255
@@ -54,10 +54,10 @@ export function hexToHsl(hex) {
   return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)]
 }
 
-export function applyAccent(hex, dark = isDark()) {
+export function applyAccent(hex: string, dark: boolean = isDark()) {
   const [h, s, l] = hexToHsl(hex)
   const root = document.documentElement.style
-  const set = (k, v) => root.setProperty(k, v)
+  const set = (k: string, v: string) => root.setProperty(k, v)
   if (dark) {
     set('--c-50', `hsl(${h}, 20%, 14%)`)
     set('--c-100', `hsl(${h}, 15%, 18%)`)
@@ -80,7 +80,7 @@ export function applyAccent(hex, dark = isDark()) {
   setThemeColorMeta(dark ? DARK_SURFACE : hex)
 }
 
-export function setThemeColorMeta(color) {
+export function setThemeColorMeta(color: string) {
   const meta = document.querySelector('meta[name="theme-color"]')
   if (meta) meta.setAttribute('content', color)
 }

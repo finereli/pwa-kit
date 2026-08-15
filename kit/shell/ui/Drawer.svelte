@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+  import type { Snippet } from 'svelte'
   // Slide-in navigation drawer that becomes a permanent sidebar on desktop
   // (>= 768px, matched by the .shell margin in App.svelte). Slides from the
   // start edge in either direction. Escape closes it; the host closes it on
@@ -7,9 +8,12 @@
   // Props: open, onclose, entries [{ label, hash, current: bool }],
   // brand snippet (logo + name), footer snippet (user row, sign-out, build
   // line with ResetButton). Seams: closeLabel, width.
-  let { open = false, onclose, entries = [], brand, footer, closeLabel = 'Close menu' } = $props()
+  export interface DrawerEntry { label: string; hash: string; current?: boolean }
+  let { open = false, onclose, entries = [], brand, footer, closeLabel = 'Close menu' }: {
+    open?: boolean; onclose?: () => void; entries?: DrawerEntry[]; brand?: Snippet; footer?: Snippet; closeLabel?: string
+  } = $props()
 
-  function go(hash) {
+  function go(hash: string) {
     location.hash = hash
     onclose?.()
   }

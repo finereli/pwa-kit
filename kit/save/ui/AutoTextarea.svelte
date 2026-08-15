@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   // Auto-growing textarea with debounced autosave. `onsave(value)` fires
   // `delay` ms after the last keystroke and on blur. The timer is nulled
   // after it fires - otherwise blur re-saved the same value a second time.
@@ -13,10 +13,20 @@
     autofocus = false,
     onblur: onBlurExternal,
     ...rest
+  }: {
+    value?: string
+    placeholder?: string
+    disabled?: boolean
+    rows?: number
+    onsave?: (value: string) => void
+    delay?: number
+    autofocus?: boolean
+    onblur?: (e: FocusEvent) => void
+    [key: string]: unknown
   } = $props()
 
-  let el = $state(null)
-  let timer = null
+  let el = $state<HTMLTextAreaElement | null>(null)
+  let timer: ReturnType<typeof setTimeout> | null = null
 
   function resize() {
     if (!el) return
@@ -33,11 +43,11 @@
     if (autofocus && el) el.focus()
   })
 
-  function oninput(e) {
-    value = e.target.value
+  function oninput(e: Event) {
+    value = (e.target as HTMLTextAreaElement).value
     resize()
     if (onsave) {
-      clearTimeout(timer)
+      if (timer) clearTimeout(timer)
       timer = setTimeout(() => {
         timer = null
         onsave(value)
@@ -45,7 +55,7 @@
     }
   }
 
-  function onblur(e) {
+  function onblur(e: FocusEvent) {
     if (onsave && timer) {
       clearTimeout(timer)
       onsave(value)

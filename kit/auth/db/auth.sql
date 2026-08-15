@@ -1,5 +1,5 @@
--- Users and sessions for the Google sign-in flow (functions/api/auth.js).
--- `is_admin` gates admin apps (REQUIRE_ADMIN in functions/api/_config.js);
+-- Users and sessions for the Google sign-in flow (functions/api/auth.ts).
+-- `is_admin` gates admin apps (REQUIRE_ADMIN in functions/api/_config.ts);
 -- flip it by hand: UPDATE users SET is_admin = 1 WHERE email = '…';
 CREATE TABLE IF NOT EXISTS users (
   google_id   TEXT PRIMARY KEY,

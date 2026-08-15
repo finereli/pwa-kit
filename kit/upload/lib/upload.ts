@@ -5,7 +5,7 @@
 // after the bytes land (create record, process, generate metadata) is the
 // app's pipeline function; the queue only owns the job list and its states.
 //
-//   import { UploadQueue, uploadWithProgress } from '$shared/lib/upload.js'
+//   import { UploadQueue, uploadWithProgress } from '$shared/lib/upload'
 //   export const uploadQueue = new UploadQueue({
 //     accept: ['m4a', 'wav', 'mp4'],
 //     maxConcurrent: 3,
@@ -39,13 +39,24 @@
 // after upload); a beforeunload guard warns while anything is active; SPA
 // navigation is safe because the queue is a module-level store.
 
-export function uploadWithProgress({ url, file, token, contentType, method = 'POST', onProgress, onStart, onUnauthorized }) {
+export interface UploadArgs {
+  url: string
+  file: Blob
+  token?: string
+  contentType?: string
+  method?: string
+  onProgress?: (fraction: number) => void
+  onStart?: (xhr: XMLHttpRequest) => void
+  onUnauthorized?: () => void
+}
+
+export function uploadWithProgress({ url, file, token, contentType, method = 'POST', onProgress, onStart, onUnauthorized }: UploadArgs): Promise<XMLHttpRequest> {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     onStart?.(xhr)
     xhr.open(method, url)
     if (token) xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-    xhr.setRequestHeader('Content-Type', contentType || file.type || 'application/octet-stream')
+    xhr.setRequestHeader('Content-Type', contentType || (file as File).type || 'application/octet-stream')
     xhr.upload.onprogress = (e) => {
       if (e.lengthComputable) onProgress?.(e.loaded / e.total)
     }
@@ -60,7 +71,7 @@ export function uploadWithProgress({ url, file, token, contentType, method = 'PO
   })
 }
 
-export function cleanBaseName(name) {
+export function cleanBaseName(name: string): string {
   return name
     .replace(/\.[^.]+$/, '')
     .replace(/_+/g, ' ')
@@ -68,12 +79,43 @@ export function cleanBaseName(name) {
     .trim()
 }
 
-export class UploadQueue {
-  jobs = $state([])
-  #active = 0
-  #opts
+export type JobStatus = 'queued' | 'running' | 'done' | 'error'
 
-  constructor({ run, accept = null, maxConcurrent = 3, errorText = { upload: 'Upload failed', process: 'Processing failed' } }) {
+export interface UploadJob {
+  key: string
+  file: File
+  fileName: string
+  baseName: string
+  ext: string
+  status: JobStatus
+  phase: '' | 'upload' | 'process'
+  step: string
+  progress: number
+  error: string | null
+  recordId: string | null
+  canceled: boolean
+  xhr: XMLHttpRequest | null
+  [key: string]: unknown
+}
+
+export interface JobHelpers {
+  setStep: (s: string) => void
+  setProgress: (p: number) => void
+}
+
+export interface UploadQueueOptions {
+  run: (job: UploadJob, helpers: JobHelpers) => Promise<void>
+  accept?: string[] | null
+  maxConcurrent?: number
+  errorText?: { upload: string; process: string }
+}
+
+export class UploadQueue {
+  jobs = $state<UploadJob[]>([])
+  #active = 0
+  #opts: Required<UploadQueueOptions>
+
+  constructor({ run, accept = null, maxConcurrent = 3, errorText = { upload: 'Upload failed', process: 'Processing failed' } }: UploadQueueOptions) {
     if (!run) throw new Error('UploadQueue: run(job, helpers) is required')
     this.#opts = { run, accept, maxConcurrent, errorText }
     addEventListener('beforeunload', (e) => {
@@ -88,11 +130,11 @@ export class UploadQueue {
     return this.jobs.some((j) => j.status === 'queued' || j.status === 'running')
   }
 
-  isCancelable(job) {
+  isCancelable(job: UploadJob) {
     return job.status === 'queued' || (job.status === 'running' && job.phase === 'upload')
   }
 
-  enqueue(files, meta = {}) {
+  enqueue(files: Iterable<File>, meta: Record<string, unknown> = {}) {
     for (const file of files) {
       const ext = file.name.split('.').pop().toLowerCase()
       if (this.#opts.accept && !this.#opts.accept.includes(ext)) continue
@@ -117,7 +159,7 @@ export class UploadQueue {
     this.#pump()
   }
 
-  retry(key) {
+  retry(key: string) {
     const job = this.jobs.find((j) => j.key === key)
     if (!job || job.status !== 'error') return
     job.status = 'queued'
@@ -125,11 +167,11 @@ export class UploadQueue {
     this.#pump()
   }
 
-  dismiss(key) {
+  dismiss(key: string) {
     this.jobs = this.jobs.filter((j) => j.key !== key)
   }
 
-  cancel(key) {
+  cancel(key: string) {
     const job = this.jobs.find((j) => j.key === key)
     if (!job) return
     if (job.status === 'queued') {
@@ -140,11 +182,11 @@ export class UploadQueue {
     }
   }
 
-  cancelAll(filter = () => true) {
+  cancelAll(filter: (j: UploadJob) => boolean = () => true) {
     for (const job of this.jobs.filter(filter)) this.cancel(job.key)
   }
 
-  clearFinished(filter = () => true) {
+  clearFinished(filter: (j: UploadJob) => boolean = () => true) {
     this.jobs = this.jobs.filter((j) => !filter(j) || (j.status !== 'done' && j.status !== 'error'))
   }
 
@@ -157,10 +199,10 @@ export class UploadQueue {
     }
   }
 
-  async #run(job) {
+  async #run(job: UploadJob) {
     job.status = 'running'
     job.error = null
-    const helpers = {
+    const helpers: JobHelpers = {
       setStep: (s) => (job.step = s),
       setProgress: (p) => (job.progress = Math.max(job.progress, p)),
     }

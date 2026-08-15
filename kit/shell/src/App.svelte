@@ -1,12 +1,12 @@
-<script>
+<script lang="ts">
   // Shell template: login gate, top bar, one scrolling body, drawer. Replace
   // the views; keep the structure. See reference/shell.md.
   import TopBar from '$shared/ui/TopBar.svelte'
   import Drawer from '$shared/ui/Drawer.svelte'
   import Login from '$shared/ui/Login.svelte'
   import ResetButton from '$shared/ui/ResetButton.svelte'
-  import { auth } from './lib/auth.svelte.js'
-  import { router } from './lib/router.svelte.js'
+  import { auth } from './lib/auth.svelte'
+  import { router } from './lib/router.svelte'
 
   router.start()
   auth.init()
@@ -46,7 +46,7 @@
   {/snippet}
   {#snippet footer()}
     {#if auth.signedIn}
-      <div class="user">{auth.user.name}</div>
+      <div class="user">{auth.user?.name}</div>
       <button class="auth-btn" onclick={() => auth.signOut()}>Sign out</button>
     {/if}
     <!-- The reload icon is the always-there escape hatch (forget the cached

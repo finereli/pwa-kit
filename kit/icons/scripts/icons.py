@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Generate src/lib/icons.js from the material-symbols font.
+"""Generate src/lib/icons.ts from the material-symbols font.
 
 The app draws its icons as inline SVG (see Icon.svelte), not a webfont - nothing
 to download, so they render instantly. The paths are extracted here from the
 material-symbols npm package, which we keep purely as the source of glyph
 artwork. This is a one-off generator, not a build step.
 
-Add an icon (extracts it and rewrites icons.js, keeping the existing set):
+Add an icon (extracts it and rewrites icons.ts, keeping the existing set):
     npm run icon add_circle download
 
 List currently bundled icons:
@@ -22,7 +22,7 @@ from fontTools.ttLib import TTFont
 from fontTools.pens.svgPathPen import SVGPathPen
 
 SRC = "node_modules/material-symbols/material-symbols-rounded.woff2"
-OUT = "src/lib/icons.js"
+OUT = "src/lib/icons.ts"
 
 font = TTFont(SRC)
 cmap = font.getBestCmap()
@@ -75,10 +75,10 @@ if not sys.argv[1:] and existing:
 
 lines = [
     "// Material Symbols Rounded icon paths, extracted from the material-symbols",
-    "// font package (see CLAUDE.md > 'App icons'). Font-unit coords (960 UPM,",
-    "// y-up); Icon.svelte applies the flip. Add one with: npm run icon <name>.",
+    "// font package. Font-unit coords (960 UPM, y-up); Icon.svelte applies the",
+    "// flip. Add one with: npm run icon <name>.",
     "",
-    "export const icons = {",
+    "export const icons: Record<string, string> = {",
 ]
 for name in names:
     lines.append(f"  {name!r}: {path_for(name)!r},")

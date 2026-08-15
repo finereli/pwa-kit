@@ -6,11 +6,14 @@
 // Sets context.data.user = { sub, email } for handlers downstream. Handlers
 // derive the user from this and never from client-supplied ids.
 
-import { verifyGoogleToken } from '../../shared/functions/google-token.js'
-import { validateSession, devBypassUser } from '../../shared/functions/sessions.js'
-import { CLIENT_ID, REQUIRE_ADMIN } from './_config.js'
+import { verifyGoogleToken } from '../../shared/functions/google-token'
+import { validateSession, devBypassUser } from '../../shared/functions/sessions'
+import { CLIENT_ID, REQUIRE_ADMIN } from './_config'
 
-export async function onRequest(context) {
+interface Env { DB: D1Database; DEV_AUTH?: string }
+export interface AuthedData { user: { sub: string; email: string } }
+
+export const onRequest: PagesFunction<Env, string, AuthedData> = async (context) => {
   const { request, env, next } = context
   const url = new URL(request.url)
 
@@ -36,7 +39,7 @@ export async function onRequest(context) {
   try {
     const payload = await verifyGoogleToken(token, CLIENT_ID)
     if (REQUIRE_ADMIN) {
-      const row = await env.DB.prepare('SELECT is_admin FROM users WHERE google_id = ?').bind(payload.sub).first()
+      const row = await env.DB.prepare('SELECT is_admin FROM users WHERE google_id = ?').bind(payload.sub).first<{ is_admin: number }>()
       if (!row?.is_admin) return Response.json({ error: 'forbidden' }, { status: 403 })
     }
     context.data.user = { sub: payload.sub, email: payload.email }

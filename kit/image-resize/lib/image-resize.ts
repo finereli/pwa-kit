@@ -9,7 +9,9 @@ const MAX_DIMENSION = 1568
 const JPEG_QUALITY = 0.85
 const MAX_FILE_SIZE = 4 * 1024 * 1024
 
-export async function resizeImage(file) {
+export interface ResizedImage { blob: Blob; width: number; height: number; originalSize: number }
+
+export async function resizeImage(file: File): Promise<ResizedImage> {
   const originalSize = file.size
   const img = await loadImage(file)
   let { width, height } = img
@@ -23,7 +25,7 @@ export async function resizeImage(file) {
   const canvas = document.createElement('canvas')
   canvas.width = width
   canvas.height = height
-  canvas.getContext('2d').drawImage(img, 0, 0, width, height)
+  canvas.getContext('2d')!.drawImage(img, 0, 0, width, height)
 
   let quality = JPEG_QUALITY
   let blob = await canvasToBlob(canvas, 'image/jpeg', quality)
@@ -34,11 +36,11 @@ export async function resizeImage(file) {
   return { blob, width, height, originalSize }
 }
 
-export function isImageFile(file) {
+export function isImageFile(file: File): boolean {
   return file.type.startsWith('image/')
 }
 
-function loadImage(file) {
+function loadImage(file: File): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const img = new Image()
     img.onload = () => {
@@ -50,7 +52,7 @@ function loadImage(file) {
   })
 }
 
-function canvasToBlob(canvas, type, quality) {
+function canvasToBlob(canvas: HTMLCanvasElement, type: string, quality: number): Promise<Blob> {
   return new Promise((resolve, reject) => {
     canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('Canvas toBlob failed'))), type, quality)
   })

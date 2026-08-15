@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   // Install nudge: a lower-third caption that wipes in from the edge, not a
   // modal. Shows when `when` turns true (after demonstrated engagement - ten
   // seconds of playback, a first message sent), never in standalone mode.
@@ -22,12 +22,24 @@
     androidSteps = 'Tap',
     androidThen = 'then "Install app"',
     bottom = '48px',
+  }: {
+    when?: boolean; text?: string; closeLabel?: string; iosSteps?: string; iosThen?: string
+    androidSteps?: string; androidThen?: string; bottom?: string
   } = $props()
+
+  interface BeforeInstallPromptEvent extends Event {
+    prompt(): Promise<void>
+    userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>
+  }
+  declare global {
+    interface Window { __pwaInstallPrompt?: BeforeInstallPromptEvent }
+    interface Navigator { standalone?: boolean }
+  }
 
   let visible = $state(false)
   let dismissed = $state(false)
   let expanded = $state(false)
-  let installPrompt = $state(typeof window !== 'undefined' ? window.__pwaInstallPrompt ?? null : null)
+  let installPrompt = $state<BeforeInstallPromptEvent | null>(typeof window !== 'undefined' ? window.__pwaInstallPrompt ?? null : null)
 
   const isStandalone =
     typeof window !== 'undefined' &&
@@ -39,9 +51,9 @@
     if (when) visible = true
   })
 
-  function onBeforeInstall(e) {
+  function onBeforeInstall(e: Event) {
     e.preventDefault()
-    installPrompt = e
+    installPrompt = e as BeforeInstallPromptEvent
   }
   function onInstalled() {
     dismiss()

@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
   // Full-screen sign-in gate. Renders the app's mark, name and one Google
   // button; the spinner shows while GSI loads. Seams: props below, and the
   // background colour (accent-deep so the login reads as "the app", not a
   // white form).
-  let { auth, title, subtitle = '', icon = '/icons/icon-192.png', buttonLabel = 'Sign in with Google' } = $props()
+  import type { GoogleAuth } from '../lib/google-auth.svelte'
+  let { auth, title, subtitle = '', icon = '/icons/icon-192.png', buttonLabel = 'Sign in with Google' }: { auth: GoogleAuth; title: string; subtitle?: string; icon?: string; buttonLabel?: string } = $props()
 </script>
 
 <div class="login">
