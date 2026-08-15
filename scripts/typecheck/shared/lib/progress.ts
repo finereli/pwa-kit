@@ -1,4 +1,4 @@
-// pwa-kit: media/lib/progress.ts v2
+// pwa-kit: media/lib/progress.ts v3
 // Where you got to in each item.
 //
 // localStorage and anonymous by default. To sync across devices, swap the

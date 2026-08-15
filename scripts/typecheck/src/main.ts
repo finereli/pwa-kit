@@ -1,4 +1,4 @@
-// pwa-kit: shell/src/main.ts v1
+// pwa-kit: shell/src/main.ts v5
 import './app.css'
 import { mount } from 'svelte'
 import App from './App.svelte'

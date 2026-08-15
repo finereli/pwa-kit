@@ -1,4 +1,4 @@
-// pwa-kit: media/lib/player.svelte.ts v2
+// pwa-kit: media/lib/player.svelte.ts v3
 // The playback engine (spec: reference/media.md).
 //
 // One <audio> element drives everything, including the video items. That is the

@@ -1,4 +1,4 @@
-// pwa-kit: auth/lib/google-auth.svelte.ts v2
+// pwa-kit: auth/lib/google-auth.svelte.ts v5
 // Google sign-in via Identity Services, with server-issued sessions.
 //
 // The flow: GSI hands us a short-lived ID token, we POST it to /api/auth,

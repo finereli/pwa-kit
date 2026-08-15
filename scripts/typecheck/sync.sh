@@ -12,7 +12,7 @@ for item in $K/*/; do
   [ -d "$item/css" ] && cp $item/css/* shared/css/
   [ -d "$item/public" ] && cp $item/public/* public/
   [ -d "$item/functions" ] && cp $item/functions/*.ts shared/functions/ 2>/dev/null || true
-  [ -d "$item/functions/api" ] && cp $item/functions/api/* functions/api/
+  [ -d "$item/functions/api" ] && cp $item/functions/api/* functions/api/ && sed -i "" "s|../../../shared/|../../shared/|" functions/api/*.ts
   [ -d "$item/src" ] && cp -r $item/src/* src/
 done
 # examples that a project would place in src/lib

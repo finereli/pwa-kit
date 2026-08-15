@@ -1,4 +1,4 @@
-// pwa-kit: auth/functions/api/_middleware.ts v2
+// pwa-kit: auth/functions/api/_middleware.ts v5
 // Every /api/* request except /api/auth and PUBLIC_PATHS must carry a live credential.
 // Order: dev bypass (double-locked) → server session → raw Google id_token
 // (accepted so a client whose /api/auth POST failed can still get through

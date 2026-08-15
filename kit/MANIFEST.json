@@ -29,46 +29,86 @@
       "files": {
         "db/auth.sql": {
           "1": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369",
-          "2": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369"
+          "2": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369",
+          "3": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369",
+          "4": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369",
+          "5": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369",
+          "6": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369"
         },
         "functions/api/_config.ts": {
           "1": "c7f0a15d99b8cd0f40b76af9d746345307a0f6e8f6e2130fea12ce1d12a35649",
-          "2": "f0f2c70ed316b6ab3160bf4d6c2ea30262be1a1b274bf81016f07c2543cb1efd"
+          "2": "f0f2c70ed316b6ab3160bf4d6c2ea30262be1a1b274bf81016f07c2543cb1efd",
+          "3": "f0f2c70ed316b6ab3160bf4d6c2ea30262be1a1b274bf81016f07c2543cb1efd",
+          "4": "f0f2c70ed316b6ab3160bf4d6c2ea30262be1a1b274bf81016f07c2543cb1efd",
+          "5": "f0f2c70ed316b6ab3160bf4d6c2ea30262be1a1b274bf81016f07c2543cb1efd",
+          "6": "f0f2c70ed316b6ab3160bf4d6c2ea30262be1a1b274bf81016f07c2543cb1efd"
         },
         "functions/api/_middleware.ts": {
           "1": "5fe58c8de8299c54bde11fb4ce45e423c7f834df5fe9818e6ba271a945341d21",
-          "2": "1d62fa01300cec68745767346a2ab00c4b70e486a51f0d3b666e32d36765fb3d"
+          "2": "1d62fa01300cec68745767346a2ab00c4b70e486a51f0d3b666e32d36765fb3d",
+          "3": "1d62fa01300cec68745767346a2ab00c4b70e486a51f0d3b666e32d36765fb3d",
+          "4": "1d62fa01300cec68745767346a2ab00c4b70e486a51f0d3b666e32d36765fb3d",
+          "5": "fbd0f6ff64c62c19ff568323a928f3d96a24e6c11d42e68c40f9cfb2331accc0",
+          "6": "fbd0f6ff64c62c19ff568323a928f3d96a24e6c11d42e68c40f9cfb2331accc0"
         },
         "functions/api/auth.ts": {
           "1": "7314f0836f9c04a367cc79f35b0f5bbaa34ebc1c394a0db169af08c6dcc261ac",
-          "2": "7314f0836f9c04a367cc79f35b0f5bbaa34ebc1c394a0db169af08c6dcc261ac"
+          "2": "7314f0836f9c04a367cc79f35b0f5bbaa34ebc1c394a0db169af08c6dcc261ac",
+          "3": "7314f0836f9c04a367cc79f35b0f5bbaa34ebc1c394a0db169af08c6dcc261ac",
+          "4": "7314f0836f9c04a367cc79f35b0f5bbaa34ebc1c394a0db169af08c6dcc261ac",
+          "5": "126844d7fff65980c354f1a9e959da6c650e71e68fec036cddfdbad0f8ab5286",
+          "6": "126844d7fff65980c354f1a9e959da6c650e71e68fec036cddfdbad0f8ab5286"
         },
         "functions/google-token.ts": {
           "1": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87",
-          "2": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87"
+          "2": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87",
+          "3": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87",
+          "4": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87",
+          "5": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87",
+          "6": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87"
         },
         "functions/sessions.ts": {
           "1": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083",
-          "2": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083"
+          "2": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083",
+          "3": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083",
+          "4": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083",
+          "5": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083",
+          "6": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083"
         },
         "lib/auth.example.ts": {
           "1": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca",
-          "2": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca"
+          "2": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca",
+          "3": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca",
+          "4": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca",
+          "5": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca",
+          "6": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca"
         },
         "lib/google-auth.svelte.ts": {
           "1": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2",
-          "2": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2"
+          "2": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2",
+          "3": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2",
+          "4": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2",
+          "5": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2",
+          "6": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2"
         },
         "ui/Login.svelte": {
           "1": "bed9574a231cbdfada9ec60acdfd69bf393731afdfc0c395de349dd1d0c314d0",
-          "2": "bed9574a231cbdfada9ec60acdfd69bf393731afdfc0c395de349dd1d0c314d0"
+          "2": "bed9574a231cbdfada9ec60acdfd69bf393731afdfc0c395de349dd1d0c314d0",
+          "3": "9f330492a26e067e4ce0d464e42d36ec0c39ee0088e104d74339831ad9ca8ca7",
+          "4": "22dcaaf41b941e6b9f19d0d224f513aa2bca9d6ffa26d9af860af7ae883b37d4",
+          "5": "22dcaaf41b941e6b9f19d0d224f513aa2bca9d6ffa26d9af860af7ae883b37d4",
+          "6": "98029679c7560aebed44b295407b8f5f6f39255976d2be585db205fb3260c9e2"
         }
       },
       "notes": {
         "1": "initial kit extraction (yaelfiner shared/, angel, glopus)",
-        "2": "PUBLIC_PATHS seam: unauthenticated API prefixes"
+        "2": "PUBLIC_PATHS seam: unauthenticated API prefixes",
+        "3": "Login children snippet + logoSize (invite variant)",
+        "4": "Login compact mode",
+        "5": "functions/api import depth assumes shared/ beside the app dir",
+        "6": "Login denied state (admin apps)"
       },
-      "version": 2
+      "version": 6
     },
     "chat": {
       "current_files": [
@@ -252,6 +292,20 @@
       },
       "version": 1
     },
+    "share": {
+      "current_files": [
+        "lib/web-share.ts"
+      ],
+      "files": {
+        "lib/web-share.ts": {
+          "1": "13490a840939e6336546be3ee69bd015ad1012577af35752e4d0ba75b93b6daf"
+        }
+      },
+      "notes": {
+        "1": "shareUrl from yaelfiner (share sheet / clipboard)"
+      },
+      "version": 1
+    },
     "shell": {
       "current_files": [
         "css/base.css",
@@ -268,43 +322,91 @@
       ],
       "files": {
         "css/base.css": {
-          "1": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd"
+          "1": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
+          "2": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
+          "3": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
+          "4": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
+          "5": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd"
         },
         "index.html": {
-          "1": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab"
+          "1": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
+          "2": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
+          "3": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
+          "4": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
+          "5": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab"
         },
         "package.json": {
-          "1": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387"
+          "1": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
+          "2": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
+          "3": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
+          "4": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
+          "5": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387"
         },
         "src/App.svelte": {
-          "1": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c"
+          "1": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
+          "2": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
+          "3": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
+          "4": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
+          "5": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c"
         },
         "src/main.ts": {
-          "1": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd"
+          "1": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
+          "2": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
+          "3": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
+          "4": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
+          "5": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd"
         },
         "svelte.config.js": {
-          "1": "da1ed4002c530fc6103aa61120f0868cbdbc0e852e0c0c2688194fd82172557c"
+          "1": "da1ed4002c530fc6103aa61120f0868cbdbc0e852e0c0c2688194fd82172557c",
+          "2": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
+          "3": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
+          "4": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
+          "5": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b"
         },
         "tsconfig.json": {
-          "1": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0"
+          "1": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
+          "2": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
+          "3": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
+          "4": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
+          "5": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0"
         },
         "ui/Btn.svelte": {
-          "1": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869"
+          "1": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
+          "2": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
+          "3": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
+          "4": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
+          "5": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869"
         },
         "ui/Drawer.svelte": {
-          "1": "f9b049bb849ac1bf94edd58728c09cdc5ce19b229b7ef74a90b742689832acf1"
+          "1": "f9b049bb849ac1bf94edd58728c09cdc5ce19b229b7ef74a90b742689832acf1",
+          "2": "f9b049bb849ac1bf94edd58728c09cdc5ce19b229b7ef74a90b742689832acf1",
+          "3": "f9b049bb849ac1bf94edd58728c09cdc5ce19b229b7ef74a90b742689832acf1",
+          "4": "772087067bb78e6a188ea9d247dd4d45b0fe8ada8928d070ec039d3c496acaac",
+          "5": "4dd2f88c7594ec0a17438b539ca5a4d815b6ff8886bf856f9993c0ed9ea8dbb5"
         },
         "ui/TopBar.svelte": {
-          "1": "2ba76b7f7bfa120d15a1485716eeb44e99a6c518d67d66cbe34dc3f14bec85e1"
+          "1": "2ba76b7f7bfa120d15a1485716eeb44e99a6c518d67d66cbe34dc3f14bec85e1",
+          "2": "2ba76b7f7bfa120d15a1485716eeb44e99a6c518d67d66cbe34dc3f14bec85e1",
+          "3": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6",
+          "4": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6",
+          "5": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6"
         },
         "vite.config.ts": {
-          "1": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64"
+          "1": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
+          "2": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
+          "3": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
+          "4": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
+          "5": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64"
         }
       },
       "notes": {
-        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)",
+        "2": "svelte.config.js: no preprocessor",
+        "3": "TopBar trailing action (snippet + label + handler)",
+        "4": "Drawer groups (titled sections) and count badges",
+        "5": "Drawer groups: fix"
       },
-      "version": 1
+      "version": 5
     },
     "theme": {
       "current_files": [
@@ -329,22 +431,37 @@
       ],
       "files": {
         "lib/updates.svelte.ts": {
-          "1": "27e5d0cd454990b8c2b00be90414805cb0712697f031e45a3b3c74f31e0bad02"
+          "1": "27e5d0cd454990b8c2b00be90414805cb0712697f031e45a3b3c74f31e0bad02",
+          "2": "27e5d0cd454990b8c2b00be90414805cb0712697f031e45a3b3c74f31e0bad02",
+          "3": "27e5d0cd454990b8c2b00be90414805cb0712697f031e45a3b3c74f31e0bad02",
+          "4": "27e5d0cd454990b8c2b00be90414805cb0712697f031e45a3b3c74f31e0bad02"
         },
         "public/reset.html": {
-          "1": "4c6d10f0cbaa3eb03288cfb2cf8fbe2d276942d8985b0661a29a6664d7204d78"
+          "1": "4c6d10f0cbaa3eb03288cfb2cf8fbe2d276942d8985b0661a29a6664d7204d78",
+          "2": "4c6d10f0cbaa3eb03288cfb2cf8fbe2d276942d8985b0661a29a6664d7204d78",
+          "3": "4c6d10f0cbaa3eb03288cfb2cf8fbe2d276942d8985b0661a29a6664d7204d78",
+          "4": "4c6d10f0cbaa3eb03288cfb2cf8fbe2d276942d8985b0661a29a6664d7204d78"
         },
         "src/build.d.ts": {
-          "1": "75cb750134bb6f7bf382d8eb596f138226d3cd19f044fb98e011916026bbcc23"
+          "1": "75cb750134bb6f7bf382d8eb596f138226d3cd19f044fb98e011916026bbcc23",
+          "2": "75cb750134bb6f7bf382d8eb596f138226d3cd19f044fb98e011916026bbcc23",
+          "3": "75cb750134bb6f7bf382d8eb596f138226d3cd19f044fb98e011916026bbcc23",
+          "4": "75cb750134bb6f7bf382d8eb596f138226d3cd19f044fb98e011916026bbcc23"
         },
         "ui/ResetButton.svelte": {
-          "1": "46ef88d5ac36d0787c9e45fcea6b757259215ff6ba5a6135a85bd1fd46e58e8b"
+          "1": "46ef88d5ac36d0787c9e45fcea6b757259215ff6ba5a6135a85bd1fd46e58e8b",
+          "2": "46ef88d5ac36d0787c9e45fcea6b757259215ff6ba5a6135a85bd1fd46e58e8b",
+          "3": "46ef88d5ac36d0787c9e45fcea6b757259215ff6ba5a6135a85bd1fd46e58e8b",
+          "4": "46ef88d5ac36d0787c9e45fcea6b757259215ff6ba5a6135a85bd1fd46e58e8b"
         }
       },
       "notes": {
-        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)",
+        "2": "pwa-build: no vite-plugin-pwa type import (shared/ can sit outside node_modules)",
+        "3": "pwa-build: registerType literal type",
+        "4": "pwa-build: manifest literal types"
       },
-      "version": 1
+      "version": 4
     },
     "upload": {
       "current_files": [

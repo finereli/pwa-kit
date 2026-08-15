@@ -14,7 +14,25 @@
 // otherwise carry the same number.
 
 import { execSync } from 'node:child_process'
-import type { VitePWAOptions } from 'vite-plugin-pwa'
+
+// Structural types only - shared/ may sit outside the app's node_modules, so
+// this file must not import from vite-plugin-pwa (the object it returns is
+// what VitePWA() expects).
+export interface PwaManifest {
+  name: string
+  short_name: string
+  description?: string
+  lang?: string
+  dir?: 'ltr' | 'rtl'
+  start_url?: string
+  scope?: string
+  display?: 'standalone' | 'fullscreen' | 'minimal-ui' | 'browser'
+  orientation?: 'portrait' | 'landscape' | 'any' | 'natural' | 'portrait-primary' | 'portrait-secondary' | 'landscape-primary' | 'landscape-secondary'
+  background_color?: string
+  theme_color?: string
+  icons: Array<{ src: string; sizes: string; type?: string; purpose?: 'any' | 'maskable' | 'monochrome' | 'any maskable' }>
+  [key: string]: unknown
+}
 
 export function buildNumber(major = 1): string {
   let build = process.env.BUILD_NUMBER || 'dev'
@@ -31,12 +49,12 @@ export function buildNumber(major = 1): string {
 // lib/updates.svelte.ts, which also does the registration, so nothing is
 // injected here (injectRegister: null).
 export interface PwaOptionsInput {
-  manifest: VitePWAOptions['manifest']
+  manifest: PwaManifest
   includeAssets?: string[]
   globPatterns?: string[]
   maxFileSizeMB?: number
   navigateFallbackDenylist?: RegExp[]
-  workbox?: Partial<NonNullable<VitePWAOptions['workbox']>>
+  workbox?: Record<string, unknown>
 }
 
 export function pwaOptions({
@@ -53,9 +71,9 @@ export function pwaOptions({
   // precached, so it works even when the app itself is stuck.
   navigateFallbackDenylist = [/^\/api\//, /^\/icons\//, /^\/fonts\//, /^\/reset(\.html)?$/],
   workbox = {},
-}: PwaOptionsInput): Partial<VitePWAOptions> {
+}: PwaOptionsInput) {
   return {
-    registerType: 'autoUpdate',
+    registerType: 'autoUpdate' as const,
     injectRegister: null,
     includeAssets,
     manifest,

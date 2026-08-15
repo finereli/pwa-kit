@@ -1,20 +1,37 @@
-<!-- pwa-kit: auth/ui/Login.svelte v2 -->
+<!-- pwa-kit: auth/ui/Login.svelte v5 -->
 <script lang="ts">
   // Full-screen sign-in gate. Renders the app's mark, name and one Google
   // button; the spinner shows while GSI loads. Seams: props below, and the
   // background colour (accent-deep so the login reads as "the app", not a
   // white form).
+  // `children` renders between the subtitle and the button - for an invite
+  // variant (someone arriving from a shared deep link sees what they were
+  // sent, not a bare wall); `compact` tightens the header to make room for it.
+  // `denied` (signed in but not allowed - an admin app) swaps the Google
+  // button for `deniedText` and a sign-out button.
+  import type { Snippet } from 'svelte'
   import type { GoogleAuth } from '../lib/google-auth.svelte'
-  let { auth, title, subtitle = '', icon = '/icons/icon-192.png', buttonLabel = 'Sign in with Google' }: { auth: GoogleAuth; title: string; subtitle?: string; icon?: string; buttonLabel?: string } = $props()
+  let {
+    auth, title, subtitle = '', icon = '/icons/icon-192.png', buttonLabel = 'Sign in with Google', compact = false, children,
+    denied = false, deniedText = 'You do not have access', signOutLabel = 'Sign out',
+  }: {
+    auth: GoogleAuth; title: string; subtitle?: string; icon?: string; buttonLabel?: string; compact?: boolean; children?: Snippet
+    denied?: boolean; deniedText?: string; signOutLabel?: string
+  } = $props()
+  const logoSize = $derived(compact ? 56 : 80)
 </script>
 
-<div class="login">
+<div class="login" class:compact>
   <div class="card">
-    <img src={icon} alt="" width="80" height="80" class="logo" />
+    <img src={icon} alt="" width={logoSize} height={logoSize} class="logo" />
     <h1>{title}</h1>
     {#if subtitle}<p class="role">{subtitle}</p>{/if}
+    {@render children?.()}
 
-    {#if auth.ready}
+    {#if auth.ready && denied}
+      <p class="denied">{deniedText}</p>
+      <button class="secondary-btn" onclick={() => auth.signOut()}>{signOutLabel}</button>
+    {:else if auth.ready}
       <button class="google-btn" onclick={() => auth.signIn()}>
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
@@ -50,12 +67,29 @@
   }
   .logo { border-radius: 50%; margin-bottom: 12px; }
   h1 { font-size: 1.5rem; font-weight: 500; color: #fff; }
+  .compact .card { max-width: 360px; }
+  .compact h1 { font-size: 1.15rem; }
+  .compact .role { margin-bottom: 20px; }
   .role {
     font-size: 0.8rem;
     color: var(--accent-light, rgba(255, 255, 255, 0.7));
     letter-spacing: 0.08em;
     margin-bottom: 32px;
   }
+  .denied {
+    font-size: 0.9rem;
+    color: #fee2e2;
+    margin-bottom: 12px;
+  }
+  .secondary-btn {
+    padding: 12px 28px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius);
+    color: #fff;
+    font-size: 0.95rem;
+    transition: background 0.15s;
+  }
+  .secondary-btn:hover { background: rgba(255, 255, 255, 0.1); }
   .google-btn {
     display: flex;
     align-items: center;

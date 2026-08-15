@@ -1,4 +1,4 @@
-<!-- pwa-kit: shell/ui/Drawer.svelte v1 -->
+<!-- pwa-kit: shell/ui/Drawer.svelte v5 -->
 <script lang="ts">
   import type { Snippet } from 'svelte'
   // Slide-in navigation drawer that becomes a permanent sidebar on desktop
@@ -6,13 +6,18 @@
   // start edge in either direction. Escape closes it; the host closes it on
   // any navigation (router.onChange) so the back button works too.
   //
-  // Props: open, onclose, entries [{ label, hash, current: bool }],
-  // brand snippet (logo + name), footer snippet (user row, sign-out, build
-  // line with ResetButton). Seams: closeLabel, width.
-  export interface DrawerEntry { label: string; hash: string; current?: boolean }
-  let { open = false, onclose, entries = [], brand, footer, closeLabel = 'Close menu' }: {
-    open?: boolean; onclose?: () => void; entries?: DrawerEntry[]; brand?: Snippet; footer?: Snippet; closeLabel?: string
+  // Props: open, onclose, entries [{ label, hash, current, count? }] for a
+  // flat list, or groups [{ title?, entries }] for titled sections (an admin
+  // with פרסום / תוכן / אנשים); `count` draws a small badge. brand snippet
+  // (logo + name), footer snippet (user row, sign-out, build line with
+  // ResetButton). Seams: closeLabel, width.
+  export interface DrawerEntry { label: string; hash: string; current?: boolean; count?: number }
+  export interface DrawerGroup { title?: string; entries: DrawerEntry[] }
+  let { open = false, onclose, entries = [], groups, brand, footer, closeLabel = 'Close menu' }: {
+    open?: boolean; onclose?: () => void; entries?: DrawerEntry[]; groups?: DrawerGroup[]
+    brand?: Snippet; footer?: Snippet; closeLabel?: string
   } = $props()
+  const sections = $derived(groups ?? [{ entries }])
 
   function go(hash: string) {
     location.hash = hash
@@ -30,12 +35,17 @@
   {/if}
 
   <ul>
-    {#each entries as e}
-      <li>
-        <button class:current={e.current} onclick={() => go(e.hash)} tabindex={open ? 0 : -1}>
-          {e.label}
-        </button>
-      </li>
+    {#each sections as g, i}
+      {#if i > 0}<li class="separator"></li>{/if}
+      {#if g.title}<li class="section-label">{g.title}</li>{/if}
+      {#each g.entries as e}
+        <li>
+          <button class:current={e.current} onclick={() => go(e.hash)} tabindex={open ? 0 : -1}>
+            {e.label}
+            {#if e.count}<span class="count">{e.count}</span>{/if}
+          </button>
+        </li>
+      {/each}
     {/each}
   </ul>
 
@@ -92,8 +102,22 @@
   }
 
   ul { list-style: none; padding: 14px 12px; }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    padding: 4px 14px 2px;
+  }
+  .separator {
+    height: 1px;
+    background: var(--border);
+    margin: 10px 14px;
+  }
   ul button {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
     text-align: start;
     padding: 13px 14px;
@@ -107,6 +131,16 @@
     background: var(--bg-hover);
     color: var(--accent-deep);
     font-weight: 500;
+  }
+  .count {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft, var(--bg-hover));
+    padding: 1px 7px;
+    border-radius: 99px;
+    min-width: 22px;
+    text-align: center;
   }
 
   .footer {

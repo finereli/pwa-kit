@@ -1,4 +1,4 @@
-// pwa-kit: auth/functions/sessions.ts v2
+// pwa-kit: auth/functions/sessions.ts v5
 // Server-issued session tokens, stored in the D1 `sessions` table
 // (schema: db/auth.sql).
 //

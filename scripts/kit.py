@@ -2,6 +2,7 @@
 """pwa kit tool: drift detection between the kit and a project.
 
     kit.py status <project-dir> [--all]   what the project has, and how it differs from the kit
+    kit.py relabel <project-dir>          rewrite headers of `current` files to the kit's version
     kit.py bump <item> [--note "..."]     new version of a kit item: rewrite headers, record hashes
     kit.py check                          every kit file's header + hash matches MANIFEST.json
     kit.py list                           kit items, versions, files
@@ -177,11 +178,22 @@ def cmd_list():
             print(f'    {rel}')
 
 
-def cmd_status(project, show_all=False):
+def cmd_relabel(project):
+    """Files whose content matches the kit's current version but whose header
+    names an older version get the header rewritten. Nothing else is touched."""
     m = load_manifest()
     project = os.path.abspath(project)
+    n = 0
+    for st, kitpath, lv, kv, relpath in scan(project, m):
+        if st == 'current' and kv is not None and lv != kv:
+            set_header(os.path.join(project, relpath), kitpath, kv)
+            print(f'relabel   {kitpath:<40} v{lv} -> v{kv}   {relpath}')
+            n += 1
+    print(f'-- {n} relabeled')
+
+
+def scan(project, m):
     found = []  # (status, kitpath, local_v, kit_v, path)
-    used_items = set()
     for dp, dns, fns in os.walk(project):
         dns[:] = [d for d in dns if d not in SKIP_DIRS]
         for fn in fns:
@@ -198,7 +210,6 @@ def cmd_status(project, show_all=False):
             if not entry or rel not in entry['files']:
                 found.append(('unknown', kitpath, local_v, None, relpath))
                 continue
-            used_items.add(item)
             kit_v = entry['version']
             hist = entry['files'][rel]
             local_sha = sha(path)
@@ -215,6 +226,14 @@ def cmd_status(project, show_all=False):
             else:
                 st = 'both'
             found.append((st, kitpath, local_v, kit_v, relpath))
+    return found
+
+
+def cmd_status(project, show_all=False):
+    m = load_manifest()
+    project = os.path.abspath(project)
+    found = scan(project, m)
+    used_items = {r[1].partition('/')[0] for r in found if r[0] != 'unknown'}
     order = {'both': 0, 'upstream': 1, 'modified': 2, 'unknown': 3, 'current': 4}
     found.sort(key=lambda r: (order[r[0]], r[1]))
     w = max([len(r[1]) for r in found] + [10])
@@ -232,7 +251,7 @@ def cmd_status(project, show_all=False):
 
 
 def main(argv):
-    if len(argv) < 2 or argv[1] not in ('status', 'bump', 'check', 'list'):
+    if len(argv) < 2 or argv[1] not in ('status', 'bump', 'check', 'list', 'relabel'):
         print(__doc__)
         return 2
     cmd = argv[1]
@@ -251,6 +270,10 @@ def main(argv):
         return 1 if cmd_check() else 0
     elif cmd == 'list':
         cmd_list()
+    elif cmd == 'relabel':
+        if len(argv) < 3:
+            sys.exit('usage: kit.py relabel <project-dir>')
+        cmd_relabel(argv[2])
     return 0
 
 

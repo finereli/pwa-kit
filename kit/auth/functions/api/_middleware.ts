@@ -1,4 +1,4 @@
-// pwa-kit: auth/functions/api/_middleware.ts v2
+// pwa-kit: auth/functions/api/_middleware.ts v6
 // Every /api/* request except /api/auth and PUBLIC_PATHS must carry a live credential.
 // Order: dev bypass (double-locked) → server session → raw Google id_token
 // (accepted so a client whose /api/auth POST failed can still get through
@@ -7,8 +7,8 @@
 // Sets context.data.user = { sub, email } for handlers downstream. Handlers
 // derive the user from this and never from client-supplied ids.
 
-import { verifyGoogleToken } from '../../shared/functions/google-token'
-import { validateSession, devBypassUser } from '../../shared/functions/sessions'
+import { verifyGoogleToken } from '../../../shared/functions/google-token'
+import { validateSession, devBypassUser } from '../../../shared/functions/sessions'
 import { CLIENT_ID, REQUIRE_ADMIN, PUBLIC_PATHS } from './_config'
 
 interface Env { DB: D1Database; DEV_AUTH?: string }

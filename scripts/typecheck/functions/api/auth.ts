@@ -1,13 +1,13 @@
-// pwa-kit: auth/functions/api/auth.ts v2
+// pwa-kit: auth/functions/api/auth.ts v5
 // POST /api/auth  { credential: "<google id_token>" }
 // Verifies the token against Google's public keys, upserts into D1, and
 // returns the user record plus a 90-day session token. The session is what
 // authenticates later API calls - the Google token itself only lives about
 // an hour. DELETE /api/auth revokes the session (sign-out).
 //
-// Import paths assume the kit's shared/ layout next to functions/; adjust to
-// where the app keeps shared code (`../../../shared/functions/…` in a repo
-// with app/ and admin/ siblings).
+// Import paths assume the family layout: shared/ beside the app directory
+// (repo/shared, repo/app/functions/api). A single-app repo with shared/ inside
+// the app uses `../../shared/functions/…`.
 
 import { verifyGoogleToken } from '../../shared/functions/google-token'
 import { createSession, deleteSession } from '../../shared/functions/sessions'
