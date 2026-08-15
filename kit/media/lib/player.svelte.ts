@@ -1,3 +1,4 @@
+// pwa-kit: media/lib/player.svelte.ts v1
 // The playback engine (spec: reference/media.md).
 //
 // One <audio> element drives everything, including the video items. That is the
@@ -91,7 +92,8 @@ export class Player<T extends PlayableItem = PlayableItem> {
   }
 
   get index() {
-    return this.item ? this.queue.findIndex((i) => i.id === this.item.id) : -1
+    const id = this.item?.id
+    return id != null ? this.queue.findIndex((i) => i.id === id) : -1
   }
 
   get hasPrev() {

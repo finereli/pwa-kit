@@ -1,3 +1,4 @@
+// pwa-kit: router/lib/router.svelte.ts v1
 // Hash routing, so the phone's back button works and a deep link survives an
 // app restart from the home screen. No library: the whole thing is a parse
 // function the app supplies plus a few history rules that are easy to get

@@ -1,3 +1,4 @@
+<!-- pwa-kit: save/ui/SaveStatus.svelte v1 -->
 <script lang="ts">
   // Always-visible autosave indicator next to an editor. Idle state is the
   // hint that changes save themselves; then saving / saved / a tappable

@@ -1,3 +1,4 @@
+// pwa-kit: theme/lib/theme.ts v1
 // Dark mode and accent-derived palettes for apps that let the user pick a
 // colour, or that ship a dark theme.
 //

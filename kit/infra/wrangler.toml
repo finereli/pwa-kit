@@ -1,3 +1,4 @@
+# pwa-kit: infra/wrangler.toml v1
 # Cloudflare Pages project config. Seams: name, database ids/names, bucket.
 name = "myapp"
 pages_build_output_dir = "dist"

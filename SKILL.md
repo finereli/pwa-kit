@@ -18,7 +18,7 @@ Two sharing levels: **within a repo**, apps import from one `shared/` (yaelfiner
 
 ## Stack
 
-Svelte 5 + Vite. Cloudflare Pages + Pages Functions + D1 + R2 for apps with a backend, or a single Worker (Durable Object) for realtime chat apps. CSS custom properties for theming, never a component library. Inline SVG icons from Material Symbols paths, never an icon font. Hash router, hand-rolled. Google sign-in with server sessions for multi-user apps, PIN for single-user.
+Svelte 5 + Vite + TypeScript. Cloudflare Pages + Pages Functions + D1 + R2 for apps with a backend, or a single Worker (Durable Object) for realtime chat apps. CSS custom properties for theming, never a component library. Inline SVG icons from Material Symbols paths, never an icon font. Hash router, hand-rolled. Google sign-in with server sessions for multi-user apps, PIN for single-user.
 
 ## Where to read what
 
@@ -41,7 +41,26 @@ Read `reference/` files on demand, not all at once. Each is self-contained.
 
 `python3 scripts/kit.py list` prints the current items. Each `kit/<item>/README.md` says what it is, the decisions baked in, the seams, and how to verify.
 
-<!-- KIT TABLE -->
+| Item | What | Origin |
+|---|---|---|
+| `updates` | SW registration + update flow, reload icon, `reset.html`, vite build helper (`__BUILD__`, workbox options) | Yael's app/admin, after the stuck-phone saga |
+| `auth` | Google sign-in + 90-day D1 sessions, token verification, `/api/auth`, middleware, schema, Login, double-locked dev bypass | Yael's app/admin, after the journal leak + preview review |
+| `api` | fetch wrapper: bearer, JSON, 401 funnel | Yael's admin |
+| `save` | SaveTracker, SaveStatus, AutoTextarea (autosave-first) | Yael's admin |
+| `shell` | base.css tokens/reset, TopBar, Drawer, Btn, index.html, App/main templates, vite/ts/svelte/package config | Yael's app/admin |
+| `router` | hash router with the history rules | Yael's app |
+| `format` | localDateStr, formatDate, formatTime | Yael's shared |
+| `media` | Player engine (audio owns, muted video follows), progress persistence | Yael's app |
+| `upload` | XHR upload with progress + pipeline queue | Yael's admin |
+| `install` | InstallBanner slide-in + globals d.ts | Yael's app |
+| `icons` | Icon.svelte + Material Symbols extraction | Yael's app |
+| `chat` | WsClient: reconnection state machine, heartbeat, backoff, browser signals | Angel |
+| `remote-log` | tagged console → server | Glopus |
+| `image-resize` | client-side resize before upload | Glopus |
+| `theme` | dark mode before first paint, accent-derived palette | Glopus |
+| `infra` | deploy workflow, wrangler.toml with `[env.preview]`, `.dev.vars`, setup-preview.sh | Yael's repo |
+
+Language: TypeScript everywhere; apps run `svelte-check` in `npm run build`. `scripts/typecheck/run.sh` type-checks and builds the whole kit as one project.
 
 ## Procedures
 
@@ -58,6 +77,7 @@ Read `reference/` files on demand, not all at once. Each is self-contained.
 
 The user says "update the app to the latest pwa skill" or similar.
 
+0. A project that predates the kit has no headers, so `status` finds nothing. First adoption: map its files to kit items by name (`shared/lib/updates.svelte.js` ↔ `updates/lib/updates.svelte.ts`), diff by hand, and adopt item by item: replace with the kit file (header included), move app-specific bits behind the item's seams, add the alias block if the app has its own token names, convert `.js` importers to the new paths. Report the diff first; the owner decides what to adopt.
 1. `python3 ~/.claude/skills/pwa/scripts/kit.py status <project> --all`. Statuses: `current` (nothing to do; relabel the header if the version moved), `upstream` (kit moved, copy untouched: copy the new file over, keep going), `modified` (project edited it, kit didn't move: leave it, but read the diff and consider promoting), `both` (three-way merge: read the project's edits, read the kit's change and the note in `MANIFEST.json`, produce a merged file that keeps both intents), `unknown` (header points at something the manifest doesn't know: investigate), `available` (kit items the project doesn't have: mention, don't add unprompted).
 2. For every file touched, run the item's verify recipe. Build both apps if the repo has two.
 3. Report per file what happened and why. Never silently overwrite a `modified` or `both` file.
@@ -69,9 +89,10 @@ After building or fixing something in an app that a future app would want. The s
 
 1. Decide spec or kit. A rule, principle, or constant goes in `reference/`. Code that must be right goes in `kit/`.
 2. For kit: copy the file(s) into `kit/<item>/` (new item or existing), strip anything app-specific behind a seam (a constructor option, a CSS token, a callback), keep the comments at the decision points, and write or update `README.md`: what, decisions, seams, verify. Add a `verify` recipe you actually ran.
-3. `python3 scripts/kit.py bump <item> --note "what changed"`. This rewrites headers and records hashes. Then copy the bumped files back into the source project so its headers match (`status` should show `current`).
-4. `python3 scripts/kit.py check` must print `ok`.
-5. Update the reference doc that describes the behavior, and the kit table in this file.
+3. `scripts/typecheck/run.sh` must pass (svelte-check + vite build over the whole kit).
+4. `python3 scripts/kit.py bump <item> --note "what changed"`. This rewrites headers and records hashes. Then copy the bumped files back into the source project so its headers match (`status` should show `current`).
+5. `python3 scripts/kit.py check` must print `ok`.
+6. Update the reference doc that describes the behavior, and the kit table in this file.
 
 ## What this style is NOT
 

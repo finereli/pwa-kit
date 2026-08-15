@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# pwa-kit: infra/scripts/setup-preview.sh v1
 # One-time setup for isolated preview deployments.
 #
 # Preview deployments (every non-main branch) bind whatever wrangler.toml

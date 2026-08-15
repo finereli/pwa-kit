@@ -1,3 +1,4 @@
+// pwa-kit: format/lib/format.ts v1
 // Date and time formatting, one module per project so every component renders alike.
 
 // Today's date as YYYY-MM-DD in the *local* timezone. Never use

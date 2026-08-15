@@ -34,6 +34,10 @@ HEADER = re.compile(r'pwa-kit:\s*(\S+)\s+v(\d+)')
 SKIP_DIRS = {'node_modules', 'dist', 'dist-media', '.git', '.svelte-kit', '.wrangler', 'build', '.venv'}
 TEXT_EXT = {'.js', '.ts', '.svelte', '.css', '.html', '.sh', '.py', '.sql', '.md', '.json', '.toml', '.jsonc', '.yml', '.yaml', '.vars', '.txt'}
 
+# JSON has no comment syntax: these get no header (still hashed in the manifest;
+# `status` can't find them in a project, and they're edited templates anyway).
+HEADERLESS_EXT = {'.json'}
+
 COMMENT = {
     '.js': ('// ', ''), '.ts': ('// ', ''), '.jsonc': ('// ', ''),
     '.svelte': ('<!-- ', ' -->'), '.html': ('<!-- ', ' -->'), '.md': ('<!-- ', ' -->'),
@@ -96,8 +100,11 @@ def kit_files(item):
 
 
 def set_header(path, kitpath, version):
-    """Insert or rewrite the pwa-kit header as the first line (after a shebang, if any)."""
+    """Insert or rewrite the pwa-kit header as the first line (after a shebang or
+    doctype, if any). JSON files are left alone."""
     ext = os.path.splitext(path)[1]
+    if ext in HEADERLESS_EXT:
+        return
     open_c, close_c = COMMENT.get(ext, ('# ', ''))
     header = f'{open_c}pwa-kit: {kitpath} v{version}{close_c}\n'
     with open(path, encoding='utf-8') as f:
@@ -107,7 +114,7 @@ def set_header(path, kitpath, version):
         if HEADER.search(lines[i]):
             del lines[i]
             break
-    at = 1 if lines and lines[0].startswith('#!') else 0
+    at = 1 if lines and (lines[0].startswith('#!') or lines[0].lower().startswith('<!doctype')) else 0
     lines.insert(at, header)
     with open(path, 'w', encoding='utf-8') as f:
         f.writelines(lines)
@@ -143,6 +150,11 @@ def cmd_check():
             h = read_header(path)
             want = (f'{item}/{rel}', v)
             recorded = entry['files'].get(rel, {}).get(str(v))
+            if os.path.splitext(rel)[1] in HEADERLESS_EXT:
+                if recorded != sha(path):
+                    print(f'HASH    {item}/{rel}: file changed since v{v} was recorded (run: kit.py bump {item})')
+                    bad += 1
+                continue
             if h != want:
                 print(f'HEADER  {item}/{rel}: has {h}, want {want}')
                 bad += 1

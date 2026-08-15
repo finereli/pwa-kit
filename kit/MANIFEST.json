@@ -1,3 +1,348 @@
 {
-  "items": {}
+  "items": {
+    "api": {
+      "current_files": [
+        "lib/api.ts"
+      ],
+      "files": {
+        "lib/api.ts": {
+          "1": "aa92d660b1b8efb53dd3baf5c52d15209d248cd5d98de3cddc0bada7d7485eb7"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "auth": {
+      "current_files": [
+        "db/auth.sql",
+        "functions/api/_config.ts",
+        "functions/api/_middleware.ts",
+        "functions/api/auth.ts",
+        "functions/google-token.ts",
+        "functions/sessions.ts",
+        "lib/auth.example.ts",
+        "lib/google-auth.svelte.ts",
+        "ui/Login.svelte"
+      ],
+      "files": {
+        "db/auth.sql": {
+          "1": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369"
+        },
+        "functions/api/_config.ts": {
+          "1": "c7f0a15d99b8cd0f40b76af9d746345307a0f6e8f6e2130fea12ce1d12a35649"
+        },
+        "functions/api/_middleware.ts": {
+          "1": "5fe58c8de8299c54bde11fb4ce45e423c7f834df5fe9818e6ba271a945341d21"
+        },
+        "functions/api/auth.ts": {
+          "1": "7314f0836f9c04a367cc79f35b0f5bbaa34ebc1c394a0db169af08c6dcc261ac"
+        },
+        "functions/google-token.ts": {
+          "1": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87"
+        },
+        "functions/sessions.ts": {
+          "1": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083"
+        },
+        "lib/auth.example.ts": {
+          "1": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca"
+        },
+        "lib/google-auth.svelte.ts": {
+          "1": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2"
+        },
+        "ui/Login.svelte": {
+          "1": "bed9574a231cbdfada9ec60acdfd69bf393731afdfc0c395de349dd1d0c314d0"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "chat": {
+      "current_files": [
+        "lib/ws-client.ts"
+      ],
+      "files": {
+        "lib/ws-client.ts": {
+          "1": "14253cbb7327f53782c11e5a9b346447adf6f134e7f5b109128c2afb21b626a8"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "format": {
+      "current_files": [
+        "lib/format.ts"
+      ],
+      "files": {
+        "lib/format.ts": {
+          "1": "866bd5107d33f73d63ffddd9edb1771f3221b1fe293fdc61c753ede7ceec9a56"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "icons": {
+      "current_files": [
+        "scripts/icons.py",
+        "scripts/icons.sh",
+        "ui/Icon.svelte"
+      ],
+      "files": {
+        "scripts/icons.py": {
+          "1": "7b49a3bdade72dc5a04e5425361a51ada98d0ee5ee4e815124dcbf0994aee85d"
+        },
+        "scripts/icons.sh": {
+          "1": "b8d84b26522ea5069c7aa7cd743f3465214d15b6bf566f960c78988df7783295"
+        },
+        "ui/Icon.svelte": {
+          "1": "511cef3effc29ff4dd6c1c32405368e3afb151d028e6e504aef181eac39099c9"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "image-resize": {
+      "current_files": [
+        "lib/image-resize.ts"
+      ],
+      "files": {
+        "lib/image-resize.ts": {
+          "1": "1af8e1aac29359b6c15655b6e8aaa251596c7cfbcfdb640c3786e23df0b43c97"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "infra": {
+      "current_files": [
+        ".dev.vars",
+        ".github/workflows/deploy.yml",
+        "scripts/setup-preview.sh",
+        "wrangler.toml"
+      ],
+      "files": {
+        ".dev.vars": {
+          "1": "5d15dbd60ea94928c39a2dc278f328570cfbbfbdf874dd4623214513e389e10e"
+        },
+        ".github/workflows/deploy.yml": {
+          "1": "3524db85a30701ed453884a054096279f18969f148328c93cf62bd10d235a8c9"
+        },
+        "scripts/setup-preview.sh": {
+          "1": "bab52fa237252186f856e8eac055b271b43d86da6dcf6d19640a45133dae9fe9"
+        },
+        "wrangler.toml": {
+          "1": "eca54d737801d3a61408d84e3e755db2f94202a8c8026f3984b6ad9faea52af9"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "install": {
+      "current_files": [
+        "src/pwa-install.d.ts",
+        "ui/InstallBanner.svelte"
+      ],
+      "files": {
+        "src/pwa-install.d.ts": {
+          "1": "cf4f58236277ae3496d1f1be09477c458e253e2d85b7a17f710184cb383b2663"
+        },
+        "ui/InstallBanner.svelte": {
+          "1": "28bcc747e1b8e25a14ee95c03e844f5f43eab82e99e83bb5e3174f4a61d07e1f"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "media": {
+      "current_files": [
+        "lib/player.svelte.ts",
+        "lib/progress.ts"
+      ],
+      "files": {
+        "lib/player.svelte.ts": {
+          "1": "cc8c171bdb9059db65671cccb6581e175dd5d5b23ed340433632dbe261815c47"
+        },
+        "lib/progress.ts": {
+          "1": "81bdc82ea71c1b17862fb8471013b7a12fef01d15d9e1ea7b11903087b679f5d"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "remote-log": {
+      "current_files": [
+        "lib/remote-log.ts"
+      ],
+      "files": {
+        "lib/remote-log.ts": {
+          "1": "63dd4ba79537f120cfb6b3ec4c154c6d242ea6137da097d62a9b350955f8a3cb"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "router": {
+      "current_files": [
+        "lib/router.svelte.ts"
+      ],
+      "files": {
+        "lib/router.svelte.ts": {
+          "1": "8aefad029d83645ac02776006d37f1e7506265c92d64624c06963cfbb3ca1310"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "save": {
+      "current_files": [
+        "lib/save-tracker.svelte.ts",
+        "ui/AutoTextarea.svelte",
+        "ui/SaveStatus.svelte"
+      ],
+      "files": {
+        "lib/save-tracker.svelte.ts": {
+          "1": "a53d54b75688233a80bae1d0e9861f7937c1be4a312872fcd07682621a8d3f42"
+        },
+        "ui/AutoTextarea.svelte": {
+          "1": "9d037481dbf241827720d12ae8b58f45a6d3204d79441dff998fbb5bce1eb3d1"
+        },
+        "ui/SaveStatus.svelte": {
+          "1": "dee906c37aef3410920c1745e88d9e2a9a207dc5de38e3987a65e41fae2ac96d"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "shell": {
+      "current_files": [
+        "css/base.css",
+        "index.html",
+        "package.json",
+        "src/App.svelte",
+        "src/main.ts",
+        "svelte.config.js",
+        "tsconfig.json",
+        "ui/Btn.svelte",
+        "ui/Drawer.svelte",
+        "ui/TopBar.svelte",
+        "vite.config.ts"
+      ],
+      "files": {
+        "css/base.css": {
+          "1": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd"
+        },
+        "index.html": {
+          "1": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab"
+        },
+        "package.json": {
+          "1": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387"
+        },
+        "src/App.svelte": {
+          "1": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c"
+        },
+        "src/main.ts": {
+          "1": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd"
+        },
+        "svelte.config.js": {
+          "1": "da1ed4002c530fc6103aa61120f0868cbdbc0e852e0c0c2688194fd82172557c"
+        },
+        "tsconfig.json": {
+          "1": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0"
+        },
+        "ui/Btn.svelte": {
+          "1": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869"
+        },
+        "ui/Drawer.svelte": {
+          "1": "f9b049bb849ac1bf94edd58728c09cdc5ce19b229b7ef74a90b742689832acf1"
+        },
+        "ui/TopBar.svelte": {
+          "1": "2ba76b7f7bfa120d15a1485716eeb44e99a6c518d67d66cbe34dc3f14bec85e1"
+        },
+        "vite.config.ts": {
+          "1": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "theme": {
+      "current_files": [
+        "lib/theme.ts"
+      ],
+      "files": {
+        "lib/theme.ts": {
+          "1": "027d1a2f2a17c5849b2d1c18ed3a209895c677055f000e2f4eaf02463aa3df6e"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "updates": {
+      "current_files": [
+        "lib/updates.svelte.ts",
+        "public/reset.html",
+        "src/build.d.ts",
+        "ui/ResetButton.svelte"
+      ],
+      "files": {
+        "lib/updates.svelte.ts": {
+          "1": "27e5d0cd454990b8c2b00be90414805cb0712697f031e45a3b3c74f31e0bad02"
+        },
+        "public/reset.html": {
+          "1": "4c6d10f0cbaa3eb03288cfb2cf8fbe2d276942d8985b0661a29a6664d7204d78"
+        },
+        "src/build.d.ts": {
+          "1": "75cb750134bb6f7bf382d8eb596f138226d3cd19f044fb98e011916026bbcc23"
+        },
+        "ui/ResetButton.svelte": {
+          "1": "46ef88d5ac36d0787c9e45fcea6b757259215ff6ba5a6135a85bd1fd46e58e8b"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    },
+    "upload": {
+      "current_files": [
+        "lib/upload.ts"
+      ],
+      "files": {
+        "lib/upload.ts": {
+          "1": "b03b3987358c22b1980952a2f510e7563a1e1bf92937c8ae3bf1cd608faf6648"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+      },
+      "version": 1
+    }
+  }
 }

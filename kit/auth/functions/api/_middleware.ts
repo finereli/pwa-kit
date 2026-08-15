@@ -1,3 +1,4 @@
+// pwa-kit: auth/functions/api/_middleware.ts v1
 // Every /api/* request except /api/auth itself must carry a live credential.
 // Order: dev bypass (double-locked) → server session → raw Google id_token
 // (accepted so a client whose /api/auth POST failed can still get through
@@ -11,7 +12,7 @@ import { validateSession, devBypassUser } from '../../shared/functions/sessions'
 import { CLIENT_ID, REQUIRE_ADMIN } from './_config'
 
 interface Env { DB: D1Database; DEV_AUTH?: string }
-export interface AuthedData { user: { sub: string; email: string } }
+export type AuthedData = { user: { sub: string; email: string } }
 
 export const onRequest: PagesFunction<Env, string, AuthedData> = async (context) => {
   const { request, env, next } = context

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# pwa-kit: icons/scripts/icons.sh v1
 # Regenerate src/lib/icons.ts from the material-symbols font. See scripts/icons.py.
 # Add icons:  npm run icon <name> [<name>...]      List icons:  npm run icon
 set -euo pipefail

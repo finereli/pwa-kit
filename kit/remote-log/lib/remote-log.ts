@@ -1,3 +1,4 @@
+// pwa-kit: remote-log/lib/remote-log.ts v1
 // Remote console log forwarder. Patches console.log/warn/error and batches
 // tagged lines to the server, so mobile problems can be debugged without a
 // cable. This is how the reconnection bugs in the chat apps got fixed: every

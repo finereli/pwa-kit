@@ -1,3 +1,4 @@
+// pwa-kit: upload/lib/upload.ts v1
 // Uploads with real progress, and a small queue that runs a per-file
 // pipeline with bounded concurrency, cancel, retry and a close-tab guard.
 //
@@ -136,7 +137,7 @@ export class UploadQueue {
 
   enqueue(files: Iterable<File>, meta: Record<string, unknown> = {}) {
     for (const file of files) {
-      const ext = file.name.split('.').pop().toLowerCase()
+      const ext = (file.name.split('.').pop() ?? '').toLowerCase()
       if (this.#opts.accept && !this.#opts.accept.includes(ext)) continue
       const baseName = cleanBaseName(file.name)
       this.jobs.push({

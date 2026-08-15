@@ -1,3 +1,4 @@
+// pwa-kit: image-resize/lib/image-resize.ts v1
 // Resize an image on the client before uploading it. Phones produce 12MB
 // photos; nothing downstream wants them. Max dimension 1568px (Claude
 // downscales to that anyway), JPEG at 0.85, stepping quality down to 0.3

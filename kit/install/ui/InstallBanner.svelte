@@ -1,3 +1,4 @@
+<!-- pwa-kit: install/ui/InstallBanner.svelte v1 -->
 <script lang="ts">
   // Install nudge: a lower-third caption that wipes in from the edge, not a
   // modal. Shows when `when` turns true (after demonstrated engagement - ten
@@ -26,15 +27,6 @@
     when?: boolean; text?: string; closeLabel?: string; iosSteps?: string; iosThen?: string
     androidSteps?: string; androidThen?: string; bottom?: string
   } = $props()
-
-  interface BeforeInstallPromptEvent extends Event {
-    prompt(): Promise<void>
-    userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>
-  }
-  declare global {
-    interface Window { __pwaInstallPrompt?: BeforeInstallPromptEvent }
-    interface Navigator { standalone?: boolean }
-  }
 
   let visible = $state(false)
   let dismissed = $state(false)

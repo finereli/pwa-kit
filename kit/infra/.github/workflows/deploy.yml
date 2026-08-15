@@ -1,3 +1,4 @@
+# pwa-kit: infra/.github/workflows/deploy.yml v1
 # Deploy one PWA to its Cloudflare Pages project on every push, any branch.
 # main → production; other branches → preview deployments (which bind the
 # isolated preview D1/R2 from wrangler.toml [env.preview], never production).

@@ -1,3 +1,4 @@
+<!-- pwa-kit: icons/ui/Icon.svelte v1 -->
 <script lang="ts">
   // Inline SVG icon. Draws a Material Symbols glyph from src/lib/icons.ts with
   // no font to download, so it renders instantly. `size` is in px; colour comes

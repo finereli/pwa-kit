@@ -1,3 +1,4 @@
+// pwa-kit: api/lib/api.ts v1
 // The one fetch wrapper for an app's API. Attaches the session token,
 // JSON-encodes plain-object bodies (files and streams pass through
 // untouched), and funnels 401s into the auth store so a dead session

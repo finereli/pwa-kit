@@ -1,3 +1,4 @@
+// pwa-kit: chat/lib/ws-client.ts v1
 // WebSocket connection layer for chat / realtime apps: the state machine,
 // auth handshake, heartbeat, backoff, and the three browser signals that make
 // reconnection feel native on a phone. Lifted from Angel's client, where every

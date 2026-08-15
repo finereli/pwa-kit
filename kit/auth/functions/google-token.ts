@@ -1,3 +1,4 @@
+// pwa-kit: auth/functions/google-token.ts v1
 // Verification of Google ID tokens against Google's published keys, for
 // Cloudflare Pages Functions / Workers (WebCrypto, no dependencies).
 //
@@ -29,10 +30,13 @@ async function getGoogleKeys(): Promise<JsonWebKey[]> {
   return keys
 }
 
-function decodeBase64Url(str: string): Uint8Array {
+function decodeBase64Url(str: string): Uint8Array<ArrayBuffer> {
   const padded = str.replace(/-/g, '+').replace(/_/g, '/') +
     '='.repeat((4 - (str.length % 4)) % 4)
-  return Uint8Array.from(atob(padded), (c) => c.charCodeAt(0))
+  const bin = atob(padded)
+  const out = new Uint8Array(bin.length)
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i)
+  return out
 }
 
 export async function verifyGoogleToken(credential: string, clientId: string): Promise<GoogleJwtPayload> {

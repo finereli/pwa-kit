@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# pwa-kit: icons/scripts/icons.py v1
 """Generate src/lib/icons.ts from the material-symbols font.
 
 The app draws its icons as inline SVG (see Icon.svelte), not a webfont - nothing
