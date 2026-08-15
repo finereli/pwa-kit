@@ -1,4 +1,4 @@
-// pwa-kit: media/lib/player.svelte.ts v1
+// pwa-kit: media/lib/player.svelte.ts v3
 // The playback engine (spec: reference/media.md).
 //
 // One <audio> element drives everything, including the video items. That is the
@@ -16,7 +16,7 @@
 //     artist: 'Name shown on the lock screen',
 //     artwork: [{ src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' }],
 //     // optional hooks - e.g. a start bell (awaited before play) and an end bell
-//     beforePlay: async () => {}, onEnded: () => {}, onLoad: () => {},
+//     beforePlay: async () => {}, onPlay: () => {}, onEnded: () => {}, onLoad: () => {},
 //   })
 //
 // Wire the rest in App.svelte / main.ts:
@@ -41,9 +41,10 @@ export interface PlayerOptions<T extends PlayableItem = PlayableItem> {
   artist?: string
   album?: string
   artwork?: MediaImage[]
-  beforePlay?: (() => Promise<unknown>) | null
-  onEnded?: (() => void) | null
-  onLoad?: (() => void) | null
+  beforePlay?: (() => Promise<unknown>) | null   // awaited before playback from the top (a start bell)
+  onPlay?: (() => void) | null                    // every play() call (cancel a pending end bell)
+  onEnded?: (() => void) | null                   // natural end (an end bell)
+  onLoad?: (() => void) | null                    // a new item loads
 }
 
 // Don't resume from the very first moments; you'd rather just start over.
@@ -86,9 +87,9 @@ export class Player<T extends PlayableItem = PlayableItem> {
   #wanted = false
   #opts: Required<PlayerOptions<T>>
 
-  constructor({ audioUrl, artist = '', album = '', artwork = [], beforePlay = null, onEnded = null, onLoad = null }: PlayerOptions<T>) {
+  constructor({ audioUrl, artist = '', album = '', artwork = [], beforePlay = null, onPlay = null, onEnded = null, onLoad = null }: PlayerOptions<T>) {
     if (!audioUrl) throw new Error('Player: audioUrl(item) is required')
-    this.#opts = { audioUrl, artist, album, artwork, beforePlay, onEnded, onLoad }
+    this.#opts = { audioUrl, artist, album, artwork, beforePlay, onPlay, onEnded, onLoad }
   }
 
   get index() {
@@ -288,6 +289,7 @@ export class Player<T extends PlayableItem = PlayableItem> {
   play() {
     const a = this.#el()
     this.#wanted = true
+    this.#opts.onPlay?.()
     // Once the user has committed, pull the audio as fast as the network allows.
     a.preload = 'auto'
     // Only correct the element when it has a duration to validate against;

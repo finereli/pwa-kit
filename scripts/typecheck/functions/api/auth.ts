@@ -1,4 +1,4 @@
-// pwa-kit: auth/functions/api/auth.ts v1
+// pwa-kit: auth/functions/api/auth.ts v2
 // POST /api/auth  { credential: "<google id_token>" }
 // Verifies the token against Google's public keys, upserts into D1, and
 // returns the user record plus a 90-day session token. The session is what

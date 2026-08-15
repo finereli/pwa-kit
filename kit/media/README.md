@@ -12,7 +12,7 @@ Rate-nudge sync (0.02 / 0.06 / 0.5s thresholds, ±4%) with hysteresis; hard seek
 
 ## Seams
 
-`audioUrl(item)`, `artist`/`album`/`artwork`, `beforePlay`/`onEnded`/`onLoad` hooks (bells), progress `KEY` prefix and backend (`setBackend` for server sync).
+`audioUrl(item)`, `artist`/`album`/`artwork`, `beforePlay`/`onEnded`/`onLoad` hooks (bells), progress storage key (`setBackend(localStorageBackend(key))`) and backend (`setBackend` for server sync).
 
 ## Verify
 

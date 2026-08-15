@@ -27,7 +27,7 @@ Pair with `api/` (the fetch wrapper that funnels 401s) and `infra/` (`.dev.vars`
 
 ## Seams
 
-`clientId` (client + `_config.ts`, keep them equal), `storageKey`, `devHostSuffix`, `devUser` (defaults to Eli's; must match server `DEFAULT_DEV_USER`), `REQUIRE_ADMIN`, Login props (title, subtitle, icon, buttonLabel), Login background (`--accent-deep`).
+`clientId` (client + `_config.ts`, keep them equal), `storageKey`, `devHostSuffix`, `devUser` (defaults to Eli's; must match server `DEFAULT_DEV_USER`), `REQUIRE_ADMIN`, `PUBLIC_PATHS` (unauthenticated API prefixes), Login props (title, subtitle, icon, buttonLabel), Login background (`--accent-deep`).
 
 ## Verify
 

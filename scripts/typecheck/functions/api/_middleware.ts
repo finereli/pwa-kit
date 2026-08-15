@@ -1,5 +1,5 @@
-// pwa-kit: auth/functions/api/_middleware.ts v1
-// Every /api/* request except /api/auth itself must carry a live credential.
+// pwa-kit: auth/functions/api/_middleware.ts v2
+// Every /api/* request except /api/auth and PUBLIC_PATHS must carry a live credential.
 // Order: dev bypass (double-locked) → server session → raw Google id_token
 // (accepted so a client whose /api/auth POST failed can still get through
 // for the hour the token lives; it re-exchanges on the next sign-in).
@@ -9,7 +9,7 @@
 
 import { verifyGoogleToken } from '../../shared/functions/google-token'
 import { validateSession, devBypassUser } from '../../shared/functions/sessions'
-import { CLIENT_ID, REQUIRE_ADMIN } from './_config'
+import { CLIENT_ID, REQUIRE_ADMIN, PUBLIC_PATHS } from './_config'
 
 interface Env { DB: D1Database; DEV_AUTH?: string }
 export type AuthedData = { user: { sub: string; email: string } }
@@ -19,6 +19,7 @@ export const onRequest: PagesFunction<Env, string, AuthedData> = async (context)
   const url = new URL(request.url)
 
   if (url.pathname === '/api/auth') return next()
+  if (PUBLIC_PATHS.some((p) => url.pathname.startsWith(p))) return next()
 
   const token = request.headers.get('Authorization')?.replace('Bearer ', '')
   if (!token) return Response.json({ error: 'unauthorized' }, { status: 401 })
