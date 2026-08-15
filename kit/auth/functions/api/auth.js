@@ -1,0 +1,58 @@
+// POST /api/auth  { credential: "<google id_token>" }
+// Verifies the token against Google's public keys, upserts into D1, and
+// returns the user record plus a 90-day session token. The session is what
+// authenticates later API calls - the Google token itself only lives about
+// an hour. DELETE /api/auth revokes the session (sign-out).
+//
+// Import paths assume the kit's shared/ layout next to functions/; adjust to
+// where the app keeps shared code (`../../../shared/functions/…` in a repo
+// with app/ and admin/ siblings).
+
+import { verifyGoogleToken } from '../../shared/functions/google-token.js'
+import { createSession, deleteSession } from '../../shared/functions/sessions.js'
+import { CLIENT_ID } from './_config.js'
+
+export async function onRequestPost({ request, env }) {
+  try {
+    const { credential } = await request.json()
+    if (!credential) {
+      return Response.json({ error: 'missing credential' }, { status: 400 })
+    }
+
+    const payload = await verifyGoogleToken(credential, CLIENT_ID)
+
+    await env.DB.prepare(
+      `INSERT INTO users (google_id, email, name, picture)
+       VALUES (?1, ?2, ?3, ?4)
+       ON CONFLICT(google_id) DO UPDATE SET
+         email = ?2, name = ?3, picture = ?4,
+         last_seen = datetime('now')`
+    )
+      .bind(payload.sub, payload.email, payload.name, payload.picture)
+      .run()
+
+    const row = await env.DB.prepare(
+      'SELECT is_admin FROM users WHERE google_id = ?'
+    ).bind(payload.sub).first()
+    const isAdmin = row?.is_admin ?? 0
+
+    const session = await createSession(env.DB, payload.sub)
+
+    return Response.json({
+      id: payload.sub,
+      email: payload.email,
+      name: payload.name,
+      picture: payload.picture,
+      is_admin: isAdmin,
+      session,
+    })
+  } catch (err) {
+    return Response.json({ error: err.message }, { status: 401 })
+  }
+}
+
+export async function onRequestDelete({ request, env }) {
+  const token = request.headers.get('Authorization')?.replace('Bearer ', '')
+  await deleteSession(env.DB, token)
+  return Response.json({ ok: true })
+}
