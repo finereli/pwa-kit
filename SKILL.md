@@ -48,6 +48,7 @@ Read `reference/` files on demand, not all at once. Each is self-contained.
 | `api` | fetch wrapper: bearer, JSON, 401 funnel | Yael's admin |
 | `save` | SaveTracker, SaveStatus, AutoTextarea (autosave-first) | Yael's admin |
 | `toast` | error toasts + optimistic-update revert pattern | Yael's admin |
+| `reorder` | touch-first drag-to-reorder (pointer events, edge autoscroll) | Yael's admin |
 | `shell` | base.css tokens/reset, TopBar, Drawer, Btn, index.html, App/main templates, vite/ts/svelte/package config | Yael's app/admin |
 | `router` | hash router with the history rules | Yael's app |
 | `format` | localDateStr, formatDate, formatTime | Yael's shared |

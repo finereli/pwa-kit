@@ -98,6 +98,7 @@ One-shot mutations (toggle, add, remove, archive, reorder) never make the user w
 - **Autosaved text is not this.** Debounced field saves go through SaveTracker + SaveStatus, which carry their own inline retry; don't toast those.
 - **Awaited is still right when navigation depends on the result** - creating an entity and routing to its id, deleting and leaving the page. Keep the busy flag, add a failure toast.
 - **Mount `<Toast />` once at the app root**, outside the auth gate.
+- **Reordering lists is drag & drop** (kit `reorder/`), not up/down arrows - arrows are miserable on a phone. Handle-only `touch-action: none` keeps the page scrollable; the drop commits optimistically.
 - Toast copy follows the register rules (action nouns): "העדכון נכשל", "ההוספה נכשלה", "המחיקה נכשלה".
 
 ## Keyboard and input

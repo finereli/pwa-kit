@@ -101,7 +101,16 @@
     border-bottom: 1px solid var(--border);
   }
 
-  ul { list-style: none; padding: 14px 12px; }
+  /* The nav list is the scroll region: a drawer taller than the screen
+     scrolls here while brand and footer stay pinned. */
+  ul {
+    list-style: none;
+    padding: 14px 12px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   .section-label {
     font-size: 0.7rem;
     font-weight: 600;
