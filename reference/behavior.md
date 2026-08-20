@@ -14,6 +14,15 @@ The single biggest feel item. The app must never render a state it will immediat
 
 The goal: a returning user sees the app in the correct theme with their last conversation, never a white flash or a login form that disappears.
 
+## Data stores: load at boot, read synchronously
+
+For management/admin apps whose whole dataset is small (hundreds of rows, not millions), stores fetch everything once at boot - in parallel, right after auth - and every view after that is a synchronous read from memory. Opening a detail view must never fire its own fetch: `store.byId(id)` and render, no loading state, no half-second blink. Discovered on Yael's posting board: the items editor opened instantly (store read) while the post editor took ~500ms (per-open `GET /api/posts/:id`), and the difference was glaring.
+
+- **Normalize, don't duplicate.** A relation loads once as its own store or map (e.g. all `post_groups` rows as `{ post_id → [{group_id, posted_at}] }`) and views join it with the registries they already have (names, links come from the groups store). Detail endpoints that re-join and re-ship data the client already holds get deleted.
+- **Derive, don't denormalize.** Counts and badges ("12/18 posted", "done") are computed from the loaded relation, not stored as columns the client must keep in sync.
+- **Mutations update the store optimistically** (see Optimistic updates); derived views re-render for free.
+- **A per-entity fetch is still right** when the payload is genuinely heavy per entity (transcripts, media, analytics) - then render everything you have from the store instantly and stream the heavy part in below it, never blocking the whole view.
+
 ## Auth
 
 ### PIN-based (single-user apps)
