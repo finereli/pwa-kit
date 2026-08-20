@@ -1,4 +1,4 @@
-<!-- pwa-kit: shell/ui/Drawer.svelte v5 -->
+<!-- pwa-kit: shell/ui/Drawer.svelte v6 -->
 <script lang="ts">
   import type { Snippet } from 'svelte'
   // Slide-in navigation drawer that becomes a permanent sidebar on desktop
