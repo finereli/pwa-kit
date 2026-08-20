@@ -278,19 +278,23 @@
       ],
       "files": {
         "lib/save-tracker.svelte.ts": {
-          "1": "a53d54b75688233a80bae1d0e9861f7937c1be4a312872fcd07682621a8d3f42"
+          "1": "a53d54b75688233a80bae1d0e9861f7937c1be4a312872fcd07682621a8d3f42",
+          "2": "a53d54b75688233a80bae1d0e9861f7937c1be4a312872fcd07682621a8d3f42"
         },
         "ui/AutoTextarea.svelte": {
-          "1": "9d037481dbf241827720d12ae8b58f45a6d3204d79441dff998fbb5bce1eb3d1"
+          "1": "9d037481dbf241827720d12ae8b58f45a6d3204d79441dff998fbb5bce1eb3d1",
+          "2": "9d037481dbf241827720d12ae8b58f45a6d3204d79441dff998fbb5bce1eb3d1"
         },
         "ui/SaveStatus.svelte": {
-          "1": "dee906c37aef3410920c1745e88d9e2a9a207dc5de38e3987a65e41fae2ac96d"
+          "1": "dee906c37aef3410920c1745e88d9e2a9a207dc5de38e3987a65e41fae2ac96d",
+          "2": "b5570ceb24eedc036f9d34cefd3da1966ede9a5a2b0456a93d5cc2d8c3656a95"
         }
       },
       "notes": {
-        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)",
+        "2": "SaveStatus v2: quiet indicator - idle renders nothing, spinner while saving (150ms delay), check flashes 1.2s then fades; error is the only worded state (errorText seam replaces the four strings)"
       },
-      "version": 1
+      "version": 2
     },
     "share": {
       "current_files": [

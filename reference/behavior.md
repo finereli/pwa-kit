@@ -74,7 +74,7 @@ Kit: `save/` (SaveTracker, SaveStatus, AutoTextarea).
 - **The server is the draft store.** No localStorage draft layer for autosaved fields; that would be a third state nobody can see or reason about. (Draft persistence to localStorage is for chat composers and journal entries where the send is explicit; see Keyboard and input.)
 - **Explicit buttons only for creation and publication.** Creating an entity is a real event with a real button; publishing likewise. Everything between is autosaved.
 - **A done-button on an autosaving editor is labeled "Done", never "Save".** "Save" promises something the button doesn't do and implies the rest wasn't saved.
-- **Always-visible indicator.** Idle state is the hint "changes save automatically", then saving / saved / a tappable retry on failure. Grid-stack the states so a swap never shifts layout.
+- **Quiet indicator.** Idle shows nothing - autosave is the norm, not news. Saving is a small spinner (150ms delay so fast writes barely flash), saved a checkmark that fades after ~1.2s. Failure is the only state that earns words: a persistent tappable retry. Grid-stack the states so a swap never shifts layout.
 - **Init fields once per entity id.** A slow round-trip that re-inits a bound field clobbers what the user typed next.
 - **Debounce timer nulled after firing**, or blur re-saves the same value. Dedupe with lastSaved/lastSent guards for the blur-flush vs done-click race.
 - **Delete vs archive is decided per entity** and written down; deleted things that can be restored get a restore path. Confirmations are inline two-step (tap, then confirm in place), never `confirm()`: the native dialog renders in the browser's language, not the app's.
