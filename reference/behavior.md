@@ -63,7 +63,7 @@ White cards with rounded corners and subtle shadow. Each card has a header row i
 
 **No toggle switches.** Every binary option is a button that changes its label and icon (e.g. "Dark mode" with moon icon toggles to "Light mode" with sun icon). This is simpler and already the house style.
 
-**Status messages are inline, not toasts.** Show them adjacent to the action that caused them. Auto-clear: 3000ms for saves, 5000ms for test results.
+**Status messages are inline, not toasts.** Show them adjacent to the action that caused them. Auto-clear: 3000ms for saves, 5000ms for test results. (Failed optimistic mutations are the exception - they have no message anchor; see Save model → Optimistic updates.)
 
 ## Save model
 
@@ -78,6 +78,18 @@ Kit: `save/` (SaveTracker, SaveStatus, AutoTextarea).
 - **Init fields once per entity id.** A slow round-trip that re-inits a bound field clobbers what the user typed next.
 - **Debounce timer nulled after firing**, or blur re-saves the same value. Dedupe with lastSaved/lastSent guards for the blur-flush vs done-click race.
 - **Delete vs archive is decided per entity** and written down; deleted things that can be restored get a restore path. Confirmations are inline two-step (tap, then confirm in place), never `confirm()`: the native dialog renders in the browser's language, not the app's.
+
+### Optimistic updates
+
+Kit: `toast/` (toasts store + Toast pill).
+
+One-shot mutations (toggle, add, remove, archive, reorder) never make the user wait for the round-trip: snapshot local state, apply the change immediately, fire the write, and on failure restore the snapshot and show `toasts.error(...)`. The optimistic UI is the success feedback; only failure gets a message. Discovered on Yael's posting checklist: an awaited checkbox reads as a broken checkbox.
+
+- **Snapshot-and-revert, not rollback logic.** Keep the previous value of exactly the state you mutate and restore it wholesale in `catch`. No inverse operations.
+- **Autosaved text is not this.** Debounced field saves go through SaveTracker + SaveStatus, which carry their own inline retry; don't toast those.
+- **Awaited is still right when navigation depends on the result** - creating an entity and routing to its id, deleting and leaving the page. Keep the busy flag, add a failure toast.
+- **Mount `<Toast />` once at the app root**, outside the auth gate.
+- Toast copy follows the register rules (action nouns): "העדכון נכשל", "ההוספה נכשלה", "המחיקה נכשלה".
 
 ## Keyboard and input
 

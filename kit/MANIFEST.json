@@ -426,6 +426,24 @@
       },
       "version": 1
     },
+    "toast": {
+      "current_files": [
+        "lib/toast.svelte.ts",
+        "ui/Toast.svelte"
+      ],
+      "files": {
+        "lib/toast.svelte.ts": {
+          "1": "36ec2f605463d88da1a7f2fd9c14e56da6e00f4d449ba45bed349fe854aecbe2"
+        },
+        "ui/Toast.svelte": {
+          "1": "fd8d8794c69f53f80e9d2824e1d88c5f22eb2cc35133e198273c07045cc35004"
+        }
+      },
+      "notes": {
+        "1": "New item: transient error toasts + the optimistic snapshot-and-revert pattern for one-shot mutations (from Yael's admin posting checklist)"
+      },
+      "version": 1
+    },
     "updates": {
       "current_files": [
         "lib/updates.svelte.ts",
