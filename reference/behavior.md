@@ -31,7 +31,7 @@ The PIN is the credential, not a session. Raw PIN stored in `localStorage['pin']
 
 Transport: send the PIN in an `{ type: 'auth', pin }` message over WebSocket, or as an `x-pin` header for fetch requests. For EventSource (which can't set headers), use `?pin=` query parameter.
 
-Login UI: `<input type="password" inputmode="numeric" pattern="[0-9]*">`, digits-only sanitization (`value.replace(/\D/g, '')`), autofocus, submit disabled under 4 digits.
+Login UI: the `pin-auth` kit item is the reference implementation - a phone-style keypad with PIN dots that auto-submits at length, shakes and clears on a wrong PIN, and accepts desktop keyboard input (digits, numpad, Backspace) via a window listener with no focus management. Fall back to a plain `<input type="password" inputmode="numeric" pattern="[0-9]*">` only where the keypad doesn't fit.
 
 Every app must have a logout affordance that clears the credential and drops to login. Any fetch wrapper should handle 401 by clearing the stored PIN and showing login.
 

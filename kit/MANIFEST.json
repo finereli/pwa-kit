@@ -242,6 +242,37 @@
       },
       "version": 3
     },
+    "pin-auth": {
+      "current_files": [
+        "functions/api/_middleware.ts",
+        "functions/api/auth/check.ts",
+        "lib/pin-auth.example.ts",
+        "ui/PinLogin.svelte"
+      ],
+      "files": {
+        "functions/api/_middleware.ts": {
+          "1": "0bcd7a84813bf3c9c44ab38e1456788e22efd6151af3a16b52a98ae7490e6681",
+          "2": "0bcd7a84813bf3c9c44ab38e1456788e22efd6151af3a16b52a98ae7490e6681"
+        },
+        "functions/api/auth/check.ts": {
+          "1": "b01d2f67aad9f20ca6e832b6e2eabb3633da875bd23dddb6352eca8e1006dcb6",
+          "2": "b01d2f67aad9f20ca6e832b6e2eabb3633da875bd23dddb6352eca8e1006dcb6"
+        },
+        "lib/pin-auth.example.ts": {
+          "1": "141bb491467569150193e44bb4768dbd6432991dfe5da518babc3cb2784b7670",
+          "2": "141bb491467569150193e44bb4768dbd6432991dfe5da518babc3cb2784b7670"
+        },
+        "ui/PinLogin.svelte": {
+          "1": "0fbc242ad1fd4350212bf8eb3d13bed83e4d322db17d5a22c8cb2f9ec439fd41",
+          "2": "79c9618fd1f13befb49dd23b0db631006e2d268300451f92e72cc0f768518813"
+        }
+      },
+      "notes": {
+        "1": "New item: PIN keypad auth for single-user apps (from Accountant), with desktop keyboard entry",
+        "2": "PinLogin takes the auth store as a prop (kit convention)"
+      },
+      "version": 2
+    },
     "remote-log": {
       "current_files": [
         "lib/remote-log.ts"

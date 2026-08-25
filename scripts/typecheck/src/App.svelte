@@ -1,4 +1,4 @@
-<!-- pwa-kit: shell/src/App.svelte v5 -->
+<!-- pwa-kit: shell/src/App.svelte v6 -->
 <script lang="ts">
   // Shell template: login gate, top bar, one scrolling body, drawer. Replace
   // the views; keep the structure. See reference/shell.md.
