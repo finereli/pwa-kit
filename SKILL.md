@@ -1,6 +1,6 @@
 ---
 name: pwa
-description: Build mobile-first PWAs that feel native, from a spec (reference docs on shell, visual style, behavior, updates, chat, media) plus a kit of copyable, already-debugged code (service worker update flow, Google auth + sessions, autosave, app shell, icons, router). Load before building a new mobile app, before touching PWA plumbing in an existing one, and for "update the app to the latest pwa skill" or "promote this to the kit".
+description: Build mobile-first PWAs that feel native, from a spec (reference docs on shell, visual style, behavior, updates, chat, media) plus a kit of copyable, already-debugged code (service worker update flow, Google sign-in through the shared login.finereli.com, autosave, app shell, icons, router). Load before building a new mobile app, before touching PWA plumbing in an existing one, and for "update the app to the latest pwa skill" or "promote this to the kit".
 ---
 
 # PWA skill
@@ -18,7 +18,7 @@ Two sharing levels: **within a repo**, apps import from one `shared/` (yaelfiner
 
 ## Stack
 
-Svelte 5 + Vite + TypeScript. Cloudflare Pages + Pages Functions + D1 + R2 for apps with a backend, or a single Worker (Durable Object) for realtime chat apps. CSS custom properties for theming, never a component library. Inline SVG icons from Material Symbols paths, never an icon font. Hash router, hand-rolled. Google sign-in with server sessions for multi-user apps, PIN for single-user.
+Svelte 5 + Vite + TypeScript. Cloudflare Pages + Pages Functions + D1 + R2 for apps with a backend, or a single Worker (Durable Object) for realtime chat apps. CSS custom properties for theming, never a component library. Inline SVG icons from Material Symbols paths, never an icon font. Hash router, hand-rolled. Google sign-in through login.finereli.com for multi-user apps (no Google project per app), PIN for single-user. Local-first apps that sign in only for sync: a single Worker with static assets and `/api/*`, D1, whole-dataset merge (100 Shots).
 
 ## Where to read what
 
@@ -28,7 +28,7 @@ Read `reference/` files on demand, not all at once. Each is self-contained.
 |---|---|
 | Any new app, or the app shell (index.html, layout, drawer, safe areas, scroll, RTL) | `reference/shell.md` |
 | Colors, typography, components, animation, icons, prose | `reference/visual.md` |
-| Boot sequence, auth, settings, keyboard, navigation, install prompts, dates, timing constants, autosave | `reference/behavior.md` |
+| Boot sequence, sign-in, sync for local-first apps, settings, keyboard, navigation, install prompts, dates, timing constants, autosave | `reference/behavior.md` |
 | Service worker, caching, versions, the update/reload flow | `reference/updates.md` |
 | A chat or realtime app (WebSocket, reconnection, send path, streaming) | `reference/chat.md` |
 | Audio or video playback | `reference/media.md` |
@@ -44,7 +44,8 @@ Read `reference/` files on demand, not all at once. Each is self-contained.
 | Item | What | Origin |
 |---|---|---|
 | `updates` | SW registration + update flow, reload icon, `reset.html`, vite build helper (`__BUILD__`, workbox options) | Yael's app/admin, after the stuck-phone saga |
-| `auth` | Google sign-in + 90-day D1 sessions, token verification, `/api/auth`, middleware, schema, Login, double-locked dev bypass | Yael's app/admin, after the journal leak + preview review |
+| `login` | **Default sign-in.** Client for login.finereli.com (popup, code exchange, sliding 90-day app-scoped tokens), Worker-side `verifyLogin`, account store example. No Google project, client or secret per app | 100 Shots, Oct 2026 |
+| `auth` | Own Google client: sign-in + 90-day D1 sessions, token verification, `/api/auth`, middleware, schema, Login, double-locked dev bypass. Only when the app needs more than identity or isn't Eli's (see behavior.md → Auth) | Yael's app/admin, after the journal leak + preview review |
 | `pin-auth` | PIN keypad login for single-user apps: keypad + desktop keyboard entry, PIN-as-credential store, Pages-secret middleware, `/api/auth/check` | Accountant |
 | `api` | fetch wrapper: bearer, JSON, 401 funnel | Yael's admin |
 | `save` | SaveTracker, SaveStatus, AutoTextarea (autosave-first) | Yael's admin |

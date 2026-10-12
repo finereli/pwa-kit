@@ -28,7 +28,8 @@ Before shipping a PWA, verify:
 - [ ] No login flash for returning users
 - [ ] External links open in system browser when installed
 - [ ] Install prompt captured in index.html inline script
-- [ ] Dev auth bypass double-locked (host AND `DEV_AUTH`); previews bind preview D1/R2
+- [ ] Sign-in is finereli login (kit `login/`) unless the app needs its own Google client; the Worker's `audience` lists only the app's origins
+- [ ] Own-client apps only: dev auth bypass double-locked (host AND `DEV_AUTH`); previews bind preview D1/R2
 - [ ] `kit.py status <project>` shows every kit file `current`
 
 **Visual:**

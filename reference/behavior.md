@@ -1,4 +1,4 @@
-# Behavior: boot, auth, settings, keyboard, navigation, install, dates, timing
+# Behavior: boot, sync, auth, settings, keyboard, navigation, install, dates, timing
 
 ## Boot sequence
 
@@ -23,6 +23,19 @@ For management/admin apps whose whole dataset is small (hundreds of rows, not mi
 - **Mutations update the store optimistically** (see Optimistic updates); derived views re-render for free.
 - **A per-entity fetch is still right** when the payload is genuinely heavy per entity (transcripts, media, analytics) - then render everything you have from the store instantly and stream the heavy part in below it, never blocking the whole view.
 
+## Sync for local-first apps
+
+For an app that keeps its whole dataset on the device (100 Shots) and adds sign-in for sync. 100 Shots is the reference (`src/lib/merge.ts`, `src/lib/sync.svelte.ts`, `worker/index.ts`).
+
+- **Send everything, keep the merge.** `POST /api/sync` carries the device's whole dataset; the Worker merges it with the stored copy (one JSON row per `sub`), stores and returns the merge; the device merges that with whatever changed while the request was out, and syncs again if anything did. Fine while a person's data is kilobytes, which for a tracker is years.
+- **The merge is a pure function shared by app and Worker**, and order-free: A into B keeps what B into A keeps, and merging twice changes nothing. Then sync has no conflicts to resolve and a lost race heals on the next sync.
+- **Ids are UUIDs made on the device. Deletes leave tombstones** (`id -> when`), or the other device brings the item back.
+- **Undo must beat the delete it undoes**, even if the delete already reached the server: a restored item gets `t = now` and lives if `t` is newer than its tombstone. Timing tricks (wait out the undo window before syncing) are not enough.
+- **Edits to a field are last-writer-wins on a per-field stamp** (`nameAt`).
+- **Sync triggers:** start, a moment (1.5s) after each edit, `visibilitychange`, `online`. Show a quiet status line (Synced / Syncing / Offline, will sync later), never a modal.
+- **Signing in merges, never replaces:** what the device logged signed out is kept.
+- **Signing out syncs first, then clears the device**, so the next person starts empty. If the sync fails, don't sign out; say the data is still on the device.
+
 ## Auth
 
 ### PIN-based (single-user apps)
@@ -35,9 +48,23 @@ Login UI: the `pin-auth` kit item is the reference implementation - a phone-styl
 
 Every app must have a logout affordance that clears the credential and drops to login. Any fetch wrapper should handle 401 by clearing the stored PIN and showing login.
 
-### Google sign-in with server sessions (multi-user apps)
+### finereli login (the default for multi-user apps)
 
-Kit: `auth/` (client class, token verification, sessions, `/api/auth`, middleware, schema, Login). Use it; this is the part with the most ways to be subtly wrong.
+Kit: `login/`. Every app signs in through login.finereli.com (repo finereli/finereli-login), which holds the one Google OAuth client. **A new app does not get a Google Cloud project, an OAuth client or a secret.** An app on `*.finereli.com` works with no setup at all; another domain is one entry in that service's `ALLOWED_ORIGINS`. The app holds no keys.
+
+The app opens the service in a popup, gets a one-time code back on its own origin, and trades it for a 90-day ES256 token whose audience is the app's origin. Its Worker checks the token against the service's public key (`verifyLogin`) and keys data on `user.sub`, the Google account id. A second app in the same browser signs in without seeing Google. Tokens slide (refreshed daily while the app is used). Details and decisions: `kit/login/README.md`.
+
+Local dev needs no bypass: localhost is an allowed origin, so the real sign-in works there, and the Worker's `audience` lists `http://localhost:5173` beside production.
+
+Signing in can be optional. A local-first app works signed out and signing in only adds sync (see Sync for local-first apps).
+
+The rules under the next heading for 401s, account switches and server-derived users apply here too: `makeApi(login)` is the 401 funnel, `login.onChange` resets per-user stores, and the Worker takes the user from the verified token, never from the request body.
+
+### Own Google client (apps that need more than identity)
+
+Use this only when finereli login doesn't fit: the app needs Google scopes beyond sign-in (Drive, Calendar, Gmail), it belongs to someone else (a client's app), or it must show its own brand on Google's screen. Existing apps on it (Yael's app/admin, Ajde) can move to finereli login without losing users, because `sub` is the same Google account id under any client.
+
+Kit: `auth/` (client class, token verification, sessions, `/api/auth`, middleware, schema, Login). Use it; this is the part with the most ways to be subtly wrong. The Google project and client come from the `google-oauth-setup` skill.
 
 Google Identity Services popup flow, never redirect, so the URL and any hash deep links survive sign-in. `auto_select: true` for silent re-auth on return. One Tap first, popup fallback when it's not displayed or skipped.
 

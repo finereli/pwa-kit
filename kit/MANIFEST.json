@@ -218,6 +218,28 @@
       },
       "version": 1
     },
+    "login": {
+      "current_files": [
+        "functions/verify-login.ts",
+        "lib/account.example.svelte.ts",
+        "lib/finereli-login.ts"
+      ],
+      "files": {
+        "functions/verify-login.ts": {
+          "1": "9420613950e859445038e66e3a76c1c37bf266e0f77df800a7d2386144c4990e"
+        },
+        "lib/account.example.svelte.ts": {
+          "1": "ff3e14bdf19b6681a7b4a1491543d92703d915f440718c497d7319bdc98d4845"
+        },
+        "lib/finereli-login.ts": {
+          "1": "3451e18dcd18282eff1854797af05355d87b2c459606e7eff3dee84c6777d4be"
+        }
+      },
+      "notes": {
+        "1": "finereli login client: popup sign-in via login.finereli.com, Worker-side verifier, account example"
+      },
+      "version": 1
+    },
     "media": {
       "current_files": [
         "lib/player.svelte.ts",

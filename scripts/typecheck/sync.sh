@@ -19,6 +19,7 @@ for item in $K/*/; do
 done
 # examples that a project would place in src/lib
 mv shared/lib/auth.example.ts src/lib/auth.svelte.ts
+mv shared/lib/account.example.svelte.ts src/lib/account.svelte.ts
 sedi "s#YOUR_CLIENT_ID.apps.googleusercontent.com#x.apps.googleusercontent.com#" src/lib/auth.svelte.ts
 cat > src/lib/router.svelte.ts <<'R'
 import { Router } from '$shared/lib/router.svelte'
@@ -38,6 +39,8 @@ R
 cat > src/smoke.ts <<'R'
 import { makeApi } from '$shared/lib/api'
 import { auth } from './lib/auth.svelte'
+import { login, account } from './lib/account.svelte'
+import { verifyLogin } from '../shared/functions/verify-login'
 import { formatDate, formatTime, localDateStr } from '$shared/lib/format'
 import { Player } from '$shared/lib/player.svelte'
 import { progressFor } from '$shared/lib/progress'
@@ -55,6 +58,8 @@ type In = { type: 'auth:ok' } | { type: 'auth:fail' } | { type: 'pong' } | { typ
 type Out = { type: 'auth'; token?: string } | { type: 'ping'; ts: number }
 export const ws = new WsClient<In, Out>({ authMessage: () => ({ type: 'auth', token: auth.token }), isAuthOk: (m) => m.type === 'auth:ok', isAuthFail: (m) => m.type === 'auth:fail', isPong: (m) => m.type === 'pong', ping: (ts) => ({ type: 'ping', ts }), onMessage: () => {} })
 export const t = new SaveTracker()
+export const loginApi = makeApi(login)
+export const y = [account, verifyLogin]
 export const x = [formatDate('2026-01-01'), formatTime(3), localDateStr(), progressFor('a'), initRemoteLog, resizeImage, applyAccent, setDarkMode, updates]
 R
 cp $K/shell/vite.config.ts vite.config.ts
