@@ -1,4 +1,4 @@
-// pwa-kit: pin-auth/functions/api/_middleware.ts v1
+// pwa-kit: pin-auth/functions/api/_middleware.ts v2
 // Everything under /api/ requires the PIN. The PWA sends `Authorization:
 // Bearer <pin>`; a CLI can send `x-pin`. The PIN itself lives in the PIN env
 // var (a Pages secret in production, .dev.vars locally) - never in source.

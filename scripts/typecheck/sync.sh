@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Lay the kit out the way a project would: shared/{lib,ui,functions,build,css}, functions/api, src, public
 set -e
+# In-place sed for both GNU (Linux) and BSD (macOS).
+sedi() { if sed --version >/dev/null 2>&1; then sed -i "$@"; else sed -i '' "$@"; fi; }
 cd "$(dirname "$0")"
 rm -rf shared functions src public
 mkdir -p shared/lib shared/ui shared/functions shared/build shared/css functions/api src/lib public
@@ -12,12 +14,12 @@ for item in $K/*/; do
   [ -d "$item/css" ] && cp $item/css/* shared/css/
   [ -d "$item/public" ] && cp $item/public/* public/
   [ -d "$item/functions" ] && cp $item/functions/*.ts shared/functions/ 2>/dev/null || true
-  [ -d "$item/functions/api" ] && cp $item/functions/api/* functions/api/ && sed -i "" "s|../../../shared/|../../shared/|" functions/api/*.ts
+  [ -d "$item/functions/api" ] && cp $item/functions/api/* functions/api/ && sedi "s|../../../shared/|../../shared/|" functions/api/*.ts
   [ -d "$item/src" ] && cp -r $item/src/* src/
 done
 # examples that a project would place in src/lib
 mv shared/lib/auth.example.ts src/lib/auth.svelte.ts
-sed -i '' "s#YOUR_CLIENT_ID.apps.googleusercontent.com#x.apps.googleusercontent.com#" src/lib/auth.svelte.ts
+sedi "s#YOUR_CLIENT_ID.apps.googleusercontent.com#x.apps.googleusercontent.com#" src/lib/auth.svelte.ts
 cat > src/lib/router.svelte.ts <<'R'
 import { Router } from '$shared/lib/router.svelte'
 type Route = { view: 'home' } | { view: 'about' }
@@ -28,7 +30,7 @@ export const icons: Record<string, string> = { close: '', install_mobile: '', io
 R
 
 # InstallBanner imports ./Icon.svelte from ui/ - the icons item's Icon.svelte lives in src/components in a real app; here keep both in shared/ui
-sed -i '' "s#from '../lib/icons'#from '../../src/lib/icons'#" shared/ui/Icon.svelte
+sedi "s#from '../lib/icons'#from '../../src/lib/icons'#" shared/ui/Icon.svelte
 cat > src/app.css <<'R'
 @import '../shared/css/base.css';
 R
@@ -56,8 +58,8 @@ export const t = new SaveTracker()
 export const x = [formatDate('2026-01-01'), formatTime(3), localDateStr(), progressFor('a'), initRemoteLog, resizeImage, applyAccent, setDarkMode, updates]
 R
 cp $K/shell/vite.config.ts vite.config.ts
-sed -i '' "s#'../shared/build/pwa-build'#'./shared/build/pwa-build'#; s#new URL('../shared'#new URL('./shared'#" vite.config.ts
+sedi "s#'../shared/build/pwa-build'#'./shared/build/pwa-build'#; s#new URL('../shared'#new URL('./shared'#" vite.config.ts
 cp $K/shell/index.html index.html
 mkdir -p public/icons && for f in icon-192 icon-512 icon-maskable-512 apple-touch-icon; do printf '' > public/icons/$f.png; done
 # App.svelte imports Login from $shared/ui - fine; smoke.ts must be imported by main to be bundled
-grep -q smoke src/main.ts || sed -i '' "s#import App from './App.svelte'#import App from './App.svelte'\nimport './smoke'#" src/main.ts
+grep -q smoke src/main.ts || sedi "s#import App from './App.svelte'#import App from './App.svelte'\nimport './smoke'#" src/main.ts

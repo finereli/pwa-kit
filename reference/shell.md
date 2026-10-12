@@ -109,6 +109,7 @@ Full-height flex layout: `display: flex; height: 100dvh; overflow: hidden`.
 - Mobile: `position: fixed`, slides in from the start edge, `transform: translateX(-100%)` (`translateX(100%)` under `[dir='rtl']`)
 - Transition: `transform 0.28s cubic-bezier(0.32, 0.72, 0, 1)`
 - Scrim behind: `rgba(0, 0, 0, 0.45)`, opacity transition, z-index above content
+- Shadow only while open: translated off-screen, the drawer's blur still reaches past its edge and shades the page's start edge
 - Escape closes it; the host closes it on every navigation (router.onChange), which is what makes the back button close it too
 - Bottom of the drawer: user row, sign-out, then the build line with the reload icon (see updates.md)
 

@@ -1,4 +1,4 @@
-<!-- pwa-kit: pin-auth/ui/PinLogin.svelte v1 -->
+<!-- pwa-kit: pin-auth/ui/PinLogin.svelte v2 -->
 <script lang="ts">
   // Numeric keypad lock screen. Auto-submits at LENGTH digits; a wrong PIN
   // shakes the dots and clears. Desktop can type the PIN (digit rows, numpad,
