@@ -207,16 +207,19 @@
       ],
       "files": {
         "src/pwa-install.d.ts": {
-          "1": "cf4f58236277ae3496d1f1be09477c458e253e2d85b7a17f710184cb383b2663"
+          "1": "cf4f58236277ae3496d1f1be09477c458e253e2d85b7a17f710184cb383b2663",
+          "2": "cf4f58236277ae3496d1f1be09477c458e253e2d85b7a17f710184cb383b2663"
         },
         "ui/InstallBanner.svelte": {
-          "1": "28bcc747e1b8e25a14ee95c03e844f5f43eab82e99e83bb5e3174f4a61d07e1f"
+          "1": "28bcc747e1b8e25a14ee95c03e844f5f43eab82e99e83bb5e3174f4a61d07e1f",
+          "2": "466d5ffad3b02b59fa08448272bf434bed94ecfb115831877d4ec40d444bf9ed"
         }
       },
       "notes": {
-        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)",
+        "2": "InstallBanner: ondismiss callback, for chaining the next onboarding step"
       },
-      "version": 1
+      "version": 2
     },
     "login": {
       "current_files": [
