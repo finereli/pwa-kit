@@ -1,4 +1,4 @@
-// pwa-kit: save/lib/save-tracker.svelte.ts v2
+// pwa-kit: save/lib/save-tracker.svelte.ts v3
 // Tracks the state of autosave writes so the UI can show live feedback
 // (ui/SaveStatus.svelte) instead of relying on an explicit save button.
 // One tracker per editing surface; pass save work through run().

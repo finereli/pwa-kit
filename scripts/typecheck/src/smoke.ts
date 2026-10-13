@@ -12,6 +12,8 @@ import { applyAccent, setDarkMode } from '$shared/lib/theme'
 import { WsClient } from '$shared/lib/ws-client'
 import { SaveTracker } from '$shared/lib/save-tracker.svelte'
 import { updates } from '$shared/lib/updates.svelte'
+import { makePush } from '$shared/lib/push'
+import { pushRoutes } from '../shared/functions/push-routes'
 export const { api, apiJson } = makeApi(auth)
 export const player = new Player({ audioUrl: (i) => `/m/${i.id}.m4a`, artist: 'x' })
 export const q = new UploadQueue({ accept: ['m4a'], async run(job, h) { await uploadWithProgress({ url: '/u', file: job.file }); h.setStep('x') } })
@@ -21,4 +23,5 @@ export const ws = new WsClient<In, Out>({ authMessage: () => ({ type: 'auth', to
 export const t = new SaveTracker()
 export const loginApi = makeApi(login)
 export const y = [account, verifyLogin]
+export const push = [makePush({ apiJson, storageKey: 'x.push.v1' }), pushRoutes]
 export const x = [formatDate('2026-01-01'), formatTime(3), localDateStr(), progressFor('a'), initRemoteLog, resizeImage, applyAccent, setDarkMode, updates]

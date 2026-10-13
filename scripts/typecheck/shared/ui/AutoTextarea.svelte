@@ -1,4 +1,4 @@
-<!-- pwa-kit: save/ui/AutoTextarea.svelte v2 -->
+<!-- pwa-kit: save/ui/AutoTextarea.svelte v3 -->
 <script lang="ts">
   // Auto-growing textarea with debounced autosave. `onsave(value)` fires
   // `delay` ms after the last keystroke and on blur. The timer is nulled

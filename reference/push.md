@@ -1,5 +1,7 @@
 # Push notifications
 
+The kit's `push/` item is all of this as code (server, routes, client, service worker, schema, a test). Use it; the notes below say why it is the way it is.
+
 ## Push notifications
 
 ### Setup flow
@@ -15,7 +17,7 @@ Parse `event.data.json()` with a text fallback. Include `icon: '/icon-192.png'`,
 
 On `notificationclick`: find an existing window with `clients.matchAll()` and focus it, or `clients.openWindow()`. Deep-link via `/?chat=<id>`, consumed on boot then cleaned with `history.replaceState`.
 
-Server: fan out to all stored subscriptions. Self-heal by deleting subscriptions that return 404/410. On Node, `web-push`; it does not run in a Cloudflare Worker (it needs Node's crypto), where the message encryption (RFC 8291, aes128gcm) and the VAPID token (RFC 8292) are about 80 lines on WebCrypto. notime's `worker/push.ts` has a tested copy.
+Server: fan out to all stored subscriptions. Self-heal by deleting subscriptions that return 404/410. On Node, `web-push`; it does not run in a Cloudflare Worker (it needs Node's crypto), where the message encryption (RFC 8291, aes128gcm) and the VAPID token (RFC 8292) are about 80 lines on WebCrypto: the kit's `push/functions/web-push.ts`, with a test that decrypts what it sends.
 
 ### Keeping it on
 
