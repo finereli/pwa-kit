@@ -17,7 +17,7 @@ Usage: one `SaveTracker` per editing surface; `tracker.run(() => apiJson(...))` 
 - SaveStatus is quiet: idle renders nothing (autosave is the norm, not news), saving is a small spinner with a 150ms fade-in delay so quick writes barely flash, saved is a checkmark that fades after 1.2s. Failure is the only state with words - a persistent tappable retry. A permanent "changes save automatically" phrase was tried first and read as noise.
 - `retry()` re-runs the last fn. `{#key}` + grid-stacked states: no layout shift on swap.
 - AutoTextarea nulls its timer after firing (blur was re-saving the same value); blur flushes a pending save.
-- AutoTextarea restores its scroller's scrollTop after each measure (height: auto shortens the page for an instant and the browser scrolls up, so a long text slid under the phone keyboard as you typed), and typing at the end keeps the end in view.
+- AutoTextarea restores its scroller's scrollTop after each measure (height: auto shortens the page for an instant and the browser scrolls up, so a long text slid under the phone keyboard as you typed), and typing at the end keeps the end in view. It also re-measures when its width changes and when fonts are ready, counts its border, and keeps its own scroll at 0: a box that is ever shorter than its text scrolls inside itself while the page scrolls outside.
 - Debounce 800ms (autosave), distinct from the 300ms localStorage draft debounce for composers.
 
 ## Seams

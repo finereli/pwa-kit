@@ -407,25 +407,29 @@
         "lib/save-tracker.svelte.ts": {
           "1": "a53d54b75688233a80bae1d0e9861f7937c1be4a312872fcd07682621a8d3f42",
           "2": "a53d54b75688233a80bae1d0e9861f7937c1be4a312872fcd07682621a8d3f42",
-          "3": "a53d54b75688233a80bae1d0e9861f7937c1be4a312872fcd07682621a8d3f42"
+          "3": "a53d54b75688233a80bae1d0e9861f7937c1be4a312872fcd07682621a8d3f42",
+          "4": "a53d54b75688233a80bae1d0e9861f7937c1be4a312872fcd07682621a8d3f42"
         },
         "ui/AutoTextarea.svelte": {
           "1": "9d037481dbf241827720d12ae8b58f45a6d3204d79441dff998fbb5bce1eb3d1",
           "2": "9d037481dbf241827720d12ae8b58f45a6d3204d79441dff998fbb5bce1eb3d1",
-          "3": "856544d593f6b13557d3eb4ee023eae8338b75fc26a766f250b1d9c1063821d3"
+          "3": "856544d593f6b13557d3eb4ee023eae8338b75fc26a766f250b1d9c1063821d3",
+          "4": "3e1650784a796686c0e2e6c84df7de701e7135a68f6dc5f709c38433ecc77079"
         },
         "ui/SaveStatus.svelte": {
           "1": "dee906c37aef3410920c1745e88d9e2a9a207dc5de38e3987a65e41fae2ac96d",
           "2": "b5570ceb24eedc036f9d34cefd3da1966ede9a5a2b0456a93d5cc2d8c3656a95",
-          "3": "b5570ceb24eedc036f9d34cefd3da1966ede9a5a2b0456a93d5cc2d8c3656a95"
+          "3": "b5570ceb24eedc036f9d34cefd3da1966ede9a5a2b0456a93d5cc2d8c3656a95",
+          "4": "b5570ceb24eedc036f9d34cefd3da1966ede9a5a2b0456a93d5cc2d8c3656a95"
         }
       },
       "notes": {
         "1": "initial kit extraction (yaelfiner shared/, angel, glopus)",
         "2": "SaveStatus v2: quiet indicator - idle renders nothing, spinner while saving (150ms delay), check flashes 1.2s then fades; error is the only worded state (errorText seam replaces the four strings)",
-        "3": "AutoTextarea restores its scroller's scrollTop after measuring and keeps the end in view while typing at the end (long text slid under the phone keyboard)"
+        "3": "AutoTextarea restores its scroller's scrollTop after measuring and keeps the end in view while typing at the end (long text slid under the phone keyboard)",
+        "4": "AutoTextarea re-measures on width change and fonts.ready, counts borders, keeps its own scrollTop 0 (a box shorter than its text scrolled inside itself)"
       },
-      "version": 3
+      "version": 4
     },
     "share": {
       "current_files": [

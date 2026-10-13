@@ -1,4 +1,4 @@
-<!-- pwa-kit: save/ui/SaveStatus.svelte v3 -->
+<!-- pwa-kit: save/ui/SaveStatus.svelte v4 -->
 <script lang="ts">
   // Subtle autosave indicator next to an editor. Idle renders nothing -
   // autosave is the norm, not news. While a write is in flight a small

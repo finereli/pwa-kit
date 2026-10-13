@@ -1,4 +1,4 @@
-<!-- pwa-kit: save/ui/AutoTextarea.svelte v3 -->
+<!-- pwa-kit: save/ui/AutoTextarea.svelte v4 -->
 <script lang="ts">
   // Auto-growing textarea with debounced autosave. `onsave(value)` fires
   // `delay` ms after the last keystroke and on blur. The timer is nulled
@@ -46,7 +46,8 @@
     const box = scroller(el)
     const top = box?.scrollTop ?? 0
     el.style.height = 'auto'
-    el.style.height = el.scrollHeight + 'px'
+    el.style.height = el.scrollHeight + (el.offsetHeight - el.clientHeight) + 'px'
+    el.scrollTop = 0
     if (!box) return
     box.scrollTop = top
     if (document.activeElement === el && el.selectionEnd === el.value.length) {
@@ -58,6 +59,23 @@
   $effect(() => {
     value
     if (el) requestAnimationFrame(resize)
+  })
+
+  // A width change rewraps the text and the font arriving changes line
+  // heights; measured only on value changes, the box stayed short and
+  // scrolled inside itself (notime: a restored draft hid 1000px of text).
+  $effect(() => {
+    if (!el) return
+    const node = el
+    let width = node.clientWidth
+    const watch = new ResizeObserver(() => {
+      if (node.clientWidth === width) return
+      width = node.clientWidth
+      resize()
+    })
+    watch.observe(node)
+    document.fonts?.ready.then(resize).catch(() => {})
+    return () => watch.disconnect()
   })
 
   $effect(() => {
