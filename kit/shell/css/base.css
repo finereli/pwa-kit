@@ -1,4 +1,4 @@
-/* pwa-kit: shell/css/base.css v7 */
+/* pwa-kit: shell/css/base.css v8 */
 /* App-wide tokens, reset and shell rules. Import first from main.ts.
    Seams: the token VALUES in :root (and .dark, if the app has dark mode) -
    everything in shared/ui references only these names, so re-skinning an
@@ -6,6 +6,11 @@
    reference/visual.md for the palettes the family uses. */
 
 :root {
+  /* Native controls (date/time pickers and their icons, scrollbars,
+     autofill) draw for this scheme. An app with dark mode sets
+     `color-scheme: dark` in its .dark block, or they stay black on dark. */
+  color-scheme: light;
+
   /* identity */
   --accent: #5b7a5e;
   --accent-deep: #3d5a40;
