@@ -1,4 +1,4 @@
-// pwa-kit: pin-auth/lib/pin-auth.example.ts v2
+// pwa-kit: pin-auth/lib/pin-auth.example.ts v3
 // PIN auth for single-user apps: the PIN is the credential, not a session.
 // Stored raw in localStorage, sent as `Bearer <pin>` on every request; a 401
 // anywhere clears it and drops back to the keypad. Copy to

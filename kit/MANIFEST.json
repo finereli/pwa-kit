@@ -277,26 +277,31 @@
       "files": {
         "functions/api/_middleware.ts": {
           "1": "0bcd7a84813bf3c9c44ab38e1456788e22efd6151af3a16b52a98ae7490e6681",
-          "2": "0bcd7a84813bf3c9c44ab38e1456788e22efd6151af3a16b52a98ae7490e6681"
+          "2": "0bcd7a84813bf3c9c44ab38e1456788e22efd6151af3a16b52a98ae7490e6681",
+          "3": "0bcd7a84813bf3c9c44ab38e1456788e22efd6151af3a16b52a98ae7490e6681"
         },
         "functions/api/auth/check.ts": {
           "1": "b01d2f67aad9f20ca6e832b6e2eabb3633da875bd23dddb6352eca8e1006dcb6",
-          "2": "b01d2f67aad9f20ca6e832b6e2eabb3633da875bd23dddb6352eca8e1006dcb6"
+          "2": "b01d2f67aad9f20ca6e832b6e2eabb3633da875bd23dddb6352eca8e1006dcb6",
+          "3": "b01d2f67aad9f20ca6e832b6e2eabb3633da875bd23dddb6352eca8e1006dcb6"
         },
         "lib/pin-auth.example.ts": {
           "1": "141bb491467569150193e44bb4768dbd6432991dfe5da518babc3cb2784b7670",
-          "2": "141bb491467569150193e44bb4768dbd6432991dfe5da518babc3cb2784b7670"
+          "2": "141bb491467569150193e44bb4768dbd6432991dfe5da518babc3cb2784b7670",
+          "3": "141bb491467569150193e44bb4768dbd6432991dfe5da518babc3cb2784b7670"
         },
         "ui/PinLogin.svelte": {
           "1": "0fbc242ad1fd4350212bf8eb3d13bed83e4d322db17d5a22c8cb2f9ec439fd41",
-          "2": "79c9618fd1f13befb49dd23b0db631006e2d268300451f92e72cc0f768518813"
+          "2": "79c9618fd1f13befb49dd23b0db631006e2d268300451f92e72cc0f768518813",
+          "3": "81ec7a77fb01c712485d6d07ba2220289bf9536b1096ab3595fea06fb18d7710"
         }
       },
       "notes": {
         "1": "New item: PIN keypad auth for single-user apps (from Accountant), with desktop keyboard entry",
-        "2": "PinLogin takes the auth store as a prop (kit convention)"
+        "2": "PinLogin takes the auth store as a prop (kit convention)",
+        "3": "PinLogin lock screen pinned with position: fixed; inset: 0, not 100dvh"
       },
-      "version": 2
+      "version": 3
     },
     "remote-log": {
       "current_files": [
@@ -403,7 +408,8 @@
           "5": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
           "6": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
           "7": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
-          "8": "57cdc9f0080b16f4f0ab0148da3e7f824891ca3939c222f93a72959652169ff0"
+          "8": "57cdc9f0080b16f4f0ab0148da3e7f824891ca3939c222f93a72959652169ff0",
+          "9": "24c4e76ea3cd68bf0f1f1f521cafb9c952925552044a02f736dc1f3b94722e12"
         },
         "index.html": {
           "1": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
@@ -413,7 +419,8 @@
           "5": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
           "6": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
           "7": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
-          "8": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab"
+          "8": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
+          "9": "1372fb121bbdf02a7361ef410843f384fd76c45e94b328826ce0b03308d8c4fb"
         },
         "package.json": {
           "1": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
@@ -423,7 +430,8 @@
           "5": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
           "6": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
           "7": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
-          "8": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387"
+          "8": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
+          "9": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387"
         },
         "src/App.svelte": {
           "1": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
@@ -433,7 +441,8 @@
           "5": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
           "6": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
           "7": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
-          "8": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c"
+          "8": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
+          "9": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c"
         },
         "src/main.ts": {
           "1": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
@@ -443,7 +452,8 @@
           "5": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
           "6": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
           "7": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
-          "8": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd"
+          "8": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
+          "9": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd"
         },
         "svelte.config.js": {
           "1": "da1ed4002c530fc6103aa61120f0868cbdbc0e852e0c0c2688194fd82172557c",
@@ -453,7 +463,8 @@
           "5": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
           "6": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
           "7": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
-          "8": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b"
+          "8": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
+          "9": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b"
         },
         "tsconfig.json": {
           "1": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
@@ -463,7 +474,8 @@
           "5": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
           "6": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
           "7": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
-          "8": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0"
+          "8": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
+          "9": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0"
         },
         "ui/Btn.svelte": {
           "1": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
@@ -473,7 +485,8 @@
           "5": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
           "6": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
           "7": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
-          "8": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869"
+          "8": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
+          "9": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869"
         },
         "ui/Drawer.svelte": {
           "1": "f9b049bb849ac1bf94edd58728c09cdc5ce19b229b7ef74a90b742689832acf1",
@@ -483,7 +496,8 @@
           "5": "4dd2f88c7594ec0a17438b539ca5a4d815b6ff8886bf856f9993c0ed9ea8dbb5",
           "6": "e6d94f7567cd6e6a81ce6528ca060273ec17c00088e3d2a20df75e2f100e0b6a",
           "7": "41ac954e1c586f60b58392ce4977bfaf4b6eb7a45bfa13a0cf0c3ef9bd81603a",
-          "8": "41ac954e1c586f60b58392ce4977bfaf4b6eb7a45bfa13a0cf0c3ef9bd81603a"
+          "8": "41ac954e1c586f60b58392ce4977bfaf4b6eb7a45bfa13a0cf0c3ef9bd81603a",
+          "9": "41ac954e1c586f60b58392ce4977bfaf4b6eb7a45bfa13a0cf0c3ef9bd81603a"
         },
         "ui/TopBar.svelte": {
           "1": "2ba76b7f7bfa120d15a1485716eeb44e99a6c518d67d66cbe34dc3f14bec85e1",
@@ -493,7 +507,8 @@
           "5": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6",
           "6": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6",
           "7": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6",
-          "8": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6"
+          "8": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6",
+          "9": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6"
         },
         "vite.config.ts": {
           "1": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
@@ -503,7 +518,8 @@
           "5": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
           "6": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
           "7": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
-          "8": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64"
+          "8": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
+          "9": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64"
         }
       },
       "notes": {
@@ -514,9 +530,10 @@
         "5": "Drawer groups: fix",
         "6": "Drawer: nav list is the scroll region (flex:1, overflow-y auto) so a drawer taller than the screen scrolls while brand and footer stay pinned",
         "7": "Drawer: shadow only while open; a closed drawer's 40px blur shaded the page's start edge",
-        "8": "base.css: color-scheme light in :root; apps with dark mode flip it in .dark so native controls (time picker icon) follow"
+        "8": "base.css: color-scheme light in :root; apps with dark mode flip it in .dark so native controls (time picker icon) follow",
+        "9": "#app pinned with position: fixed; inset: 0 instead of 100dvh (installed Android PWAs report 100dvh 56px taller than the screen); interactive-widget=resizes-content in index.html"
       },
-      "version": 8
+      "version": 9
     },
     "theme": {
       "current_files": [

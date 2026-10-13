@@ -1,4 +1,4 @@
-<!-- pwa-kit: shell/ui/TopBar.svelte v8 -->
+<!-- pwa-kit: shell/ui/TopBar.svelte v9 -->
 <script lang="ts">
   import type { Snippet } from 'svelte'
   // The one bar at the top of every screen. `leading` decides whether it opens

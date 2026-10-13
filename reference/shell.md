@@ -15,25 +15,25 @@ Every app starts with this. Don't skip any of it.
 <meta name="theme-color" content="...">
 ```
 
-`user-scalable=no` is a deliberate choice: this is an app, not a page, and pinch-zoom on a player or a chat reads as broken. Accessibility purists disagree; we chose app-feel. `interactive-widget=resizes-content` plus a `100dvh` shell that never scrolls is what makes the keyboard resize the layout instead of pushing it.
+`user-scalable=no` is a deliberate choice: this is an app, not a page, and pinch-zoom on a player or a chat reads as broken. Accessibility purists disagree; we chose app-feel. `interactive-widget=resizes-content` plus a `position: fixed; inset: 0` shell that never scrolls is what makes the keyboard resize the layout instead of pushing it. (The kit's `index.html` carries it; it had been missing there.)
 
 The theme-color meta tag should update dynamically when dark mode toggles: accent color in light mode, surface color in dark mode.
 
 ### Height handling
 
-Mobile browsers lie about viewport height. Use `100dvh` as the primary unit, plus a JS fallback for older browsers:
+The app root is `position: fixed; inset: 0`. A fixed element with `inset: 0` is the layout viewport, which is exactly the visible area: the browser keeps it above the system navigation bar and, with `interactive-widget=resizes-content`, shrinks it while the keyboard is open. No viewport units, no JS.
 
-```javascript
-function setVh() {
-  document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-}
-window.addEventListener('resize', setVh);
-setVh();
-setTimeout(setVh, 100);
-setTimeout(setVh, 300);
-```
+Don't size the shell with viewport units. Measured on a Samsung phone with 3-button navigation, Chrome 154 (viewport-lab, Oct 2026):
 
-The delayed recalculations catch mobile browser chrome settling after load. Use `height: 100dvh` in CSS, falling back to `calc(var(--vh, 1vh) * 100)`.
+| | browser tab | installed PWA |
+|---|---|---|
+| visible area (`innerHeight`) | 669 | 725 |
+| `100vh` / `100dvh` / `100lvh` | 725 / 669 / 725 | **781** / **781** / **781** |
+| `100svh` | 669 | 725 |
+| `position: fixed; inset: 0` | 669 | 725 (470 with keyboard) |
+| `env(safe-area-inset-bottom)` | 0 | 0 |
+
+Installed, Chrome treats the navigation bar like a browser toolbar that could slide away, so the "large" and "dynamic" viewport are 56px taller than the screen: a `100dvh` shell puts its bottom bar behind the buttons. `viewport-fit` made no difference, and the insets were 0 because Chrome doesn't draw under the 3-button bar at all. Only the fixed box was right in every mode, with the keyboard open and closed, and only with `resizes-content` (`resizes-visual` and `overlays-content` leave the keyboard over the bottom bar). The older `--vh` JS fallback is gone with it.
 
 ### Safe areas
 
@@ -46,7 +46,7 @@ Define these variables globally:
 }
 ```
 
-Use them in: top bars (`padding-top: calc(var(--safe-top) + 6px)`), bottom-docked elements (`padding-bottom: calc(var(--safe-bottom) + Npx)`), full-screen overlays.
+Use them in: top bars (`padding-top: calc(var(--safe-top) + 6px)`), bottom-docked elements (`padding-bottom: calc(var(--safe-bottom) + Npx)`), full-screen overlays. They matter on iOS (notch, home indicator). On Android an installed app reports 0 and the fixed shell already stops above the navigation bar; Chrome's edge-to-edge (`env(safe-area-max-inset-bottom)`, the chin) applies to pages that scroll under a gesture bar, which the shell never does.
 
 ### Manifest
 
@@ -100,7 +100,7 @@ button, a, [role="button"] {
 └─────────────────────────────┘
 ```
 
-Full-height flex layout: `display: flex; height: 100dvh; overflow: hidden`.
+Full-height flex layout inside the fixed `#app`: `display: flex; flex-direction: column; height: 100%`.
 
 ### Sidebar
 
@@ -138,7 +138,7 @@ At the breakpoint: sidebar becomes permanent, hamburger hides, font size can ste
 
 ### Structural scroll control
 
-The app shell itself never scrolls - `html, body { overflow: hidden }`, app root at `100dvh`. Each view has exactly one inner element with `overflow-y: auto`.
+The app shell itself never scrolls - `body { overflow: hidden }`, app root `position: fixed; inset: 0`. Each view has exactly one inner element with `overflow-y: auto`.
 
 For chat apps where pull-to-refresh would interfere with the scrolled message list, add `overscroll-behavior-y: none` on the scroller. Same for player views and any fixed-layout screen.
 

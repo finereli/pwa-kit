@@ -10,8 +10,6 @@ The single biggest feel item. The app must never render a state it will immediat
 
 3. **Restore last state before flipping authenticated.** Load the last conversation ID, settings, and any other persisted state. Show the UI only after state is ready - not before.
 
-4. **Delayed `--vh` recalculations.** Set `--vh` immediately, then again at 100ms and 300ms after load to catch mobile browser chrome settling.
-
 The goal: a returning user sees the app in the correct theme with their last conversation, never a white flash or a login form that disappears.
 
 ## Data stores: load at boot, read synchronously
@@ -132,7 +130,7 @@ One-shot mutations (toggle, add, remove, archive, reorder) never make the user w
 
 ### Virtual keyboard
 
-The viewport meta `interactive-widget=resizes-content` plus `100dvh` handles keyboard resize declaratively. The layout viewport shrinks when the keyboard opens; no JS needed.
+The viewport meta `interactive-widget=resizes-content` plus the `position: fixed; inset: 0` app root handles keyboard resize declaratively (shell.md, Height handling). The layout viewport shrinks when the keyboard opens; no JS needed.
 
 ### Textarea auto-resize
 

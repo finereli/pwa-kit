@@ -23,7 +23,8 @@ Before shipping a PWA, verify:
 - [ ] `canReload` veto wired for the app's sensitive moment (audio, upload, stream)
 - [ ] Reload icon + build number in the drawer; `/reset.html` reachable past the worker
 - [ ] Safe area variables used in top/bottom bars
-- [ ] `100dvh` shell, body `overflow: hidden`, one scroller per view
+- [ ] Fixed shell (`#app { position: fixed; inset: 0 }`, no viewport units), body `overflow: hidden`, one scroller per view
+- [ ] Installed on Android with 3-button navigation: bottom bar above the buttons, keyboard open and closed
 - [ ] Dark mode applied before first paint (inline script), if the app has dark mode
 - [ ] No login flash for returning users
 - [ ] External links open in system browser when installed

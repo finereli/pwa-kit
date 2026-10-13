@@ -14,7 +14,7 @@ The app skeleton: tokens + reset, top bar, drawer/sidebar, button, `index.html`,
 
 ## Decisions baked in
 
-- `html, body, #app { height: 100dvh }`, body `overflow: hidden`, one scroller per view: keyboard resizes the layout instead of pushing it.
+- `#app { position: fixed; inset: 0 }`, body `overflow: hidden`, one scroller per view: the app is exactly the visible area, above Android's navigation bar, and the keyboard (`interactive-widget=resizes-content`) shrinks it instead of covering it. No viewport units: installed Android PWAs report `100dvh` taller than the screen they show.
 - Viewport `viewport-fit=cover, maximum-scale=1.0, user-scalable=no`: an app, not a page (a chosen trade-off).
 - TopBar: 44px leading button, trailing spacer so the title centres, `--safe-top` padding, chevron flips under `[dir='ltr']`.
 - Drawer: `min(78vw, 300px)`, slides from the start edge in either direction, permanent sidebar ≥768px with `.shell { margin-inline-start }`, Escape closes, host closes on navigation.
@@ -28,4 +28,4 @@ Token values in `:root`; TopBar/Drawer labels; Drawer `brand`/`footer` snippets;
 
 ## Verify
 
-iPhone with a notch: top bar padded, nothing under the home indicator. Keyboard open: layout resizes, no page scroll. Desktop ≥768: sidebar permanent, no scrim, hamburger hidden. Escape and the back button both close the drawer. `npm run check` clean.
+iPhone with a notch: top bar padded, nothing under the home indicator. Android with 3-button navigation, installed: the bottom of the app sits fully above the buttons. Keyboard open (Android): layout resizes, the bottom bar sits on the keyboard, no page scroll. Desktop ≥768: sidebar permanent, no scrim, hamburger hidden. Escape and the back button both close the drawer. `npm run check` clean.
