@@ -111,7 +111,7 @@ Kit: `save/` (SaveTracker, SaveStatus, AutoTextarea).
 - **Quiet indicator.** Idle shows nothing - autosave is the norm, not news. Saving is a small spinner (150ms delay so fast writes barely flash), saved a checkmark that fades after ~1.2s. Failure is the only state that earns words: a persistent tappable retry. Grid-stack the states so a swap never shifts layout.
 - **Init fields once per entity id.** A slow round-trip that re-inits a bound field clobbers what the user typed next.
 - **Debounce timer nulled after firing**, or blur re-saves the same value. Dedupe with lastSaved/lastSent guards for the blur-flush vs done-click race.
-- **Delete vs archive is decided per entity** and written down; deleted things that can be restored get a restore path. Confirmations are inline two-step (tap, then confirm in place), never `confirm()`: the native dialog renders in the browser's language, not the app's.
+- **Delete vs archive is decided per entity** and written down; deleted things that can be restored get a restore path. Confirmations are inline two-step (tap, then confirm in place), never `confirm()`: the native dialog renders in the browser's language, not the app's. Kit `confirm/` (ConfirmButton): the first tap changes the label to "Sure?" and nothing else, so a menu row stays a row and a link stays a link; the second tap acts; it disarms after 3 s.
 
 ### Optimistic updates
 

@@ -124,6 +124,20 @@
       },
       "version": 1
     },
+    "confirm": {
+      "current_files": [
+        "ui/ConfirmButton.svelte"
+      ],
+      "files": {
+        "ui/ConfirmButton.svelte": {
+          "1": "30a088f85f33318d253bc3d233d702048c42b6a8edf7d5a03f6d9a5c740fc84c"
+        }
+      },
+      "notes": {
+        "1": "ConfirmButton: inline two-step confirm in place, label becomes Sure?, look unchanged"
+      },
+      "version": 1
+    },
     "format": {
       "current_files": [
         "lib/format.ts"

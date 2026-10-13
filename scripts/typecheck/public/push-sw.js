@@ -1,3 +1,4 @@
+// pwa-kit: push/public/push-sw.js v1
 // Imported by the generated service worker: in vite.config's pwaOptions,
 //   workbox: { importScripts: ['/push-sw.js'], globIgnores: [..., '**/push-sw.js'] }
 // The browser byte-checks imported scripts on every update check, so a change

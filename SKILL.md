@@ -51,6 +51,7 @@ Read `reference/` files on demand, not all at once. Each is self-contained.
 | `save` | SaveTracker, SaveStatus, AutoTextarea (autosave-first) | Yael's admin |
 | `push` | web push on Workers (RFC 8291 + VAPID on WebCrypto), subscribe routes, client state, SW handlers, keeping push on across a reset | notime |
 | `toast` | error toasts + optimistic-update revert pattern | Yael's admin |
+| `confirm` | ConfirmButton: inline two-step confirm in place ("Sure?"), shape unchanged | 100 Shots |
 | `reorder` | touch-first drag-to-reorder (pointer events, edge autoscroll) | Yael's admin |
 | `shell` | base.css tokens/reset, TopBar, Drawer, Btn, index.html, App/main templates, vite/ts/svelte/package config | Yael's app/admin |
 | `router` | hash router with the history rules | Yael's app |

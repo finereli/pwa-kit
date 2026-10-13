@@ -1,3 +1,4 @@
+// pwa-kit: push/functions/web-push.ts v1
 // Web push without a library: RFC 8291 message encryption (aes128gcm, RFC
 // 8188) and a VAPID token (RFC 8292), all on WebCrypto, so it runs in a
 // Cloudflare Worker or Pages Function. The usual `web-push` package leans on
