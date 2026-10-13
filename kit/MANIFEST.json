@@ -354,22 +354,26 @@
       "files": {
         "lib/save-tracker.svelte.ts": {
           "1": "a53d54b75688233a80bae1d0e9861f7937c1be4a312872fcd07682621a8d3f42",
-          "2": "a53d54b75688233a80bae1d0e9861f7937c1be4a312872fcd07682621a8d3f42"
+          "2": "a53d54b75688233a80bae1d0e9861f7937c1be4a312872fcd07682621a8d3f42",
+          "3": "a53d54b75688233a80bae1d0e9861f7937c1be4a312872fcd07682621a8d3f42"
         },
         "ui/AutoTextarea.svelte": {
           "1": "9d037481dbf241827720d12ae8b58f45a6d3204d79441dff998fbb5bce1eb3d1",
-          "2": "9d037481dbf241827720d12ae8b58f45a6d3204d79441dff998fbb5bce1eb3d1"
+          "2": "9d037481dbf241827720d12ae8b58f45a6d3204d79441dff998fbb5bce1eb3d1",
+          "3": "856544d593f6b13557d3eb4ee023eae8338b75fc26a766f250b1d9c1063821d3"
         },
         "ui/SaveStatus.svelte": {
           "1": "dee906c37aef3410920c1745e88d9e2a9a207dc5de38e3987a65e41fae2ac96d",
-          "2": "b5570ceb24eedc036f9d34cefd3da1966ede9a5a2b0456a93d5cc2d8c3656a95"
+          "2": "b5570ceb24eedc036f9d34cefd3da1966ede9a5a2b0456a93d5cc2d8c3656a95",
+          "3": "b5570ceb24eedc036f9d34cefd3da1966ede9a5a2b0456a93d5cc2d8c3656a95"
         }
       },
       "notes": {
         "1": "initial kit extraction (yaelfiner shared/, angel, glopus)",
-        "2": "SaveStatus v2: quiet indicator - idle renders nothing, spinner while saving (150ms delay), check flashes 1.2s then fades; error is the only worded state (errorText seam replaces the four strings)"
+        "2": "SaveStatus v2: quiet indicator - idle renders nothing, spinner while saving (150ms delay), check flashes 1.2s then fades; error is the only worded state (errorText seam replaces the four strings)",
+        "3": "AutoTextarea restores its scroller's scrollTop after measuring and keeps the end in view while typing at the end (long text slid under the phone keyboard)"
       },
-      "version": 2
+      "version": 3
     },
     "share": {
       "current_files": [
@@ -579,34 +583,39 @@
           "1": "27e5d0cd454990b8c2b00be90414805cb0712697f031e45a3b3c74f31e0bad02",
           "2": "27e5d0cd454990b8c2b00be90414805cb0712697f031e45a3b3c74f31e0bad02",
           "3": "27e5d0cd454990b8c2b00be90414805cb0712697f031e45a3b3c74f31e0bad02",
-          "4": "27e5d0cd454990b8c2b00be90414805cb0712697f031e45a3b3c74f31e0bad02"
+          "4": "27e5d0cd454990b8c2b00be90414805cb0712697f031e45a3b3c74f31e0bad02",
+          "5": "27e5d0cd454990b8c2b00be90414805cb0712697f031e45a3b3c74f31e0bad02"
         },
         "public/reset.html": {
           "1": "4c6d10f0cbaa3eb03288cfb2cf8fbe2d276942d8985b0661a29a6664d7204d78",
           "2": "4c6d10f0cbaa3eb03288cfb2cf8fbe2d276942d8985b0661a29a6664d7204d78",
           "3": "4c6d10f0cbaa3eb03288cfb2cf8fbe2d276942d8985b0661a29a6664d7204d78",
-          "4": "4c6d10f0cbaa3eb03288cfb2cf8fbe2d276942d8985b0661a29a6664d7204d78"
+          "4": "4c6d10f0cbaa3eb03288cfb2cf8fbe2d276942d8985b0661a29a6664d7204d78",
+          "5": "4c6d10f0cbaa3eb03288cfb2cf8fbe2d276942d8985b0661a29a6664d7204d78"
         },
         "src/build.d.ts": {
           "1": "75cb750134bb6f7bf382d8eb596f138226d3cd19f044fb98e011916026bbcc23",
           "2": "75cb750134bb6f7bf382d8eb596f138226d3cd19f044fb98e011916026bbcc23",
           "3": "75cb750134bb6f7bf382d8eb596f138226d3cd19f044fb98e011916026bbcc23",
-          "4": "75cb750134bb6f7bf382d8eb596f138226d3cd19f044fb98e011916026bbcc23"
+          "4": "75cb750134bb6f7bf382d8eb596f138226d3cd19f044fb98e011916026bbcc23",
+          "5": "75cb750134bb6f7bf382d8eb596f138226d3cd19f044fb98e011916026bbcc23"
         },
         "ui/ResetButton.svelte": {
           "1": "46ef88d5ac36d0787c9e45fcea6b757259215ff6ba5a6135a85bd1fd46e58e8b",
           "2": "46ef88d5ac36d0787c9e45fcea6b757259215ff6ba5a6135a85bd1fd46e58e8b",
           "3": "46ef88d5ac36d0787c9e45fcea6b757259215ff6ba5a6135a85bd1fd46e58e8b",
-          "4": "46ef88d5ac36d0787c9e45fcea6b757259215ff6ba5a6135a85bd1fd46e58e8b"
+          "4": "46ef88d5ac36d0787c9e45fcea6b757259215ff6ba5a6135a85bd1fd46e58e8b",
+          "5": "46ef88d5ac36d0787c9e45fcea6b757259215ff6ba5a6135a85bd1fd46e58e8b"
         }
       },
       "notes": {
         "1": "initial kit extraction (yaelfiner shared/, angel, glopus)",
         "2": "pwa-build: no vite-plugin-pwa type import (shared/ can sit outside node_modules)",
         "3": "pwa-build: registerType literal type",
-        "4": "pwa-build: manifest literal types"
+        "4": "pwa-build: manifest literal types",
+        "5": "navigate fallback leaves /oauth/, /mcp and /.well-known/ to the server (an agent's OAuth link opened the cached app); README: reset() ends Android push subscriptions"
       },
-      "version": 4
+      "version": 5
     },
     "upload": {
       "current_files": [
