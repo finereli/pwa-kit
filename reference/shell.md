@@ -65,6 +65,8 @@ Use them in: top bars (`padding-top: calc(var(--safe-top) + 6px)`), bottom-docke
 
 The maskable icon should keep the mark at ~62% inside the safe zone so OS masks don't clip it.
 
+`background_color` is not just the splash screen. Android (seen on Samsung OneUI with 3-button navigation, 2026) paints it behind the system navigation bar for the life of the app, so it must be the color the app's page actually is, or a light strip sits under a dark app. The manifest has one color, so pick the theme the owner uses: a dark app (or a dark-by-default one) gets its dark `--bg-surface`. `theme_color` only colors the status bar. The installed app keeps the colors it was installed with until Chrome refreshes the WebAPK (up to about a day); uninstall and reinstall to see a change at once.
+
 ### Service worker
 
 See `updates.md`. Short version: workbox precache of the shell, worker activates on download, the page decides when to reload, never cache media, `/reset.html` outside the worker.

@@ -462,6 +462,7 @@
       "files": {
         "css/base.css": {
           "1": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
+          "10": "24c4e76ea3cd68bf0f1f1f521cafb9c952925552044a02f736dc1f3b94722e12",
           "2": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
           "3": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
           "4": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
@@ -473,6 +474,7 @@
         },
         "index.html": {
           "1": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
+          "10": "1372fb121bbdf02a7361ef410843f384fd76c45e94b328826ce0b03308d8c4fb",
           "2": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
           "3": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
           "4": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
@@ -484,6 +486,7 @@
         },
         "package.json": {
           "1": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
+          "10": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
           "2": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
           "3": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
           "4": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
@@ -495,6 +498,7 @@
         },
         "src/App.svelte": {
           "1": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
+          "10": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
           "2": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
           "3": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
           "4": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
@@ -506,6 +510,7 @@
         },
         "src/main.ts": {
           "1": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
+          "10": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
           "2": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
           "3": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
           "4": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
@@ -517,6 +522,7 @@
         },
         "svelte.config.js": {
           "1": "da1ed4002c530fc6103aa61120f0868cbdbc0e852e0c0c2688194fd82172557c",
+          "10": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
           "2": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
           "3": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
           "4": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
@@ -528,6 +534,7 @@
         },
         "tsconfig.json": {
           "1": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
+          "10": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
           "2": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
           "3": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
           "4": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
@@ -539,6 +546,7 @@
         },
         "ui/Btn.svelte": {
           "1": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
+          "10": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
           "2": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
           "3": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
           "4": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
@@ -550,6 +558,7 @@
         },
         "ui/Drawer.svelte": {
           "1": "f9b049bb849ac1bf94edd58728c09cdc5ce19b229b7ef74a90b742689832acf1",
+          "10": "41ac954e1c586f60b58392ce4977bfaf4b6eb7a45bfa13a0cf0c3ef9bd81603a",
           "2": "f9b049bb849ac1bf94edd58728c09cdc5ce19b229b7ef74a90b742689832acf1",
           "3": "f9b049bb849ac1bf94edd58728c09cdc5ce19b229b7ef74a90b742689832acf1",
           "4": "772087067bb78e6a188ea9d247dd4d45b0fe8ada8928d070ec039d3c496acaac",
@@ -561,6 +570,7 @@
         },
         "ui/TopBar.svelte": {
           "1": "2ba76b7f7bfa120d15a1485716eeb44e99a6c518d67d66cbe34dc3f14bec85e1",
+          "10": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6",
           "2": "2ba76b7f7bfa120d15a1485716eeb44e99a6c518d67d66cbe34dc3f14bec85e1",
           "3": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6",
           "4": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6",
@@ -572,6 +582,7 @@
         },
         "vite.config.ts": {
           "1": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
+          "10": "32c1bd1a81d94f4f2e41ae8eabf522220f42c0b9dbf8aa5e83c677803dc123b8",
           "2": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
           "3": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
           "4": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
@@ -584,6 +595,7 @@
       },
       "notes": {
         "1": "initial kit extraction (yaelfiner shared/, angel, glopus)",
+        "10": "Manifest background_color: Android paints it behind the navigation bar",
         "2": "svelte.config.js: no preprocessor",
         "3": "TopBar trailing action (snippet + label + handler)",
         "4": "Drawer groups (titled sections) and count badges",
@@ -593,7 +605,7 @@
         "8": "base.css: color-scheme light in :root; apps with dark mode flip it in .dark so native controls (time picker icon) follow",
         "9": "#app pinned with position: fixed; inset: 0 instead of 100dvh (installed Android PWAs report 100dvh 56px taller than the screen); interactive-widget=resizes-content in index.html"
       },
-      "version": 9
+      "version": 10
     },
     "theme": {
       "current_files": [
