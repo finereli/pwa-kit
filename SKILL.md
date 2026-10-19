@@ -46,6 +46,7 @@ Read `reference/` files on demand, not all at once. Each is self-contained.
 | `updates` | SW registration + update flow, reload icon, `reset.html`, vite build helper (`__BUILD__`, workbox options) | Yael's app/admin, after the stuck-phone saga |
 | `auth` | Google sign-in + 90-day D1 sessions, token verification, `/api/auth`, middleware, schema, Login, double-locked dev bypass | Yael's app/admin, after the journal leak + preview review |
 | `pin-auth` | PIN keypad login for single-user apps: keypad + desktop keyboard entry, PIN-as-credential store, Pages-secret middleware, `/api/auth/check` | Accountant |
+| `mcp` | MCP server for the user's own agents: OAuth 2.1 approved with Google, JSON-RPC endpoint, Agents settings panel, local flow test (see the `mcp` skill) | Accountant, Yara Reads |
 | `api` | fetch wrapper: bearer, JSON, 401 funnel | Yael's admin |
 | `save` | SaveTracker, SaveStatus, AutoTextarea (autosave-first) | Yael's admin |
 | `toast` | error toasts + optimistic-update revert pattern | Yael's admin |

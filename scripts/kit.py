@@ -33,14 +33,14 @@ KIT = os.path.normpath(KIT)
 MANIFEST = os.path.join(KIT, 'MANIFEST.json')
 HEADER = re.compile(r'pwa-kit:\s*(\S+)\s+v(\d+)')
 SKIP_DIRS = {'node_modules', 'dist', 'dist-media', '.git', '.svelte-kit', '.wrangler', 'build', '.venv'}
-TEXT_EXT = {'.js', '.ts', '.svelte', '.css', '.html', '.sh', '.py', '.sql', '.md', '.json', '.toml', '.jsonc', '.yml', '.yaml', '.vars', '.txt'}
+TEXT_EXT = {'.js', '.mjs', '.ts', '.svelte', '.css', '.html', '.sh', '.py', '.sql', '.md', '.json', '.toml', '.jsonc', '.yml', '.yaml', '.vars', '.txt'}
 
 # JSON has no comment syntax: these get no header (still hashed in the manifest;
 # `status` can't find them in a project, and they're edited templates anyway).
 HEADERLESS_EXT = {'.json'}
 
 COMMENT = {
-    '.js': ('// ', ''), '.ts': ('// ', ''), '.jsonc': ('// ', ''),
+    '.js': ('// ', ''), '.mjs': ('// ', ''), '.ts': ('// ', ''), '.jsonc': ('// ', ''),
     '.svelte': ('<!-- ', ' -->'), '.html': ('<!-- ', ' -->'), '.md': ('<!-- ', ' -->'),
     '.css': ('/* ', ' */'),
     '.sh': ('# ', ''), '.py': ('# ', ''), '.toml': ('# ', ''), '.yml': ('# ', ''), '.yaml': ('# ', ''), '.vars': ('# ', ''),

@@ -218,6 +218,40 @@
       },
       "version": 1
     },
+    "mcp": {
+      "current_files": [
+        "db/mcp.sql",
+        "functions/mcp-auth.ts",
+        "functions/mcp-server.ts",
+        "scripts/dev-login.mjs",
+        "scripts/mcp-flow-test.mjs",
+        "ui/AgentsPanel.svelte"
+      ],
+      "files": {
+        "db/mcp.sql": {
+          "1": "ffcf9475bb0e22665a8e6b8fcb3f446e5af90a8f6e1d3b7ff77b052350d168ab"
+        },
+        "functions/mcp-auth.ts": {
+          "1": "83831b653d40877e4610490aa33d69d07f6221cefc93d7a1935797fbdfcca51c"
+        },
+        "functions/mcp-server.ts": {
+          "1": "37e93a767cff6d86ad8049750a52ec06c0dde779aad2207b5c694a9017571b7a"
+        },
+        "scripts/dev-login.mjs": {
+          "1": "8738f970fe9b8f40df8959ea24ce68e9b3bfe556916fc720ed8846b10aff9305"
+        },
+        "scripts/mcp-flow-test.mjs": {
+          "1": "23669eb0f27a6027546fc504277dda053a74a7a480df6f21f8de58fe950b0598"
+        },
+        "ui/AgentsPanel.svelte": {
+          "1": "ef57d3551e51cfd5aa104c7582d602acc2863cb62be0c6a3e9cf4ffeb78e174a"
+        }
+      },
+      "notes": {
+        "1": "initial kit extraction (Accountant, Yara Reads)"
+      },
+      "version": 1
+    },
     "media": {
       "current_files": [
         "lib/player.svelte.ts",
