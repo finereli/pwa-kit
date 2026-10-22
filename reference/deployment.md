@@ -40,3 +40,7 @@ Single Cloudflare Worker with `wrangler.jsonc`:
 ```
 
 Those two lines make a routerless SPA and a WebSocket upgrade coexist with the static asset layer. Add D1 bindings, a named Durable Object (`idFromName('appname')` for single-user), and a custom domain route.
+
+## Worker-backed apps (local-first with sync)
+
+Same single Worker, `"run_worker_first": ["/api/*"]` and an `ASSETS` binding so the Worker can hand everything else to the static layer. One D1 table holding a JSON document per Google `sub`. No Google setup: sign-in is login.finereli.com (kit `login/`). `npm run deploy` runs tests, build, `wrangler d1 migrations apply <db> --remote`, `wrangler deploy`. 100 Shots is the reference.

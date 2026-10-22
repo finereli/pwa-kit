@@ -30,7 +30,7 @@ Settings pages that start flat and grow into an index of sub-pages without a rew
 - Account details (email, sign-out, delete my data, version) live on an Account page, not in the drawer footer; the footer only shows avatar + name (`shell/ui/AccountMenu`).
 - On mobile the top bar shows the title and, on sub-pages, a back arrow (`TopBar leading="back"`, its target is the parent route); SettingsPage hides its own `h2` and back link there. On desktop SettingsPage shows both.
 - Borderless rows with hairline separators, hover tint - not cards. Status dots: `.dot.ok / .warn / .error`.
-- Buttons: `.apply-btn` (primary pill), `.quiet-btn` (outline, `.neutral` for non-destructive), `.danger-btn` (`.solid` for the confirm step). Two-step inline confirms, never `confirm()`.
+- Buttons: `.apply-btn` (primary pill), `.quiet-btn` (outline, `.neutral` for non-destructive), `.danger-btn` (`.solid` for the confirm step). Two-step inline confirms, never `confirm()` (kit `confirm/`, ConfirmButton).
 - Max width 42rem, centred.
 
 ## Seams

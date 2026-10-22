@@ -8,7 +8,7 @@ Kit: `updates/` (registration + update logic, reset button, reset.html, vite bui
 
 ## Service worker strategy
 
-vite-plugin-pwa with workbox, `registerType: 'autoUpdate'`, `injectRegister: null` (we register ourselves), `skipWaiting: true`, `clientsClaim: true`. Precache the shell (JS, CSS, HTML, fonts, icons); `navigateFallback: '/index.html'` for the SPA, with a denylist for `/api/`, static asset dirs, and `/reset.html`.
+vite-plugin-pwa with workbox, `registerType: 'autoUpdate'`, `injectRegister: null` (we register ourselves), `skipWaiting: true`, `clientsClaim: true`. Precache the shell (JS, CSS, HTML, fonts, icons); `navigateFallback: '/index.html'` for the SPA, with a denylist for `/api/`, static asset dirs, `/reset.html`, and the server's own pages (`/oauth/`, `/mcp`, `/.well-known/`, which an agent's sign-in link opens).
 
 The worker takes over as soon as it has downloaded. Precache means instant offline launch, and it is safe precisely because the worker never waits.
 

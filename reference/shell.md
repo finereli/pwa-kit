@@ -15,25 +15,25 @@ Every app starts with this. Don't skip any of it.
 <meta name="theme-color" content="...">
 ```
 
-`user-scalable=no` is a deliberate choice: this is an app, not a page, and pinch-zoom on a player or a chat reads as broken. Accessibility purists disagree; we chose app-feel. `interactive-widget=resizes-content` plus a `100dvh` shell that never scrolls is what makes the keyboard resize the layout instead of pushing it.
+`user-scalable=no` is a deliberate choice: this is an app, not a page, and pinch-zoom on a player or a chat reads as broken. Accessibility purists disagree; we chose app-feel. `interactive-widget=resizes-content` plus a `position: fixed; inset: 0` shell that never scrolls is what makes the keyboard resize the layout instead of pushing it. (The kit's `index.html` carries it; it had been missing there.)
 
 The theme-color meta tag should update dynamically when dark mode toggles: accent color in light mode, surface color in dark mode.
 
 ### Height handling
 
-Mobile browsers lie about viewport height. Use `100dvh` as the primary unit, plus a JS fallback for older browsers:
+The app root is `position: fixed; inset: 0`. A fixed element with `inset: 0` is the layout viewport, which is exactly the visible area: the browser keeps it above the system navigation bar and, with `interactive-widget=resizes-content`, shrinks it while the keyboard is open. No viewport units, no JS.
 
-```javascript
-function setVh() {
-  document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-}
-window.addEventListener('resize', setVh);
-setVh();
-setTimeout(setVh, 100);
-setTimeout(setVh, 300);
-```
+Don't size the shell with viewport units. Measured on a Samsung phone with 3-button navigation, Chrome 154 (viewport-lab, Oct 2026):
 
-The delayed recalculations catch mobile browser chrome settling after load. Use `height: 100dvh` in CSS, falling back to `calc(var(--vh, 1vh) * 100)`.
+| | browser tab | installed PWA |
+|---|---|---|
+| visible area (`innerHeight`) | 669 | 725 |
+| `100vh` / `100dvh` / `100lvh` | 725 / 669 / 725 | **781** / **781** / **781** |
+| `100svh` | 669 | 725 |
+| `position: fixed; inset: 0` | 669 | 725 (470 with keyboard) |
+| `env(safe-area-inset-bottom)` | 0 | 0 |
+
+Installed, Chrome treats the navigation bar like a browser toolbar that could slide away, so the "large" and "dynamic" viewport are 56px taller than the screen: a `100dvh` shell puts its bottom bar behind the buttons. `viewport-fit` made no difference, and the insets were 0 because Chrome doesn't draw under the 3-button bar at all. Only the fixed box was right in every mode, with the keyboard open and closed, and only with `resizes-content` (`resizes-visual` and `overlays-content` leave the keyboard over the bottom bar). The older `--vh` JS fallback is gone with it.
 
 ### Safe areas
 
@@ -46,7 +46,7 @@ Define these variables globally:
 }
 ```
 
-Use them in: top bars (`padding-top: calc(var(--safe-top) + 6px)`), bottom-docked elements (`padding-bottom: calc(var(--safe-bottom) + Npx)`), full-screen overlays.
+Use them in: top bars (`padding-top: calc(var(--safe-top) + 6px)`), bottom-docked elements (`padding-bottom: calc(var(--safe-bottom) + Npx)`), full-screen overlays. They matter on iOS (notch, home indicator). On Android an installed app reports 0 and the fixed shell already stops above the navigation bar; Chrome's edge-to-edge (`env(safe-area-max-inset-bottom)`, the chin) applies to pages that scroll under a gesture bar, which the shell never does.
 
 ### Manifest
 
@@ -69,6 +69,8 @@ Use them in: top bars (`padding-top: calc(var(--safe-top) + 6px)`), bottom-docke
 - **The maskable icon is its own file.** Reusing the `any` icon as maskable is what made Angel's mark touch the edges on Android: the launcher crops to a circle or squircle and only the central ~80% is safe. Mark at ~86% of the square in the `any` icons, ~76% in the maskable one.
 - **Generate them all from one source** (an SVG of the mark, or its polygons) with a small script in the repo, so a size change is one number. Only the tab favicon (`favicon.svg`) keeps rounded corners.
 - **An icon in the user's colour** is the `theme` kit's v2 upgrade (`appicon.ts`): drawn at runtime and swapped into the favicon, apple-touch-icon and a blob manifest. It works for installs made after the pick; an installed app keeps its old icon.
+
+`background_color` is not just the splash screen. Android (seen on Samsung OneUI with 3-button navigation, 2026) paints it behind the system navigation bar for the life of the app, so it must be the color the app's page actually is, or a light strip sits under a dark app. The manifest has one color, so pick the theme the owner uses: a dark app (or a dark-by-default one) gets its dark `--bg-surface`. `theme_color` only colors the status bar. The installed app keeps the colors it was installed with until Chrome refreshes the WebAPK (up to about a day); uninstall and reinstall to see a change at once.
 
 ### Service worker
 
@@ -105,7 +107,7 @@ button, a, [role="button"] {
 └─────────────────────────────┘
 ```
 
-Full-height flex layout: `display: flex; height: 100dvh; overflow: hidden`.
+Full-height flex layout inside the fixed `#app`: `display: flex; flex-direction: column; height: 100%`.
 
 ### Sidebar
 
@@ -114,6 +116,7 @@ Full-height flex layout: `display: flex; height: 100dvh; overflow: hidden`.
 - Mobile: `position: fixed`, slides in from the start edge, `transform: translateX(-100%)` (`translateX(100%)` under `[dir='rtl']`)
 - Transition: `transform 0.28s cubic-bezier(0.32, 0.72, 0, 1)`
 - Scrim behind: `rgba(0, 0, 0, 0.45)`, opacity transition, z-index above content
+- Shadow only while open: translated off-screen, the drawer's blur still reaches past its edge and shades the page's start edge
 - Escape closes it; the host closes it on every navigation (router.onChange), which is what makes the back button close it too
 - Top and bottom bands are the same height: the brand band and the footer are both `--topbar-h` (56px) plus their safe area, so the sidebar looks balanced. The drawer itself has no vertical padding; the bands carry the safe areas.
 - Footer: one row. `AccountMenu` (avatar + name, never the email) on the start side; a tap opens a small menu upwards with Sign out (and the version). Icon buttons on the end: the reload icon (see updates.md), then light/dark and the settings gear when the app has them. Email, delete-my-data and the version in full go on the Account settings page.
@@ -143,7 +146,7 @@ At the breakpoint: sidebar becomes permanent, hamburger hides, font size can ste
 
 ### Structural scroll control
 
-The app shell itself never scrolls - `html, body { overflow: hidden }`, app root at `100dvh`. Each view has exactly one inner element with `overflow-y: auto`.
+The app shell itself never scrolls - `body { overflow: hidden }`, app root `position: fixed; inset: 0`. Each view has exactly one inner element with `overflow-y: auto`.
 
 For chat apps where pull-to-refresh would interfere with the scrolled message list, add `overscroll-behavior-y: none` on the scroller. Same for player views and any fixed-layout screen.
 

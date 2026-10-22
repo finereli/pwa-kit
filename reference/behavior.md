@@ -1,4 +1,4 @@
-# Behavior: boot, auth, settings, keyboard, navigation, install, dates, timing
+# Behavior: boot, sync, auth, settings, keyboard, navigation, install, dates, timing
 
 ## Boot sequence
 
@@ -10,8 +10,6 @@ The single biggest feel item. The app must never render a state it will immediat
 
 3. **Restore last state before flipping authenticated.** Load the last conversation ID, settings, and any other persisted state. Show the UI only after state is ready - not before.
 
-4. **Delayed `--vh` recalculations.** Set `--vh` immediately, then again at 100ms and 300ms after load to catch mobile browser chrome settling.
-
 The goal: a returning user sees the app in the correct theme with their last conversation, never a white flash or a login form that disappears.
 
 ## Data stores: load at boot, read synchronously
@@ -22,6 +20,19 @@ For management/admin apps whose whole dataset is small (hundreds of rows, not mi
 - **Derive, don't denormalize.** Counts and badges ("12/18 posted", "done") are computed from the loaded relation, not stored as columns the client must keep in sync.
 - **Mutations update the store optimistically** (see Optimistic updates); derived views re-render for free.
 - **A per-entity fetch is still right** when the payload is genuinely heavy per entity (transcripts, media, analytics) - then render everything you have from the store instantly and stream the heavy part in below it, never blocking the whole view.
+
+## Sync for local-first apps
+
+For an app that keeps its whole dataset on the device (100 Shots) and adds sign-in for sync. 100 Shots is the reference (`src/lib/merge.ts`, `src/lib/sync.svelte.ts`, `worker/index.ts`).
+
+- **Send everything, keep the merge.** `POST /api/sync` carries the device's whole dataset; the Worker merges it with the stored copy (one JSON row per `sub`), stores and returns the merge; the device merges that with whatever changed while the request was out, and syncs again if anything did. Fine while a person's data is kilobytes, which for a tracker is years.
+- **The merge is a pure function shared by app and Worker**, and order-free: A into B keeps what B into A keeps, and merging twice changes nothing. Then sync has no conflicts to resolve and a lost race heals on the next sync.
+- **Ids are UUIDs made on the device. Deletes leave tombstones** (`id -> when`), or the other device brings the item back.
+- **Undo must beat the delete it undoes**, even if the delete already reached the server: a restored item gets `t = now` and lives if `t` is newer than its tombstone. Timing tricks (wait out the undo window before syncing) are not enough.
+- **Edits to a field are last-writer-wins on a per-field stamp** (`nameAt`).
+- **Sync triggers:** start, a moment (1.5s) after each edit, `visibilitychange`, `online`. Show a quiet status line (Synced / Syncing / Offline, will sync later), never a modal.
+- **Signing in merges, never replaces:** what the device logged signed out is kept.
+- **Signing out syncs first, then clears the device**, so the next person starts empty. If the sync fails, don't sign out; say the data is still on the device.
 
 ## Auth
 
@@ -35,9 +46,23 @@ Login UI: the `pin-auth` kit item is the reference implementation - a phone-styl
 
 Every app must have a logout affordance that clears the credential and drops to login. Any fetch wrapper should handle 401 by clearing the stored PIN and showing login.
 
-### Google sign-in with server sessions (multi-user apps)
+### finereli login (the default for multi-user apps)
 
-Kit: `auth/` (client class, token verification, sessions, `/api/auth`, middleware, schema, Login). Use it; this is the part with the most ways to be subtly wrong.
+Kit: `login/`. Every app signs in through login.finereli.com (repo finereli/finereli-login), which holds the one Google OAuth client. **A new app does not get a Google Cloud project, an OAuth client or a secret.** An app on `*.finereli.com` works with no setup at all; another domain is one entry in that service's `ALLOWED_ORIGINS`. The app holds no keys.
+
+The app opens the service in a popup, gets a one-time code back on its own origin, and trades it for a 90-day ES256 token whose audience is the app's origin. Its Worker checks the token against the service's public key (`verifyLogin`) and keys data on `user.sub`, the Google account id. A second app in the same browser signs in without seeing Google. Tokens slide (refreshed daily while the app is used). Details and decisions: `kit/login/README.md`.
+
+Local dev needs no bypass: localhost is an allowed origin, so the real sign-in works there, and the Worker's `audience` lists `http://localhost:5173` beside production.
+
+Signing in can be optional. A local-first app works signed out and signing in only adds sync (see Sync for local-first apps).
+
+The rules under the next heading for 401s, account switches and server-derived users apply here too: `makeApi(login)` is the 401 funnel, `login.onChange` resets per-user stores, and the Worker takes the user from the verified token, never from the request body.
+
+### Own Google client (apps that need more than identity)
+
+Use this only when finereli login doesn't fit: the app needs Google scopes beyond sign-in (Drive, Calendar, Gmail), it belongs to someone else (a client's app), or it must show its own brand on Google's screen. Existing apps on it (Yael's app/admin, Ajde) can move to finereli login without losing users, because `sub` is the same Google account id under any client.
+
+Kit: `auth/` (client class, token verification, sessions, `/api/auth`, middleware, schema, Login). Use it; this is the part with the most ways to be subtly wrong. The Google project and client come from the `google-oauth-setup` skill.
 
 Google Identity Services popup flow, never redirect, so the URL and any hash deep links survive sign-in. `auto_select: true` for silent re-auth on return. One Tap first, popup fallback when it's not displayed or skipped.
 
@@ -94,7 +119,7 @@ Kit: `save/` (SaveTracker, SaveStatus, AutoTextarea).
 - **Quiet indicator.** Idle shows nothing - autosave is the norm, not news. Saving is a small spinner (150ms delay so fast writes barely flash), saved a checkmark that fades after ~1.2s. Failure is the only state that earns words: a persistent tappable retry. Grid-stack the states so a swap never shifts layout.
 - **Init fields once per entity id.** A slow round-trip that re-inits a bound field clobbers what the user typed next.
 - **Debounce timer nulled after firing**, or blur re-saves the same value. Dedupe with lastSaved/lastSent guards for the blur-flush vs done-click race.
-- **Delete vs archive is decided per entity** and written down; deleted things that can be restored get a restore path. Confirmations are inline two-step (tap, then confirm in place), never `confirm()`: the native dialog renders in the browser's language, not the app's.
+- **Delete vs archive is decided per entity** and written down; deleted things that can be restored get a restore path. Confirmations are inline two-step (tap, then confirm in place), never `confirm()`: the native dialog renders in the browser's language, not the app's. Kit `confirm/` (ConfirmButton): the first tap changes the label to "Sure?" and nothing else, so a menu row stays a row and a link stays a link; the second tap acts; it disarms after 3 s.
 
 ### Optimistic updates
 
@@ -113,7 +138,7 @@ One-shot mutations (toggle, add, remove, archive, reorder) never make the user w
 
 ### Virtual keyboard
 
-The viewport meta `interactive-widget=resizes-content` plus `100dvh` handles keyboard resize declaratively. The layout viewport shrinks when the keyboard opens; no JS needed.
+The viewport meta `interactive-widget=resizes-content` plus the `position: fixed; inset: 0` app root handles keyboard resize declaratively (shell.md, Height handling). The layout viewport shrinks when the keyboard opens; no JS needed.
 
 ### Textarea auto-resize
 

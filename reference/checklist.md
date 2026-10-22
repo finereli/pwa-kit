@@ -19,16 +19,19 @@ Before shipping a PWA, verify:
 - [ ] Apple + mobile-web-app meta tags, apple-touch-icon
 - [ ] theme-color meta (dynamic if the app has dark mode)
 - [ ] Manifest with proper icons including maskable
+- [ ] Manifest `background_color` is the app's page color in the theme the owner uses (Android paints it behind the navigation bar)
 - [ ] Update flow verified with two builds (kit `updates/README.md` recipe)
 - [ ] `canReload` veto wired for the app's sensitive moment (audio, upload, stream)
 - [ ] Reload icon + build number in the drawer; `/reset.html` reachable past the worker
 - [ ] Safe area variables used in top/bottom bars
-- [ ] `100dvh` shell, body `overflow: hidden`, one scroller per view
+- [ ] Fixed shell (`#app { position: fixed; inset: 0 }`, no viewport units), body `overflow: hidden`, one scroller per view
+- [ ] Installed on Android with 3-button navigation: bottom bar above the buttons, keyboard open and closed
 - [ ] Dark mode applied before first paint (inline script), if the app has dark mode
 - [ ] No login flash for returning users
 - [ ] External links open in system browser when installed
 - [ ] Install prompt captured in index.html inline script
-- [ ] Dev auth bypass double-locked (host AND `DEV_AUTH`); previews bind preview D1/R2
+- [ ] Sign-in is finereli login (kit `login/`) unless the app needs its own Google client; the Worker's `audience` lists only the app's origins
+- [ ] Own-client apps only: dev auth bypass double-locked (host AND `DEV_AUTH`); previews bind preview D1/R2
 - [ ] `kit.py status <project>` shows every kit file `current`
 
 **Visual:**

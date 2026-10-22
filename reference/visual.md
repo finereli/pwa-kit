@@ -40,6 +40,7 @@ Toggle via a `dark` class on `<html>`, persisted to `localStorage`, falling back
 
 ```css
 .dark {
+  color-scheme: dark;   /* native controls: time picker icon, scrollbars */
   --bg-surface: #1e1e2e;
   --bg-sidebar: #181825;
   --bg-hover: #313244;
@@ -53,7 +54,7 @@ Toggle via a `dark` class on `<html>`, persisted to `localStorage`, falling back
 }
 ```
 
-The accent color stays constant across both modes. The theme-color meta tag switches to `#1e1e2e` in dark mode.
+`color-scheme` must flip with the class: without it, native controls (the clock in `<input type="time">`, scrollbars, autofill) stay drawn for light mode, black on dark. The accent color stays constant across both modes. The theme-color meta tag switches to `#1e1e2e` in dark mode.
 
 ### Semantic status colors
 
