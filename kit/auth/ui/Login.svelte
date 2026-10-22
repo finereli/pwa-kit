@@ -1,4 +1,4 @@
-<!-- pwa-kit: auth/ui/Login.svelte v6 -->
+<!-- pwa-kit: auth/ui/Login.svelte v7 -->
 <script lang="ts">
   // Full-screen sign-in gate. Renders the app's mark, name and one Google
   // button; the spinner shows while GSI loads. Seams: props below, and the

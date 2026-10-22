@@ -33,7 +33,8 @@
           "3": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369",
           "4": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369",
           "5": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369",
-          "6": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369"
+          "6": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369",
+          "7": "b344c8f8ccd1a62f21dabb1270d6153057491cee70369f33e68ffb80b575e369"
         },
         "functions/api/_config.ts": {
           "1": "c7f0a15d99b8cd0f40b76af9d746345307a0f6e8f6e2130fea12ce1d12a35649",
@@ -41,7 +42,8 @@
           "3": "f0f2c70ed316b6ab3160bf4d6c2ea30262be1a1b274bf81016f07c2543cb1efd",
           "4": "f0f2c70ed316b6ab3160bf4d6c2ea30262be1a1b274bf81016f07c2543cb1efd",
           "5": "f0f2c70ed316b6ab3160bf4d6c2ea30262be1a1b274bf81016f07c2543cb1efd",
-          "6": "f0f2c70ed316b6ab3160bf4d6c2ea30262be1a1b274bf81016f07c2543cb1efd"
+          "6": "f0f2c70ed316b6ab3160bf4d6c2ea30262be1a1b274bf81016f07c2543cb1efd",
+          "7": "f0f2c70ed316b6ab3160bf4d6c2ea30262be1a1b274bf81016f07c2543cb1efd"
         },
         "functions/api/_middleware.ts": {
           "1": "5fe58c8de8299c54bde11fb4ce45e423c7f834df5fe9818e6ba271a945341d21",
@@ -49,7 +51,8 @@
           "3": "1d62fa01300cec68745767346a2ab00c4b70e486a51f0d3b666e32d36765fb3d",
           "4": "1d62fa01300cec68745767346a2ab00c4b70e486a51f0d3b666e32d36765fb3d",
           "5": "fbd0f6ff64c62c19ff568323a928f3d96a24e6c11d42e68c40f9cfb2331accc0",
-          "6": "fbd0f6ff64c62c19ff568323a928f3d96a24e6c11d42e68c40f9cfb2331accc0"
+          "6": "fbd0f6ff64c62c19ff568323a928f3d96a24e6c11d42e68c40f9cfb2331accc0",
+          "7": "fbd0f6ff64c62c19ff568323a928f3d96a24e6c11d42e68c40f9cfb2331accc0"
         },
         "functions/api/auth.ts": {
           "1": "7314f0836f9c04a367cc79f35b0f5bbaa34ebc1c394a0db169af08c6dcc261ac",
@@ -57,7 +60,8 @@
           "3": "7314f0836f9c04a367cc79f35b0f5bbaa34ebc1c394a0db169af08c6dcc261ac",
           "4": "7314f0836f9c04a367cc79f35b0f5bbaa34ebc1c394a0db169af08c6dcc261ac",
           "5": "126844d7fff65980c354f1a9e959da6c650e71e68fec036cddfdbad0f8ab5286",
-          "6": "126844d7fff65980c354f1a9e959da6c650e71e68fec036cddfdbad0f8ab5286"
+          "6": "126844d7fff65980c354f1a9e959da6c650e71e68fec036cddfdbad0f8ab5286",
+          "7": "126844d7fff65980c354f1a9e959da6c650e71e68fec036cddfdbad0f8ab5286"
         },
         "functions/google-token.ts": {
           "1": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87",
@@ -65,7 +69,8 @@
           "3": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87",
           "4": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87",
           "5": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87",
-          "6": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87"
+          "6": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87",
+          "7": "31609e472cca01f4199a248da7e323c42e9d19631fcd7f619663de5bf2068c87"
         },
         "functions/sessions.ts": {
           "1": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083",
@@ -73,7 +78,8 @@
           "3": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083",
           "4": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083",
           "5": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083",
-          "6": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083"
+          "6": "69f80601c30f95d7dfaa9b1ab073674bbf64304ea4f37984a66993ddb5dbd083",
+          "7": "7f8ad7df237af00e696d1203c8f9c863e944ac42b802facc24b26b8f2a4c2b31"
         },
         "lib/auth.example.ts": {
           "1": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca",
@@ -81,7 +87,8 @@
           "3": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca",
           "4": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca",
           "5": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca",
-          "6": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca"
+          "6": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca",
+          "7": "b29e5c993cbc79cf369e8615c394a1293d695556d14fa84c90cac38d0fd991ca"
         },
         "lib/google-auth.svelte.ts": {
           "1": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2",
@@ -89,7 +96,8 @@
           "3": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2",
           "4": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2",
           "5": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2",
-          "6": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2"
+          "6": "68dc9c9cf7a61e52ec61ad39a79558e876677208319ebed3fd0e3f7d6d160bb2",
+          "7": "42d8c4f1e33603d11ba5f77af4f6715585c34c08d00be37b3edede6b7fcc2610"
         },
         "ui/Login.svelte": {
           "1": "bed9574a231cbdfada9ec60acdfd69bf393731afdfc0c395de349dd1d0c314d0",
@@ -97,7 +105,8 @@
           "3": "9f330492a26e067e4ce0d464e42d36ec0c39ee0088e104d74339831ad9ca8ca7",
           "4": "22dcaaf41b941e6b9f19d0d224f513aa2bca9d6ffa26d9af860af7ae883b37d4",
           "5": "22dcaaf41b941e6b9f19d0d224f513aa2bca9d6ffa26d9af860af7ae883b37d4",
-          "6": "98029679c7560aebed44b295407b8f5f6f39255976d2be585db205fb3260c9e2"
+          "6": "98029679c7560aebed44b295407b8f5f6f39255976d2be585db205fb3260c9e2",
+          "7": "98029679c7560aebed44b295407b8f5f6f39255976d2be585db205fb3260c9e2"
         }
       },
       "notes": {
@@ -106,9 +115,10 @@
         "3": "Login children snippet + logoSize (invite variant)",
         "4": "Login compact mode",
         "5": "functions/api import depth assumes shared/ beside the app dir",
-        "6": "Login denied state (admin apps)"
+        "6": "Login denied state (admin apps)",
+        "7": "dev identity is a placeholder (dev@example.com), not the author's account"
       },
-      "version": 6
+      "version": 7
     },
     "chat": {
       "current_files": [

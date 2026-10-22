@@ -1,4 +1,4 @@
-// pwa-kit: auth/functions/google-token.ts v6
+// pwa-kit: auth/functions/google-token.ts v7
 // Verification of Google ID tokens against Google's published keys, for
 // Cloudflare Pages Functions / Workers (WebCrypto, no dependencies).
 //

@@ -1,4 +1,4 @@
-// pwa-kit: auth/lib/auth.example.ts v6
+// pwa-kit: auth/lib/auth.example.ts v7
 // src/lib/auth.svelte.ts in the app - the one instance everything imports.
 import { GoogleAuth } from '$shared/lib/google-auth.svelte'
 
