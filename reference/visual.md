@@ -67,7 +67,7 @@ Don't create tokens for these - use them inline:
 
 ### Dynamic theme generation (optional)
 
-Kit: `theme/`. For apps where users pick their own color (like Glopus), generate the full accent palette from a single hex value via HSL conversion:
+Kit: `theme/` (v1: `applyAccent`; v2 upgrade: Theme page with light/dark/match-device, preset + custom accent picker, and an app icon that follows the accent - see its README). For apps where users pick their own color (Glopus, Angel), generate the full accent palette from a single hex value via HSL conversion:
 
 ```javascript
 function applyThemeColor(hex) {

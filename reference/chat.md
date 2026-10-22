@@ -52,7 +52,9 @@ The liveness hierarchy: the browser's `offline`/`online` events beat any heartbe
 
 ### Enter key behavior
 
-Detect mobile: `window.matchMedia('(max-width: 1024px)').matches || 'ontouchstart' in window`.
+Detect mobile by the primary pointer: `matchMedia('(hover: none) and (pointer: coarse)').matches`. Not window width (a narrow desktop window still has a keyboard) and not `'ontouchstart' in window` (touchscreen laptops). Both broke Enter-to-send on Angel. An iPad with a trackpad may still report coarse; acceptable.
+
+Ignore `keydown` while `e.isComposing`: Enter that confirms an IME candidate (Chinese, Japanese, Korean) is not a send.
 
 - **Mobile:** Enter always inserts a newline. Send is button-only.
 - **Desktop:** Enter sends. Shift+Enter inserts a newline (native behavior). Alt+Enter inserts a newline at cursor position (splice at `selectionStart`, restore caret to `start + 1` after `tick()`, re-run autoresize).

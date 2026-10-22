@@ -58,12 +58,17 @@ Use them in: top bars (`padding-top: calc(var(--safe-top) + 6px)`), bottom-docke
   "icons": [
     { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
 ```
 
-The maskable icon should keep the mark at ~62% inside the safe zone so OS masks don't clip it.
+### Icons
+
+- **PNG icons are opaque, full-bleed squares.** The platform rounds them. A rounded icon with transparent corners turns them black on iOS and doubles the rounding on Android.
+- **The maskable icon is its own file.** Reusing the `any` icon as maskable is what made Angel's mark touch the edges on Android: the launcher crops to a circle or squircle and only the central ~80% is safe. Mark at ~86% of the square in the `any` icons, ~76% in the maskable one.
+- **Generate them all from one source** (an SVG of the mark, or its polygons) with a small script in the repo, so a size change is one number. Only the tab favicon (`favicon.svg`) keeps rounded corners.
+- **An icon in the user's colour** is the `theme` kit's v2 upgrade (`appicon.ts`): drawn at runtime and swapped into the favicon, apple-touch-icon and a blob manifest. It works for installs made after the pick; an installed app keeps its old icon.
 
 ### Service worker
 
@@ -110,7 +115,8 @@ Full-height flex layout: `display: flex; height: 100dvh; overflow: hidden`.
 - Transition: `transform 0.28s cubic-bezier(0.32, 0.72, 0, 1)`
 - Scrim behind: `rgba(0, 0, 0, 0.45)`, opacity transition, z-index above content
 - Escape closes it; the host closes it on every navigation (router.onChange), which is what makes the back button close it too
-- Bottom of the drawer: user row, sign-out, then the build line with the reload icon (see updates.md)
+- Top and bottom bands are the same height: the brand band and the footer are both `--topbar-h` (56px) plus their safe area, so the sidebar looks balanced. The drawer itself has no vertical padding; the bands carry the safe areas.
+- Footer: one row. `AccountMenu` (avatar + name, never the email) on the start side; a tap opens a small menu upwards with Sign out (and the version). Icon buttons on the end: the reload icon (see updates.md), then light/dark and the settings gear when the app has them. Email, delete-my-data and the version in full go on the Account settings page.
 
 ### Main content
 

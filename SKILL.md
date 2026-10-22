@@ -51,7 +51,8 @@ Read `reference/` files on demand, not all at once. Each is self-contained.
 | `save` | SaveTracker, SaveStatus, AutoTextarea (autosave-first) | Yael's admin |
 | `toast` | error toasts + optimistic-update revert pattern | Yael's admin |
 | `reorder` | touch-first drag-to-reorder (pointer events, edge autoscroll) | Yael's admin |
-| `shell` | base.css tokens/reset, TopBar, Drawer, Btn, index.html, App/main templates, vite/ts/svelte/package config | Yael's app/admin |
+| `shell` | base.css tokens/reset, TopBar, Drawer, AccountMenu, Btn, index.html, App/main templates, vite/ts/svelte/package config | Yael's app/admin, Angel (balanced sidebar, account menu) |
+| `settings` | SettingsPage frame, SettingsRow, settings.css: flat first, an index of sub-pages when it grows | Angel |
 | `router` | hash router with the history rules | Yael's app |
 | `format` | localDateStr, formatDate, formatTime | Yael's shared |
 | `media` | Player engine (audio owns, muted video follows), progress persistence | Yael's app |
@@ -61,7 +62,7 @@ Read `reference/` files on demand, not all at once. Each is self-contained.
 | `chat` | WsClient: reconnection state machine, heartbeat, backoff, browser signals | Angel |
 | `remote-log` | tagged console → server | Glopus |
 | `image-resize` | client-side resize before upload | Glopus |
-| `theme` | dark mode before first paint, accent-derived palette | Glopus |
+| `theme` | v1: dark mode before first paint, accent-derived palette. v2 upgrade (optional): light/dark/match-device, accent picker, app icon in the accent | Glopus, Angel |
 | `infra` | deploy workflow, wrangler.toml with `[env.preview]`, `.dev.vars`, setup-preview.sh | Yael's repo |
 
 Language: TypeScript everywhere; apps run `svelte-check` in `npm run build`. `scripts/typecheck/run.sh` type-checks and builds the whole kit as one project.
@@ -76,6 +77,14 @@ Language: TypeScript everywhere; apps run `svelte-check` in `npm run build`. `sc
 4. Run each item's verify recipe before moving on. The updates flow in particular has to be seen working (two builds, swap under a running page) before you build on top of it.
 5. Everything domain-specific goes in the app, not in `shared/`. Resist generalizing before a second app needs it.
 6. When done, run the ship checklist and `scripts/kit.py status <project>` (should be all `current`).
+
+### When kit changes reach an app
+
+Pull, not push. A kit change does not mean every app gets updated now. An app takes the latest kit when someone is working on it anyway: before touching its shell, settings or update flow, run `status`, and take what's `upstream` while the context is loaded. The exceptions are fixes for something users are hitting (a stuck update, a data-loss race); those are worth a pass over every app that has the item.
+
+Drift is fine. A `modified` file is an app that made a decision, not a debt. Each app's copy is its own code, and that is what makes the kit cheap to change: nothing breaks downstream when it moves. The manifest's version notes are the changelog an app reads when it does catch up.
+
+The flow is two-way. Most kit changes start as a fix or a better idea in one app (Angel's sidebar footer, Yael's update flow). Promote it while the reasons are fresh, and the next app that updates gets it with the reasons attached.
 
 ### Update an app to the latest kit
 

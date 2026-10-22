@@ -375,6 +375,28 @@
       },
       "version": 2
     },
+    "settings": {
+      "current_files": [
+        "css/settings.css",
+        "ui/SettingsPage.svelte",
+        "ui/SettingsRow.svelte"
+      ],
+      "files": {
+        "css/settings.css": {
+          "1": "6bdf538e69791ef07699118246601d7a62c3d880481ca221f5a9260aa23aca2a"
+        },
+        "ui/SettingsPage.svelte": {
+          "1": "12bc20a2af6ef87e09b2e6d1513e2543bf1d0fff406018ea5cbac04a73721331"
+        },
+        "ui/SettingsRow.svelte": {
+          "1": "bfd8238a83f5bac6a23a0f3269f8630cc58a45ac6784e9ffdde809138c124614"
+        }
+      },
+      "notes": {
+        "1": "new: SettingsPage frame, SettingsRow, settings.css - flat first, multi-pane index of sub-pages when it grows (from Angel)"
+      },
+      "version": 1
+    },
     "share": {
       "current_files": [
         "lib/web-share.ts"
@@ -398,6 +420,7 @@
         "src/main.ts",
         "svelte.config.js",
         "tsconfig.json",
+        "ui/AccountMenu.svelte",
         "ui/Btn.svelte",
         "ui/Drawer.svelte",
         "ui/TopBar.svelte",
@@ -410,7 +433,8 @@
           "3": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
           "4": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
           "5": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
-          "6": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd"
+          "6": "c9b9310583dfc069362af90f13fabb524f2ebe6868c1b9a8940b748fb5e314cd",
+          "7": "15a79607f27022e527688ecf60747ac179b2682910fe99880018559a9aa41076"
         },
         "index.html": {
           "1": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
@@ -418,7 +442,8 @@
           "3": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
           "4": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
           "5": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
-          "6": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab"
+          "6": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab",
+          "7": "0c6dad3b6ab82b5778135f467321411d6ba7c9b699b3601df1cb5929b2059cab"
         },
         "package.json": {
           "1": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
@@ -426,7 +451,8 @@
           "3": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
           "4": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
           "5": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
-          "6": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387"
+          "6": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387",
+          "7": "bacaab7bcef5c8d2751f0c8c078b3423256c5395bb230ceb2ce6ce401a439387"
         },
         "src/App.svelte": {
           "1": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
@@ -434,7 +460,8 @@
           "3": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
           "4": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
           "5": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
-          "6": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c"
+          "6": "3f09089ffd8058fa6619e63225c6dc69c61dff271237d4c96e7c495f56817b0c",
+          "7": "4b95b9fac13c02dd8112926cf99548295b1e8db86fbbd471f406c1a8d90762b4"
         },
         "src/main.ts": {
           "1": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
@@ -442,7 +469,8 @@
           "3": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
           "4": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
           "5": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
-          "6": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd"
+          "6": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd",
+          "7": "80eeddca1a2004669bbc71afc451ff6e0c100737ec33d5c4ababafa372b060cd"
         },
         "svelte.config.js": {
           "1": "da1ed4002c530fc6103aa61120f0868cbdbc0e852e0c0c2688194fd82172557c",
@@ -450,7 +478,8 @@
           "3": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
           "4": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
           "5": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
-          "6": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b"
+          "6": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b",
+          "7": "813c5122fc839dc64ceab86821eea52a670fa979a69f0c6f4909a3326cc8a01b"
         },
         "tsconfig.json": {
           "1": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
@@ -458,7 +487,11 @@
           "3": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
           "4": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
           "5": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
-          "6": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0"
+          "6": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0",
+          "7": "e77c2e676bb9f059fd9687e052c6cb3a901faeb01f1cde41e2b8a1e72fc4b5b0"
+        },
+        "ui/AccountMenu.svelte": {
+          "7": "cdcfd4ff6759a8a2ffcc5bc9b42dcb1099dd24273785cebbe64a78313edcd30c"
         },
         "ui/Btn.svelte": {
           "1": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
@@ -466,7 +499,8 @@
           "3": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
           "4": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
           "5": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
-          "6": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869"
+          "6": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869",
+          "7": "4ad4ce1f3e9143ffdb8b632df650408e7c2db72d33efcc898a9675538482c869"
         },
         "ui/Drawer.svelte": {
           "1": "f9b049bb849ac1bf94edd58728c09cdc5ce19b229b7ef74a90b742689832acf1",
@@ -474,7 +508,8 @@
           "3": "f9b049bb849ac1bf94edd58728c09cdc5ce19b229b7ef74a90b742689832acf1",
           "4": "772087067bb78e6a188ea9d247dd4d45b0fe8ada8928d070ec039d3c496acaac",
           "5": "4dd2f88c7594ec0a17438b539ca5a4d815b6ff8886bf856f9993c0ed9ea8dbb5",
-          "6": "e6d94f7567cd6e6a81ce6528ca060273ec17c00088e3d2a20df75e2f100e0b6a"
+          "6": "e6d94f7567cd6e6a81ce6528ca060273ec17c00088e3d2a20df75e2f100e0b6a",
+          "7": "4f0f587792529eb44e9aea7db97f1aa1d73a240fce2750b8fd331086f62258dc"
         },
         "ui/TopBar.svelte": {
           "1": "2ba76b7f7bfa120d15a1485716eeb44e99a6c518d67d66cbe34dc3f14bec85e1",
@@ -482,7 +517,8 @@
           "3": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6",
           "4": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6",
           "5": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6",
-          "6": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6"
+          "6": "704afd57aafe232782daea65a945378e771e5237c1dd17fd7775748523a8d8c6",
+          "7": "1304a8f41fd850d865fce6ddffdd0e4143626d70f53299087c2bd1943518a7ad"
         },
         "vite.config.ts": {
           "1": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
@@ -490,7 +526,8 @@
           "3": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
           "4": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
           "5": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
-          "6": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64"
+          "6": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64",
+          "7": "6e4042c5df56dec74e9f20b14fde37024bb28df155bf33fba00451cabfddcf64"
         }
       },
       "notes": {
@@ -499,23 +536,46 @@
         "3": "TopBar trailing action (snippet + label + handler)",
         "4": "Drawer groups (titled sections) and count badges",
         "5": "Drawer groups: fix",
-        "6": "Drawer: nav list is the scroll region (flex:1, overflow-y auto) so a drawer taller than the screen scrolls while brand and footer stay pinned"
+        "6": "Drawer: nav list is the scroll region (flex:1, overflow-y auto) so a drawer taller than the screen scrolls while brand and footer stay pinned",
+        "7": "Drawer footer matches the brand band (--topbar-h), no drawer bottom padding, optional list snippet, --accent-text; AccountMenu (avatar + name, upward menu with Sign out); App template footer is one row; TopBar height from --topbar-h"
       },
-      "version": 6
+      "version": 7
     },
     "theme": {
       "current_files": [
-        "lib/theme.ts"
+        "lib/accent.ts",
+        "lib/appearance.svelte.ts",
+        "lib/appicon.ts",
+        "lib/theme.ts",
+        "ui/AccentPicker.svelte",
+        "ui/AppearancePicker.svelte"
       ],
       "files": {
+        "lib/accent.ts": {
+          "2": "88b56820d0b3a6aa20380c57fe7369f370638446bd748ef37078ec128f44306d"
+        },
+        "lib/appearance.svelte.ts": {
+          "2": "adf4ba9a31a9350ef8ee91146f93b9cc6998eb5038a93cb24bdeb2e78d16b538"
+        },
+        "lib/appicon.ts": {
+          "2": "12b9d076ecde3f3b923caaf7f117fa06f0434636633020f7e1a742a1ea96c61b"
+        },
         "lib/theme.ts": {
-          "1": "027d1a2f2a17c5849b2d1c18ed3a209895c677055f000e2f4eaf02463aa3df6e"
+          "1": "027d1a2f2a17c5849b2d1c18ed3a209895c677055f000e2f4eaf02463aa3df6e",
+          "2": "027d1a2f2a17c5849b2d1c18ed3a209895c677055f000e2f4eaf02463aa3df6e"
+        },
+        "ui/AccentPicker.svelte": {
+          "2": "39850c8e818cb102a4f5aa68bee7374a3dff2294d68587d584ad053ecd7e3c20"
+        },
+        "ui/AppearancePicker.svelte": {
+          "2": "33ac2abef4c3e9af9f2edfebb0efc6cc98edbe3b38fc55fd3ba232ef46061830"
         }
       },
       "notes": {
-        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)"
+        "1": "initial kit extraction (yaelfiner shared/, angel, glopus)",
+        "2": "v2 upgrade (optional): appearance mode rune, accent presets + custom picker, runtime app icon and manifest in the accent (from Angel)"
       },
-      "version": 1
+      "version": 2
     },
     "toast": {
       "current_files": [

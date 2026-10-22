@@ -1,4 +1,4 @@
-<!-- pwa-kit: shell/src/App.svelte v6 -->
+<!-- pwa-kit: shell/src/App.svelte v7 -->
 <script lang="ts">
   // Shell template: login gate, top bar, one scrolling body, drawer. Replace
   // the views; keep the structure. See reference/shell.md.
@@ -6,6 +6,7 @@
   import Drawer from '$shared/ui/Drawer.svelte'
   import Login from '$shared/ui/Login.svelte'
   import ResetButton from '$shared/ui/ResetButton.svelte'
+  import AccountMenu from '$shared/ui/AccountMenu.svelte'
   import { auth } from './lib/auth.svelte'
   import { router } from './lib/router.svelte'
 
@@ -46,16 +47,24 @@
     <strong>My App</strong>
   {/snippet}
   {#snippet footer()}
-    {#if auth.signedIn}
-      <div class="user">{auth.user?.name}</div>
-      <button class="auth-btn" onclick={() => auth.signOut()}>Sign out</button>
-    {/if}
-    <!-- The reload icon is the always-there escape hatch (forget the cached
-         app, load it fresh); it lights up when a new version is waiting. -->
-    <p class="build">
-      <span>Version {__BUILD__}</span>
+    <!-- One row, as tall as the brand band: who you are on the start side,
+         icon buttons on the end. The reload icon is the always-there escape
+         hatch (forget the cached app, load it fresh); it lights up when a new
+         version is waiting. Add a light/dark toggle and a settings gear here
+         when the app has them. -->
+    <div class="footer-row">
+      {#if auth.signedIn}
+        <AccountMenu name={auth.user?.name || auth.user?.email || ''} picture={auth.user?.picture || null} tabindex={menuOpen ? 0 : -1}>
+          {#snippet menu(close)}
+            <button role="menuitem" onclick={() => { close(); auth.signOut() }}>Sign out</button>
+            <p class="build">Version {__BUILD__}</p>
+          {/snippet}
+        </AccountMenu>
+      {:else}
+        <span class="build grow">Version {__BUILD__}</span>
+      {/if}
       <ResetButton tabindex={menuOpen ? 0 : -1} />
-    </p>
+    </div>
   {/snippet}
 </Drawer>
 
@@ -73,8 +82,7 @@
   @media (min-width: 768px) {
     .shell { margin-inline-start: min(78vw, 300px); }
   }
-  .user { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px; }
-  .auth-btn { font-size: 0.8rem; color: var(--accent); padding: 6px 0; }
-  .build { display: flex; align-items: center; gap: 6px; font-size: 0.65rem; color: var(--text-secondary); margin-top: 8px; }
-  .build span { opacity: 0.6; }
+  .footer-row { display: flex; align-items: center; gap: 4px; }
+  .build { padding: 6px 10px 4px; font-size: 0.7rem; color: var(--text-secondary); opacity: 0.7; }
+  .grow { flex: 1; padding: 0; }
 </style>

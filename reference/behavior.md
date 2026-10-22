@@ -62,13 +62,21 @@ Admin apps: `is_admin` column on users, middleware refuses non-admin sessions wi
 - Device preferences (dark mode): `localStorage` only, applied on boot
 - Identity settings (name, icon, theme color): server via `PATCH /api/config`, loaded after auth
 
-Dark mode toggle lives in the sidebar footer, not on the settings page.
+The one-tap dark mode toggle lives in the sidebar footer. With the theme v2 upgrade, the Theme settings page also offers light / dark / match device, sharing one rune with the toggle.
 
 ### Settings page structure
 
-White cards with rounded corners and subtle shadow. Each card has a header row in `0.875rem` weight-500 secondary text. Content sections stacked with `space-y` gap.
+Kit: `settings/` (SettingsPage frame, SettingsRow, settings.css).
 
-**Color picker:** 8-10 preset swatches as 32px circles (`border-2`, selected gets `border-gray-800 scale-110`), plus a custom swatch - dashed border circle with a hidden `<input type="color">` at `absolute inset-0 opacity-0`. Apply the color live on selection; save explicitly.
+**Start flat, grow into panes.** Early on, one `#/settings` page with a few `<section>`s (heading, one-line hint, control) is right. When it outgrows a phone screen, or one section needs its own sub-pages (a list of connections, each with a detail page), turn `#/settings` into an index of rows and move each section to `#/settings/<section>`. The frame and classes are the same in both shapes, so the move is cut-and-paste, not a redesign.
+
+- **Index rows summarize current state**, not contents: "Dark, teal", "2 connected, 1 needs attention", the chosen model. A row that says what is inside ("Model, voice, effort") is a fallback while loading. The summaries are what make the index feel finished.
+- Borderless rows with hairline separators and a chevron, not cards.
+- Mobile: the top bar carries the title and, on sub-pages, a back arrow to the parent route; the page hides its own heading. Desktop: the page shows the heading and a back link.
+- Typical sections: the app's own (domain settings), Theme (when people pick colours), Connections/Agents, Account (email, sign-out, delete my data, version).
+- **Changes with consequences are staged.** When a setting changes something the person can't easily undo or will notice (switching the model a companion runs on), picking it shows what it means and an explicit confirm button. On a fresh setup with nothing to disturb, apply at once.
+
+**Color picker:** kit `theme/` v2 (`AccentPicker`): 8 preset swatches as 32px circles plus a rainbow custom swatch over a hidden `<input type="color">`, clipped with `clip-path: circle(50%)`. Previews live while dragging, saves on close.
 
 **No toggle switches.** Every binary option is a button that changes its label and icon (e.g. "Dark mode" with moon icon toggles to "Light mode" with sun icon). This is simpler and already the house style.
 

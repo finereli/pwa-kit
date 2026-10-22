@@ -1,4 +1,4 @@
-<!-- pwa-kit: shell/ui/Drawer.svelte v6 -->
+<!-- pwa-kit: shell/ui/Drawer.svelte v7 -->
 <script lang="ts">
   import type { Snippet } from 'svelte'
   // Slide-in navigation drawer that becomes a permanent sidebar on desktop
@@ -9,13 +9,17 @@
   // Props: open, onclose, entries [{ label, hash, current, count? }] for a
   // flat list, or groups [{ title?, entries }] for titled sections (an admin
   // with פרסום / תוכן / אנשים); `count` draws a small badge. brand snippet
-  // (logo + name), footer snippet (user row, sign-out, build line with
-  // ResetButton). Seams: closeLabel, width.
+  // (logo + name), footer snippet: one row, the same height as the brand band -
+  // AccountMenu (avatar + name, opens Sign out and friends) on the start side,
+  // icon buttons on the end (ResetButton, light/dark, settings). Seams:
+  // closeLabel, width.
   export interface DrawerEntry { label: string; hash: string; current?: boolean; count?: number }
   export interface DrawerGroup { title?: string; entries: DrawerEntry[] }
-  let { open = false, onclose, entries = [], groups, brand, footer, closeLabel = 'Close menu' }: {
+  // `list` replaces the generated entries, for a list that needs its own rows
+  // (labels with actions, per-row menus).
+  let { open = false, onclose, entries = [], groups, brand, list, footer, closeLabel = 'Close menu' }: {
     open?: boolean; onclose?: () => void; entries?: DrawerEntry[]; groups?: DrawerGroup[]
-    brand?: Snippet; footer?: Snippet; closeLabel?: string
+    brand?: Snippet; list?: Snippet; footer?: Snippet; closeLabel?: string
   } = $props()
   const sections = $derived(groups ?? [{ entries }])
 
@@ -34,20 +38,24 @@
     <div class="brand">{@render brand()}</div>
   {/if}
 
-  <ul>
-    {#each sections as g, i}
-      {#if i > 0}<li class="separator"></li>{/if}
-      {#if g.title}<li class="section-label">{g.title}</li>{/if}
-      {#each g.entries as e}
-        <li>
-          <button class:current={e.current} onclick={() => go(e.hash)} tabindex={open ? 0 : -1}>
-            {e.label}
-            {#if e.count}<span class="count">{e.count}</span>{/if}
-          </button>
-        </li>
+  {#if list}
+    <div class="list">{@render list()}</div>
+  {:else}
+    <ul>
+      {#each sections as g, i}
+        {#if i > 0}<li class="separator"></li>{/if}
+        {#if g.title}<li class="section-label">{g.title}</li>{/if}
+        {#each g.entries as e}
+          <li>
+            <button class:current={e.current} onclick={() => go(e.hash)} tabindex={open ? 0 : -1}>
+              {e.label}
+              {#if e.count}<span class="count">{e.count}</span>{/if}
+            </button>
+          </li>
+        {/each}
       {/each}
-    {/each}
-  </ul>
+    </ul>
+  {/if}
 
   {#if footer}
     <div class="footer">{@render footer()}</div>
@@ -78,7 +86,9 @@
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.18);
     display: flex;
     flex-direction: column;
-    padding: calc(var(--safe-top) + 22px) 0 calc(var(--safe-bottom) + 22px);
+    /* No bottom padding: the footer carries the safe area, so it can match the
+       brand band's height. */
+    padding: 0;
     /* Hidden off the start edge. transform isn't direction-aware, so branch
        on the document direction. */
     transform: translateX(-100%);
@@ -97,8 +107,19 @@
   }
 
   .brand {
-    padding: 0 22px 20px;
+    height: calc(var(--safe-top) + var(--topbar-h));
+    display: flex;
+    align-items: center;
+    padding: var(--safe-top) var(--gutter) 0;
     border-bottom: 1px solid var(--border);
+  }
+  .drawer { --gutter: 22px; }
+  .list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 14px 0;
   }
 
   /* The nav list is the scroll region: a drawer taller than the screen
@@ -114,7 +135,7 @@
   .section-label {
     font-size: 0.7rem;
     font-weight: 600;
-    color: var(--accent);
+    color: var(--accent-text);
     letter-spacing: 0.05em;
     padding: 4px 14px 2px;
   }
@@ -138,13 +159,13 @@
   ul button:hover { background: var(--bg-hover); }
   ul button.current {
     background: var(--bg-hover);
-    color: var(--accent-deep);
+    color: var(--accent-text);
     font-weight: 500;
   }
   .count {
     font-size: 0.7rem;
     font-weight: 600;
-    color: var(--accent);
+    color: var(--accent-text);
     background: var(--accent-soft, var(--bg-hover));
     padding: 1px 7px;
     border-radius: 99px;
@@ -152,9 +173,16 @@
     text-align: center;
   }
 
+  /* The same height as the brand band (and the top bar), so the sidebar's top
+     and bottom edges balance. One row: the account button and icon buttons. */
   .footer {
     margin-top: auto;
-    padding: 16px 22px;
+    flex-shrink: 0;
+    height: calc(var(--topbar-h) + var(--safe-bottom));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 var(--gutter) var(--safe-bottom);
     border-top: 1px solid var(--border);
   }
 </style>
