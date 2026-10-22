@@ -2,6 +2,23 @@
 
 A Claude Code skill for building mobile web apps that feel native: installable, fast to open, and free of the small wrongnesses that give a web app away. It's what I use to build all my apps, and it's how they stay consistent with each other without sharing a line of code at runtime.
 
+<table>
+  <tr>
+    <td><img src="docs/screenshots/notime.png" alt="notime: a feed of short posts" width="200"></td>
+    <td><img src="docs/screenshots/accountant.png" alt="Accountant: a cash forecast, figures blurred" width="200"></td>
+    <td><img src="docs/screenshots/100shots.png" alt="100 Shots: habit cards counting down from 100" width="200"></td>
+    <td><img src="docs/screenshots/yael-admin.png" alt="A meditation app's admin, in Hebrew" width="200"></td>
+  </tr>
+  <tr>
+    <td align="center">notime</td>
+    <td align="center">Accountant</td>
+    <td align="center">100 Shots</td>
+    <td align="center">Meditation admin (RTL)</td>
+  </tr>
+</table>
+
+Four apps built on the kit. They look different on purpose. What they share is how they behave.
+
 The unusual thing about it is what gets reused. It isn't mainly a component library. The reusable part is a spec, a set of documents that say how an app shell should behave, what an update should feel like, when a setting saves, what the Enter key does on a phone. Code is there only where prose isn't precise enough. A service worker update flow, an autosave race, the iOS keyboard pushing the page around - these took several tries to get right, so the kit keeps the version that works, with comments at the places where the obvious approach failed.
 
 That changes how the code gets reused. A library is made generic so you never have to edit it, because editing used to be expensive. Now an agent edits code almost for free, and what's expensive is getting it right. So kit files are copied into each app and adapted there. Each copy carries a header like `pwa-kit: shell/ui/Drawer.svelte v11`, and a small script compares an app's copies with the kit. That tells you, for any file, whether the kit has moved on, whether the app changed it, or both.
