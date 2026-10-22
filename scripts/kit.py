@@ -184,7 +184,7 @@ def cmd_check():
                 print(f'HASH    {item}/{rel}: file changed since v{v} was recorded (run: kit.py bump {item})')
                 bad += 1
     for item in sorted(os.listdir(KIT)):
-        if os.path.isdir(os.path.join(KIT, item)) and item not in m['items']:
+        if os.path.isdir(os.path.join(KIT, item)) and item not in m['items'] and item not in SKIP_DIRS:
             print(f'UNBUMPED {item}: directory exists but not in manifest (run: kit.py bump {item})')
             bad += 1
     print('ok' if not bad else f'{bad} problem(s)')
