@@ -1,4 +1,4 @@
-<!-- pwa-kit: shell/src/App.svelte v12 -->
+<!-- pwa-kit: shell/src/App.svelte v13 -->
 <script lang="ts">
   // Shell template: login gate, top bar, one scrolling body, drawer. Replace
   // the views; keep the structure. See reference/shell.md.
@@ -48,14 +48,14 @@
   {/snippet}
   {#snippet footer()}
     <!-- One row, as tall as the brand band: who you are on the start side,
-         small icons on the end. With dark mode, the one-tap light/dark icon
-         comes first (moon in light, sun in dark: appearance.toggle(), kit
-         theme); the three-way picker belongs on a settings page. Then the
-         version, small, right beside the reload icon: that is where someone
-         looks when you ask which version they're on, and where the reload
-         that fixes it is. The reload icon is the always-there escape hatch
-         (forget the cached app, load it fresh); it lights up when a new
-         version is waiting. A settings gear goes last when the app has one. -->
+         small icons on the end in this order: light/dark (one tap, moon in
+         light, sun in dark: appearance.toggle(), kit theme; the three-way
+         picker belongs on a settings page), the settings gear, the reload
+         icon, the version. Add the first two when the app has them. The
+         reload icon is the always-there escape hatch (forget the cached app,
+         load it fresh); it lights up when a new version is waiting. The
+         version closes the row right after it: that is where someone looks
+         when you ask which version they're on. -->
     <div class="footer-row">
       {#if auth.signedIn}
         <AccountMenu name={auth.user?.name || auth.user?.email || ''} picture={auth.user?.picture || null} tabindex={menuOpen ? 0 : -1}>
@@ -66,8 +66,8 @@
       {:else}
         <span class="grow"></span>
       {/if}
-      <span class="build">v{__BUILD__}</span>
       <ResetButton tabindex={menuOpen ? 0 : -1} />
+      <span class="build">v{__BUILD__}</span>
     </div>
   {/snippet}
 </Drawer>

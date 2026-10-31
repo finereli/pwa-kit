@@ -1,4 +1,4 @@
-<!-- pwa-kit: shell/ui/Btn.svelte v13 -->
+<!-- pwa-kit: shell/ui/Btn.svelte v14 -->
 <script lang="ts">
   import type { Snippet } from 'svelte'
   // The button. Variants: primary (solid accent), outline, ghost, danger,
