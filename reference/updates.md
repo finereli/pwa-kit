@@ -39,7 +39,7 @@ Two, always:
 
 ## Versions
 
-Show a version at the bottom of the drawer: `MAJOR.<build>`, where the build is the total git commit count, baked in at build time as `__BUILD__` (CI checks out full history for this: `fetch-depth: 0`). It counts up by itself and never needs deciding. `MAJOR` is a constant, bumped by hand only for a rewrite. Nobody consumes it; it is a label a user can read back to you.
+Show a version at the bottom of the drawer, small, right beside the reload icon (`v1.40`; see shell.md → Sidebar for the footer order): `MAJOR.<build>`, where the build is the total git commit count, baked in at build time as `__BUILD__` (CI checks out full history for this: `fetch-depth: 0`). It counts up by itself and never needs deciding. `MAJOR` is a constant, bumped by hand only for a rewrite. Nobody consumes it; it is a label a user can read back to you.
 
 `BUILD_NUMBER=<n>` overrides the count. That is how you exercise the flow locally: build twice with different numbers, serve `dist/` with `wrangler pages dev`, swap builds under the running page, watch the drawer.
 

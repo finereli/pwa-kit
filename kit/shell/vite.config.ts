@@ -1,4 +1,4 @@
-// pwa-kit: shell/vite.config.ts v11
+// pwa-kit: shell/vite.config.ts v12
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'

@@ -15,7 +15,7 @@ Dark mode applied before first paint (copy the inline `<script>` from the header
 | `lib/appicon.ts` | `shared/lib/` - redraws the app icon in the accent and swaps favicon, apple-touch-icon and the manifest |
 | `ui/AppearancePicker.svelte`, `ui/AccentPicker.svelte` | `shared/ui/` |
 
-Wiring: `main.ts` calls `setAccent(storedAccent())` before mount. When the user's saved accent arrives from the server, `setAccent(saved)` (an `$effect` in App). Set `appearance.accent = () => saved ?? storedAccent()` so a light/dark switch re-derives the accent for the new mode. A Theme page (a `settings` sub-page) holds both pickers; the sidebar footer keeps a one-tap light/dark icon that calls `appearance.toggle()`.
+Wiring: `main.ts` calls `setAccent(storedAccent())` before mount. When the user's saved accent arrives from the server, `setAccent(saved)` (an `$effect` in App). Set `appearance.accent = () => saved ?? storedAccent()` so a light/dark switch re-derives the accent for the new mode. A Theme page (a `settings` sub-page) holds both pickers; the sidebar footer keeps a one-tap light/dark icon that calls `appearance.toggle()`, before the version and the reload icon. The icon is the drawer's only theme control; the three-way picker never goes in the drawer.
 
 ### Decisions
 

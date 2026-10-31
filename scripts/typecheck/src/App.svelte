@@ -48,21 +48,25 @@
   {/snippet}
   {#snippet footer()}
     <!-- One row, as tall as the brand band: who you are on the start side,
-         icon buttons on the end. The reload icon is the always-there escape
-         hatch (forget the cached app, load it fresh); it lights up when a new
-         version is waiting. Add a light/dark toggle and a settings gear here
-         when the app has them. -->
+         small icons on the end. With dark mode, the one-tap light/dark icon
+         comes first (moon in light, sun in dark: appearance.toggle(), kit
+         theme); the three-way picker belongs on a settings page. Then the
+         version, small, right beside the reload icon: that is where someone
+         looks when you ask which version they're on, and where the reload
+         that fixes it is. The reload icon is the always-there escape hatch
+         (forget the cached app, load it fresh); it lights up when a new
+         version is waiting. A settings gear goes last when the app has one. -->
     <div class="footer-row">
       {#if auth.signedIn}
         <AccountMenu name={auth.user?.name || auth.user?.email || ''} picture={auth.user?.picture || null} tabindex={menuOpen ? 0 : -1}>
           {#snippet menu(close)}
             <button role="menuitem" onclick={() => { close(); auth.signOut() }}>Sign out</button>
-            <p class="build">Version {__BUILD__}</p>
           {/snippet}
         </AccountMenu>
       {:else}
-        <span class="build grow">Version {__BUILD__}</span>
+        <span class="grow"></span>
       {/if}
+      <span class="build">v{__BUILD__}</span>
       <ResetButton tabindex={menuOpen ? 0 : -1} />
     </div>
   {/snippet}
@@ -83,6 +87,6 @@
     .shell { margin-inline-start: min(78vw, 300px); }
   }
   .footer-row { display: flex; align-items: center; gap: 4px; }
-  .build { padding: 6px 10px 4px; font-size: 0.7rem; color: var(--text-secondary); opacity: 0.7; }
-  .grow { flex: 1; padding: 0; }
+  .build { font-size: 0.7rem; color: var(--text-secondary); opacity: 0.7; font-variant-numeric: tabular-nums; margin-inline-start: 4px; }
+  .grow { flex: 1; }
 </style>
