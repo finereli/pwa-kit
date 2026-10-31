@@ -1,4 +1,4 @@
-// pwa-kit: push/functions/push-routes.ts v1
+// pwa-kit: push/functions/push-routes.ts v2
 // The server side of a device's subscription, as one function a Worker or a
 // Pages Function calls before its other routes:
 //

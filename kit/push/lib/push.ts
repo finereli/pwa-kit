@@ -1,4 +1,4 @@
-// pwa-kit: push/lib/push.ts v1
+// pwa-kit: push/lib/push.ts v2
 // Push on this device: its state for Settings, turning it on and off, and
 // keeping it on. Pass the app's apiJson (kit api/) and a localStorage key:
 //
