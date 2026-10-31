@@ -1,4 +1,4 @@
-// pwa-kit: updates/lib/updates.svelte.ts v5
+// pwa-kit: updates/lib/updates.svelte.ts v6
 // Version-update flow for an installable PWA (spec: reference/updates.md).
 //
 // The service worker takes over as soon as it has downloaded (skipWaiting +

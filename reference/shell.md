@@ -54,7 +54,6 @@ Use them in: top bars (`padding-top: calc(var(--safe-top) + 6px)`), bottom-docke
 {
   "display": "standalone",
   "background_color": "<surface-color>",
-  "theme_color": "<accent-color>",
   "icons": [
     { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
@@ -70,7 +69,9 @@ Use them in: top bars (`padding-top: calc(var(--safe-top) + 6px)`), bottom-docke
 - **Generate them all from one source** (an SVG of the mark, or its polygons) with a small script in the repo, so a size change is one number. Only the tab favicon (`favicon.svg`) keeps rounded corners.
 - **An icon in the user's colour** is the `theme` kit's v2 upgrade (`appicon.ts`): drawn at runtime and swapped into the favicon, apple-touch-icon and a blob manifest. It works for installs made after the pick; an installed app keeps its old icon.
 
-`background_color` is not just the splash screen. Android (seen on Samsung OneUI with 3-button navigation, 2026) paints it behind the system navigation bar for the life of the app, so it must be the color the app's page actually is, or a light strip sits under a dark app. The manifest has one color, so pick the theme the owner uses: a dark app (or a dark-by-default one) gets its dark `--bg-surface`. `theme_color` only colors the status bar. The installed app keeps the colors it was installed with until Chrome refreshes the WebAPK (up to about a day); uninstall and reinstall to see a change at once.
+**No `theme_color` in the manifest.** An installed Android app paints its system navigation bar with the manifest's `theme_color`, and the manifest has one value with no dark variant (Chrome's `dark_theme_color` experiment is no longer parsed). So an accent there is a coloured bar under the dark theme, and a dark surface there is a dark bar under the light one. Left out, the navigation bar takes the phone's own light/dark default, which looks right in both. The status bar still follows the page's `theme-color` meta, which the app switches with its theme. Seen on Samsung OneUI with 3-button navigation, Chrome, Oct 2026: notime and 100 Shots had set `theme_color` to the dark surface as a workaround; Emotion Stack dropped it and the bar followed the phone. (Older notes said `background_color` was behind the bar; on that phone it was `theme_color`.)
+
+vite-plugin-pwa fills in its own green when `theme_color` is missing, so the kit's `pwaOptions` passes `theme_color: undefined` explicitly; its "will not be able to be installed" warning is wrong for Chrome, which doesn't require the field. `background_color` is the splash screen: the page colour of the theme the owner uses. The installed app keeps the manifest it was installed with until Chrome refreshes the WebAPK (up to about a day); uninstall and reinstall to see a change at once.
 
 ### Service worker
 

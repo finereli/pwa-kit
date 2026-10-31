@@ -1,4 +1,4 @@
-// pwa-kit: shell/vite.config.ts v11
+// pwa-kit: shell/vite.config.ts v12
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
@@ -31,10 +31,11 @@ export default defineConfig({
           scope: '/',
           display: 'standalone',
           orientation: 'portrait',
-          // The page color (--bg-surface) of the theme the owner uses: Android
-          // paints it behind the navigation bar, not only on the splash.
+          // The splash screen: the page colour (--bg-surface) of the theme the
+          // owner uses. No theme_color: Android paints the navigation bar with
+          // it, one colour for light and dark; without it the bar follows the
+          // phone (reference/shell.md -> Manifest). pwaOptions keeps it out.
           background_color: '#faf6f0',
-          theme_color: '#3d5a40',
           icons: [
             { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
             { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' },

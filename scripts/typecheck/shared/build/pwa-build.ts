@@ -80,7 +80,12 @@ export function pwaOptions({
     registerType: 'autoUpdate' as const,
     injectRegister: null,
     includeAssets,
-    manifest,
+    // theme_color stays out of the manifest unless the app sets one: an
+    // installed Android app paints its navigation bar with it, a single
+    // colour for both themes, while without it the bar follows the phone.
+    // Explicit undefined, because vite-plugin-pwa otherwise fills in its own
+    // green (and warns the app can't be installed; Chrome doesn't need it).
+    manifest: { ...manifest, theme_color: manifest.theme_color },
     workbox: {
       globPatterns,
       maximumFileSizeToCacheInBytes: maxFileSizeMB * 1024 * 1024,

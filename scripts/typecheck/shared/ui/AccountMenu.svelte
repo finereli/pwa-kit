@@ -1,4 +1,4 @@
-<!-- pwa-kit: shell/ui/AccountMenu.svelte v11 -->
+<!-- pwa-kit: shell/ui/AccountMenu.svelte v12 -->
 <script lang="ts">
   import type { Snippet } from 'svelte'
   // The account button at the start of the drawer footer: avatar (or an
