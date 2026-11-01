@@ -1,4 +1,4 @@
--- pwa-kit: push/db/push.sql v2
+-- pwa-kit: push/db/push.sql v3
 -- One row per device that turned push on. Rows the push service reports as
 -- gone (404/410) are deleted by fanOut.
 CREATE TABLE push_subs (

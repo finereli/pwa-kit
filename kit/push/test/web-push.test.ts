@@ -1,4 +1,4 @@
-// pwa-kit: push/test/web-push.test.ts v2
+// pwa-kit: push/test/web-push.test.ts v3
 // The two halves that are easy to get subtly wrong, checked against the
 // other side: the browser's decryption of an RFC 8291 message, and a
 // verifier's check of the VAPID signature. Run with vitest from the app
