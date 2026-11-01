@@ -13,7 +13,7 @@ The kit's `push/` item is all of this as code (server, routes, client, service w
 
 ### Service worker handler
 
-Parse `event.data.json()` with a text fallback. Include `badge: '/badge-72.png'` (72px monochrome glyph for Android status bar - easy to forget) and `vibrate: [200, 100, 200]`. Leave out `icon`: Android already shows the app's icon on the left and draws `icon` again as a thumbnail on the right, which takes the room the message needs. The message is what people read, two lines at most (about 48 characters on a Samsung) before it's cut off, so write short, complete messages; the title barely shows.
+Parse `event.data.json()` with a text fallback. Include `badge: '/badge-72.png'` (72px monochrome glyph for Android status bar - easy to forget) and `vibrate: [200, 100, 200]`. Keep `icon: '/icon-192.png'`: Android puts a thumbnail on the right of every web notification, and without an icon Chrome fills it with a grey letter. That thumbnail can't be removed, so the room for the message is fixed. The message is what people read, two lines at most (about 48 characters on a Samsung) before it's cut off, so write short, complete messages; the title barely shows.
 
 On `notificationclick`: find an existing window with `clients.matchAll()` and focus it, or `clients.openWindow()`. Deep-link via `/?chat=<id>`, consumed on boot then cleaned with `history.replaceState`.
 

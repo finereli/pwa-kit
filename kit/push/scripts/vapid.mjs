@@ -1,4 +1,4 @@
-// pwa-kit: push/scripts/vapid.mjs v3
+// pwa-kit: push/scripts/vapid.mjs v4
 // Make the VAPID key pair that signs this app's push messages. Run once and
 // put the three lines in the app's secrets. Never regenerate them for an app
 // that has subscribers: every subscription is bound to the public key, and a

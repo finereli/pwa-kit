@@ -375,45 +375,53 @@
         "db/push.sql": {
           "1": "ac21c0349e2ed2dabb32aa53160ed218a8a2195df2c152c21da4fe082ee8cc58",
           "2": "ac21c0349e2ed2dabb32aa53160ed218a8a2195df2c152c21da4fe082ee8cc58",
-          "3": "ac21c0349e2ed2dabb32aa53160ed218a8a2195df2c152c21da4fe082ee8cc58"
+          "3": "ac21c0349e2ed2dabb32aa53160ed218a8a2195df2c152c21da4fe082ee8cc58",
+          "4": "ac21c0349e2ed2dabb32aa53160ed218a8a2195df2c152c21da4fe082ee8cc58"
         },
         "functions/push-routes.ts": {
           "1": "0ba3550e755b0e57b8384b86d2ada672e0415ec9b47b2f7be65df724339c1600",
           "2": "0ba3550e755b0e57b8384b86d2ada672e0415ec9b47b2f7be65df724339c1600",
-          "3": "0ba3550e755b0e57b8384b86d2ada672e0415ec9b47b2f7be65df724339c1600"
+          "3": "0ba3550e755b0e57b8384b86d2ada672e0415ec9b47b2f7be65df724339c1600",
+          "4": "0ba3550e755b0e57b8384b86d2ada672e0415ec9b47b2f7be65df724339c1600"
         },
         "functions/web-push.ts": {
           "1": "60477adb1b2b7b976ac65a84d9d87c68729ee364f098686f19bcb4bac6438825",
           "2": "60477adb1b2b7b976ac65a84d9d87c68729ee364f098686f19bcb4bac6438825",
-          "3": "60477adb1b2b7b976ac65a84d9d87c68729ee364f098686f19bcb4bac6438825"
+          "3": "60477adb1b2b7b976ac65a84d9d87c68729ee364f098686f19bcb4bac6438825",
+          "4": "60477adb1b2b7b976ac65a84d9d87c68729ee364f098686f19bcb4bac6438825"
         },
         "lib/push.ts": {
           "1": "b63ce91091259618498bdc6b2dcdc87e77cd25cb262adf819f5e9ef8a0ab1ac0",
           "2": "b63ce91091259618498bdc6b2dcdc87e77cd25cb262adf819f5e9ef8a0ab1ac0",
-          "3": "b63ce91091259618498bdc6b2dcdc87e77cd25cb262adf819f5e9ef8a0ab1ac0"
+          "3": "b63ce91091259618498bdc6b2dcdc87e77cd25cb262adf819f5e9ef8a0ab1ac0",
+          "4": "b63ce91091259618498bdc6b2dcdc87e77cd25cb262adf819f5e9ef8a0ab1ac0"
         },
         "public/push-sw.js": {
           "1": "5e8a4ba2380383ab19ffe79dc49adc9c1bb7037a867dc529a7c908743f32e9d0",
           "2": "5e8a4ba2380383ab19ffe79dc49adc9c1bb7037a867dc529a7c908743f32e9d0",
-          "3": "5e27c280cc381a5a572f891b3926fb596612d385699e7d69fa9721de12e7a803"
+          "3": "5e27c280cc381a5a572f891b3926fb596612d385699e7d69fa9721de12e7a803",
+          "4": "be21f455b2f5deb24cb7cdd77e3e4c5ca23a90562818c18d8e2ed714dbb3ec6a"
         },
         "scripts/vapid.mjs": {
           "1": "8f2fef416c6d78e9e60062b9b62f95dfb50f52036f20adc1894b18f906da52b7",
           "2": "8f2fef416c6d78e9e60062b9b62f95dfb50f52036f20adc1894b18f906da52b7",
-          "3": "8f2fef416c6d78e9e60062b9b62f95dfb50f52036f20adc1894b18f906da52b7"
+          "3": "8f2fef416c6d78e9e60062b9b62f95dfb50f52036f20adc1894b18f906da52b7",
+          "4": "8f2fef416c6d78e9e60062b9b62f95dfb50f52036f20adc1894b18f906da52b7"
         },
         "test/web-push.test.ts": {
           "1": "71cde17d2f7d23c4778d23aa12c4dcc872eb9a18b8a742a006e7910c49fa317c",
           "2": "71cde17d2f7d23c4778d23aa12c4dcc872eb9a18b8a742a006e7910c49fa317c",
-          "3": "71cde17d2f7d23c4778d23aa12c4dcc872eb9a18b8a742a006e7910c49fa317c"
+          "3": "71cde17d2f7d23c4778d23aa12c4dcc872eb9a18b8a742a006e7910c49fa317c",
+          "4": "71cde17d2f7d23c4778d23aa12c4dcc872eb9a18b8a742a006e7910c49fa317c"
         }
       },
       "notes": {
         "1": "initial extraction from notime: web-push on WebCrypto, push routes with renew, makePush client with keepPush, SW handlers incl. pushsubscriptionchange, schema, vapid script, test",
         "2": "vapid.mjs: the header line was '#', which isn't JavaScript, so the script crashed on its first line. Now '//' like every other .mjs (found setting up Stack's reminders).",
-        "3": "push-sw.js: no notification icon. Android shows the app icon on the left anyway; icon added a second one on the right and cost the message its room (found on Stack's reminders, Samsung)."
+        "3": "push-sw.js: no notification icon. Android shows the app icon on the left anyway; icon added a second one on the right and cost the message its room (found on Stack's reminders, Samsung).",
+        "4": "push-sw.js: icon back. Without it Chrome draws a grey letter in the same spot on the right, so dropping it (v3) gained no room."
       },
-      "version": 3
+      "version": 4
     },
     "remote-log": {
       "current_files": [

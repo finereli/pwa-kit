@@ -1,4 +1,4 @@
-// pwa-kit: push/public/push-sw.js v3
+// pwa-kit: push/public/push-sw.js v4
 // Imported by the generated service worker: in vite.config's pwaOptions,
 //   workbox: { importScripts: ['/push-sw.js'], globIgnores: [..., '**/push-sw.js'] }
 // The browser byte-checks imported scripts on every update check, so a change
@@ -10,9 +10,9 @@
 // hash route works); unread sets the app badge. Seam: the badge path below
 // (a 72px monochrome glyph, Android's status bar).
 //
-// No `icon`: Android already shows the app's icon on the left, and an `icon`
-// is drawn again as a thumbnail on the right, taking the room the message
-// needs (Samsung cut a two-line message off at about 48 characters).
+// Keep `icon`: Android draws a thumbnail on the right of every web
+// notification. Without an icon Chrome fills it with a grey letter (tried on
+// Stack, Samsung, Nov 2026), so the app icon is the better of the two.
 
 self.addEventListener('push', (event) => {
   let data = {}
@@ -25,6 +25,7 @@ self.addEventListener('push', (event) => {
     (async () => {
       await self.registration.showNotification(data.title || 'notime', {
         body: data.body || '',
+        icon: '/icons/icon-192.png',
         badge: '/icons/badge-72.png',
         tag: data.tag,
         data: { url: data.url || '/' },
