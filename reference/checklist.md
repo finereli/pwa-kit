@@ -19,7 +19,7 @@ Before shipping a PWA, verify:
 - [ ] Apple + mobile-web-app meta tags, apple-touch-icon
 - [ ] theme-color meta (dynamic if the app has dark mode)
 - [ ] Manifest with proper icons including maskable
-- [ ] Manifest has no `theme_color` (Android paints the navigation bar with it, one colour for both themes; without it the bar follows the phone), and `background_color` is the page colour for the splash
+- [ ] Manifest `theme_color` is the dark surface (Android bakes it into the installed app and paints the navigation bar with it; leaving it out makes Chrome install a badged shortcut instead), and `background_color` is the page colour for the splash
 - [ ] Update flow verified with two builds (kit `updates/README.md` recipe)
 - [ ] `canReload` veto wired for the app's sensitive moment (audio, upload, stream)
 - [ ] Reload icon + build number in the drawer; `/reset.html` reachable past the worker
