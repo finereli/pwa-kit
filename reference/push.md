@@ -13,7 +13,7 @@ The kit's `push/` item is all of this as code (server, routes, client, service w
 
 ### Service worker handler
 
-Parse `event.data.json()` with a text fallback. Include `badge: '/badge-72.png'` (72px monochrome glyph for Android status bar - easy to forget) and `vibrate: [200, 100, 200]`. Keep `icon: '/icon-192.png'`: Android puts a thumbnail on the right of every web notification, and without an icon Chrome fills it with a grey letter. That thumbnail can't be removed, so the room for the message is fixed. The message is what people read, two lines at most (about 48 characters on a Samsung) before it's cut off, so write short, complete messages; the title barely shows.
+Parse `event.data.json()` with a text fallback. Include `badge: '/badge-72.png'` (72px monochrome glyph for Android status bar - easy to forget) and `vibrate: [200, 100, 200]`. Android puts a thumbnail on the right of every web notification and reserves its space; without an `icon` Chrome fills it with a grey letter. A fully transparent 192px PNG as `icon` leaves it empty, so only the app icon on the left shows (Stack, Samsung, Nov 2026) - but the message doesn't get wider. Or use that spot for a picture that means something (a rising sun for a morning reminder). Chrome also always adds the site's address next to the title. The message is what people read, two lines at most (about 48 characters on a Samsung) before it's cut off, so write short, complete messages; the title barely shows.
 
 On `notificationclick`: find an existing window with `clients.matchAll()` and focus it, or `clients.openWindow()`. Deep-link via `/?chat=<id>`, consumed on boot then cleaned with `history.replaceState`.
 
