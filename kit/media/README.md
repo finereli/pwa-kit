@@ -4,7 +4,7 @@ The playback engine: one `<audio>` owns everything, muted video follows its cloc
 
 ## Files
 
-`lib/player.svelte.ts`, `lib/progress.ts` → `shared/lib/`. App: `export const player = new Player({ audioUrl, artist, artwork, beforePlay, onEnded })` in `src/lib/player.svelte.ts`; `player.init()` once; `visibilitychange` → `player.resync()`; `pagehide` → `player.flush()`; `updates.init({ canReload: () => !player.playing })`. Video items: `<video muted playsinline>` with `attachVideo`/`detachVideo`.
+`lib/player.svelte.ts`, `lib/progress.ts` → `shared/lib/`. App: `export const player = new Player({ audioUrl, artist, artwork, beforePlay, onEnded })` in `src/lib/player.svelte.ts`; `player.init()` once; `visibilitychange` → `player.resync()`; `pagehide` → `player.flush()`; `updates.init({ canReload: () => !player.playing })` - but see updates/README: a player paused from the Android notification must also veto, or the reload strands the notification. Video items: `<video muted playsinline>` with `attachVideo`/`detachVideo`.
 
 ## Decisions baked in
 
