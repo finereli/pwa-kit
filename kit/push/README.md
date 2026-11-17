@@ -9,6 +9,7 @@ Web push for a PWA on Cloudflare: turning it on per device, sending from a Worke
 | `functions/web-push.ts` | `shared/functions/` (or the Worker's dir) | RFC 8291 encryption + RFC 8292 VAPID on WebCrypto; `fanOut(db, payload, env)` sends to every device and deletes the gone ones |
 | `functions/push-routes.ts` | next to it | `pushRoutes({ request, url, db, vapid, signedIn })`: key, subscribe, unsubscribe, test, renew. Returns `null` for other paths |
 | `lib/push.ts` | `shared/lib/` | `makePush({ apiJson, storageKey })`: `pushState`, `enablePush`, `disablePush`, `keepPush`, `testPush` |
+| `ui/PushBanner.svelte` | `shared/ui/` | the notifications ask: the install card's twin, from the top; shows only while push is off here, after engagement, never beside another ask; dismissed, back once a week later. Needs the icons kit (notifications, close) |
 | `public/push-sw.js` | `public/` | the service worker half: `push`, `notificationclick`, `pushsubscriptionchange` |
 | `db/push.sql` | a migration | the `push_subs` table |
 | `scripts/vapid.mjs` | run once | prints the key pair and subject for the app's secrets |
@@ -18,6 +19,7 @@ Wiring, beyond copying:
 
 - vite.config, in `pwaOptions`: `workbox: { importScripts: ['/push-sw.js'], globIgnores: ['**/node_modules/**/*', '**/reset.html', '**/push-sw.js'] }`. The worker imports the file; it is not precached, so a change to it rides the update flow.
 - In the app: `export const push = makePush({ apiJson, storageKey: '<app>.push.v1' })`, call `push.keepPush()` on launch once signed in (and again on sign-in), and give Settings a toggle (`enablePush`/`disablePush`, words per `pushState()`) and a "Send a test" button.
+- The ask: `<PushBanner {push} storageKey="<app>.pushask.v1" when={engaged && !installShowing} text="<why you'd notify>" />` (reference/behavior.md, Asks).
 - On the server, before the other routes: `const r = await pushRoutes({ ... }); if (r) return r`. Renew must be reachable without a session.
 - Secrets: `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT`.
 

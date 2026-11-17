@@ -193,9 +193,19 @@ if (window.matchMedia('(display-mode: standalone)').matches) {
 }
 ```
 
-## Install prompts
+## Asks: install and notifications
 
-Kit: `install/` (InstallBanner) plus the inline capture in `shell/index.html`.
+Kit: `install/` (InstallBanner) plus the inline capture in `shell/index.html`; `push/` (PushBanner).
+
+The two things an app asks of a person, beyond signing in, are to install it and to let it notify them. Both are small cards that drop in from the top, just under the top bar, never modals. The top is free in most layouts (a composer, a player or a tab bar owns the bottom), and it's where the eye starts.
+
+- **Earn it first.** Neither card shows on a first look. Each waits for the app's own sign of engagement: ten seconds of playback, a first message sent, a first session finished, a few notes written.
+- **One at a time.** Install first, notifications after: on an iPhone push only exists for a home-screen app, and an installed app is where notifications land best anyway. The host binds InstallBanner's `visible` and passes `when={engaged && !installShowing}` to PushBanner, so dismissing or completing the install card lets the next one in.
+- **Install comes back each session** until the app is installed: the lasting "stop showing this" is installing. Never in standalone mode; gone on `appinstalled`.
+- **Notifications ask twice at most.** Shown only while push is `off` on this device (not on, denied, unsupported, or an iPhone outside the home screen). Dismissed, it returns once a week later, then never; Settings keeps the toggle. A tap on the card is the gesture the permission prompt needs, so the browser's dialog follows at once, and the card's line says why the app would notify, which the bare dialog can't.
+- **Say what's in it for them**, in the app's voice: "Get a nudge when the day's gone quiet", not "Enable notifications".
+
+### Install prompts
 
 ### Capture early
 
@@ -223,12 +233,12 @@ const isStandalone = window.matchMedia('(display-mode: standalone)').matches
   || window.navigator.standalone === true;
 ```
 
-### The slide-in tip pattern
+### The drop-in card pattern
 
-A lower-third banner that slides in from the edge, not a modal. Implementation from Yael's app:
+A small card that drops in from the top, not a modal. (It used to be a lower-third that wiped in from the side; the bottom of most apps is taken, so it moved up, Nov 2026.) Implementation from Yael's app:
 
-- Position: `absolute`, anchored near the bottom above any player/nav bar
-- Entrance animation: slide from offscreen with `cubic-bezier(0.22, 1, 0.36, 1)` over 0.5s, opacity fade-in at 60%
+- Position: `fixed`, just under the top bar (`top: calc(var(--safe-top) + var(--topbar-h) + 10px)`), centred, beside the sidebar on desktop
+- Entrance: drops in from above (a fly of about 90px, ease-out, 0.45s); leaves upwards, faster
 - Frosted or semi-opaque background in the app's accent color
 - Expandable: tap to reveal platform-specific install instructions
 - For Android: one tap calls `installPrompt.prompt()` if the deferred event exists

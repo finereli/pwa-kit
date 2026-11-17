@@ -27,7 +27,7 @@ type Route = { view: 'home' } | { view: 'about' }
 export const router = new Router<Route>({ home: '/', parse(p) { return p === '/about' ? { view: 'about' } : { view: 'home' } } })
 R
 cat > src/lib/icons.ts <<'R'
-export const icons: Record<string, string> = { close: '', install_mobile: '', ios_share: '', more_vert: '' }
+export const icons: Record<string, string> = { close: '', install_mobile: '', ios_share: '', more_vert: '', notifications: '' }
 R
 
 # InstallBanner imports ./Icon.svelte from ui/ - the icons item's Icon.svelte lives in src/components in a real app; here keep both in shared/ui

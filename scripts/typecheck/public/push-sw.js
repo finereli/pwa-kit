@@ -1,4 +1,4 @@
-// pwa-kit: push/public/push-sw.js v2
+// pwa-kit: push/public/push-sw.js v4
 // Imported by the generated service worker: in vite.config's pwaOptions,
 //   workbox: { importScripts: ['/push-sw.js'], globIgnores: [..., '**/push-sw.js'] }
 // The browser byte-checks imported scripts on every update check, so a change
@@ -7,8 +7,12 @@
 // browser-replaced subscription to the server.
 //
 // Payload: { title, body, tag, url, unread }. url is where a tap goes (a
-// hash route works); unread sets the app badge. Seams: the icon and badge
-// paths below (the badge is a 72px monochrome glyph, Android's status bar).
+// hash route works); unread sets the app badge. Seam: the badge path below
+// (a 72px monochrome glyph, Android's status bar).
+//
+// Keep `icon`: Android draws a thumbnail on the right of every web
+// notification. Without an icon Chrome fills it with a grey letter (tried on
+// Stack, Samsung, Nov 2026), so the app icon is the better of the two.
 
 self.addEventListener('push', (event) => {
   let data = {}
