@@ -1,4 +1,4 @@
-<!-- pwa-kit: push/ui/PushBanner.svelte v5 -->
+<!-- pwa-kit: push/ui/PushBanner.svelte v6 -->
 <script lang="ts">
   // The notifications ask: the same card as InstallBanner (kit install/),
   // dropping in from the top. A tap on it is the user gesture the permission
@@ -11,15 +11,20 @@
   // On top of that it shows only while push is 'off' here: not when it's on,
   // denied (only browser settings can undo that), unsupported, or an iPhone
   // outside the home screen (push needs the install there; InstallBanner
-  // asks first). Dismissed, it comes back once after `again` ms, then never:
-  // Settings keeps the toggle.
+  // asks first). Nor in a browser tab once the app is installed
+  // (install/lib/installed.ts): the order is try, install, use, then
+  // notifications, so it asks the first time the installed app opens.
+  // Dismissed, it comes back once after `again` ms, then never: Settings
+  // keeps the toggle.
   //
-  // Needs the icons kit (notifications, close) and makePush (lib/push.ts).
+  // Needs the icons kit (notifications, close), makePush (lib/push.ts) and
+  // install's lib/installed.ts.
   // Seams: the strings, `top`, `again`, the storage key (from makePush's).
   import { fly } from 'svelte/transition'
   import { cubicOut } from 'svelte/easing'
   import Icon from './Icon.svelte'
   import type { makePush, PushState } from '../lib/push'
+  import { tabWithAppInstalled } from '../lib/installed'
 
   let {
     push,
@@ -55,7 +60,7 @@
   }
 
   $effect(() => {
-    if (!when) { visible = false; return }
+    if (!when || tabWithAppInstalled()) { visible = false; return }
     push.pushState().then((s) => {
       current = s
       visible = when && s === 'off' && due()

@@ -1,4 +1,4 @@
-<!-- pwa-kit: install/ui/InstallBanner.svelte v3 -->
+<!-- pwa-kit: install/ui/InstallBanner.svelte v4 -->
 <script lang="ts">
   // Install nudge: a small card that drops in from the top, just under the
   // top bar, not a modal. The top is free in most layouts (a composer, a
@@ -13,7 +13,10 @@
   // Needs the inline capture in index.html (window.__pwaInstallPrompt) and
   // the icons kit (install_mobile, close, ios_share, more_vert).
   // `ondismiss` fires when the banner goes away (closed, or installed), so
-  // the host can follow it with the next onboarding step.
+  // the host can follow it with the next onboarding step. An install is
+  // remembered (lib/installed.ts), and the next step then waits for the
+  // installed app: a browser tab can't open it, so asking for notifications
+  // there would be asking in the wrong place.
   // Seams: the strings, `top` (under the kit TopBar by default), colours
   // (accent-deep surface, a highlight for the icon and edge). One ask at a
   // time: PushBanner (kit push/) waits for this one (reference/behavior.md,
@@ -21,6 +24,7 @@
   import { fly } from 'svelte/transition'
   import { cubicOut } from 'svelte/easing'
   import Icon from './Icon.svelte'
+  import { installed, markInstalled } from '../lib/installed'
 
   let {
     when = false,
@@ -43,13 +47,11 @@
   let expanded = $state(false)
   let installPrompt = $state<BeforeInstallPromptEvent | null>(typeof window !== 'undefined' ? window.__pwaInstallPrompt ?? null : null)
 
-  const isStandalone =
-    typeof window !== 'undefined' &&
-    (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true)
   const isIOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
   $effect(() => {
-    if (isStandalone || dismissed) return
+    // Installed (here, or seen installed from this browser): nothing to ask.
+    if (installed() || dismissed) return
     if (when) visible = true
   })
 
@@ -77,7 +79,12 @@
     installPrompt.prompt()
     const { outcome } = await installPrompt.userChoice
     installPrompt = null
-    if (outcome === 'accepted') dismiss()
+    if (outcome === 'accepted') {
+      // Record it now: on Android appinstalled comes seconds later, once the
+      // app is built, and the next ask must already know to wait for the app.
+      markInstalled()
+      dismiss()
+    }
   }
 
   function tap() {

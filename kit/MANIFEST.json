@@ -226,27 +226,34 @@
     },
     "install": {
       "current_files": [
+        "lib/installed.ts",
         "src/pwa-install.d.ts",
         "ui/InstallBanner.svelte"
       ],
       "files": {
+        "lib/installed.ts": {
+          "4": "a3d0ef50911d71ba2cf571be0c62023490eb3801814162b1e4474aef5d79b502"
+        },
         "src/pwa-install.d.ts": {
           "1": "cf4f58236277ae3496d1f1be09477c458e253e2d85b7a17f710184cb383b2663",
           "2": "cf4f58236277ae3496d1f1be09477c458e253e2d85b7a17f710184cb383b2663",
-          "3": "cf4f58236277ae3496d1f1be09477c458e253e2d85b7a17f710184cb383b2663"
+          "3": "cf4f58236277ae3496d1f1be09477c458e253e2d85b7a17f710184cb383b2663",
+          "4": "cf4f58236277ae3496d1f1be09477c458e253e2d85b7a17f710184cb383b2663"
         },
         "ui/InstallBanner.svelte": {
           "1": "28bcc747e1b8e25a14ee95c03e844f5f43eab82e99e83bb5e3174f4a61d07e1f",
           "2": "466d5ffad3b02b59fa08448272bf434bed94ecfb115831877d4ec40d444bf9ed",
-          "3": "d8a3567158194391254d15880dca87613065254693e286609b85be6a73c2da6c"
+          "3": "d8a3567158194391254d15880dca87613065254693e286609b85be6a73c2da6c",
+          "4": "ee45e6631141d253009924e90ac53423d5108dc867bc40030814b28a74a87cc1"
         }
       },
       "notes": {
         "1": "initial kit extraction (yaelfiner shared/, angel, glopus)",
         "2": "InstallBanner: ondismiss callback, for chaining the next onboarding step",
-        "3": "InstallBanner drops in from the top, under the top bar, instead of wiping in from the side above the bottom (the bottom of most apps is taken); bindable visible so the notifications ask waits for it (found on timelog)"
+        "3": "InstallBanner drops in from the top, under the top bar, instead of wiping in from the side above the bottom (the bottom of most apps is taken); bindable visible so the notifications ask waits for it (found on timelog)",
+        "4": "lib/installed.ts remembers on the device that the app is installed (accepted, appinstalled, standalone; forgotten when the browser offers the install again), so a tab knows the next step belongs to the installed app; InstallBanner records an accepted install at once (timelog)"
       },
-      "version": 3
+      "version": 4
     },
     "login": {
       "current_files": [
@@ -381,52 +388,60 @@
           "2": "ac21c0349e2ed2dabb32aa53160ed218a8a2195df2c152c21da4fe082ee8cc58",
           "3": "ac21c0349e2ed2dabb32aa53160ed218a8a2195df2c152c21da4fe082ee8cc58",
           "4": "ac21c0349e2ed2dabb32aa53160ed218a8a2195df2c152c21da4fe082ee8cc58",
-          "5": "ac21c0349e2ed2dabb32aa53160ed218a8a2195df2c152c21da4fe082ee8cc58"
+          "5": "ac21c0349e2ed2dabb32aa53160ed218a8a2195df2c152c21da4fe082ee8cc58",
+          "6": "ac21c0349e2ed2dabb32aa53160ed218a8a2195df2c152c21da4fe082ee8cc58"
         },
         "functions/push-routes.ts": {
           "1": "0ba3550e755b0e57b8384b86d2ada672e0415ec9b47b2f7be65df724339c1600",
           "2": "0ba3550e755b0e57b8384b86d2ada672e0415ec9b47b2f7be65df724339c1600",
           "3": "0ba3550e755b0e57b8384b86d2ada672e0415ec9b47b2f7be65df724339c1600",
           "4": "0ba3550e755b0e57b8384b86d2ada672e0415ec9b47b2f7be65df724339c1600",
-          "5": "0ba3550e755b0e57b8384b86d2ada672e0415ec9b47b2f7be65df724339c1600"
+          "5": "0ba3550e755b0e57b8384b86d2ada672e0415ec9b47b2f7be65df724339c1600",
+          "6": "0ba3550e755b0e57b8384b86d2ada672e0415ec9b47b2f7be65df724339c1600"
         },
         "functions/web-push.ts": {
           "1": "60477adb1b2b7b976ac65a84d9d87c68729ee364f098686f19bcb4bac6438825",
           "2": "60477adb1b2b7b976ac65a84d9d87c68729ee364f098686f19bcb4bac6438825",
           "3": "60477adb1b2b7b976ac65a84d9d87c68729ee364f098686f19bcb4bac6438825",
           "4": "60477adb1b2b7b976ac65a84d9d87c68729ee364f098686f19bcb4bac6438825",
-          "5": "60477adb1b2b7b976ac65a84d9d87c68729ee364f098686f19bcb4bac6438825"
+          "5": "60477adb1b2b7b976ac65a84d9d87c68729ee364f098686f19bcb4bac6438825",
+          "6": "60477adb1b2b7b976ac65a84d9d87c68729ee364f098686f19bcb4bac6438825"
         },
         "lib/push.ts": {
           "1": "b63ce91091259618498bdc6b2dcdc87e77cd25cb262adf819f5e9ef8a0ab1ac0",
           "2": "b63ce91091259618498bdc6b2dcdc87e77cd25cb262adf819f5e9ef8a0ab1ac0",
           "3": "b63ce91091259618498bdc6b2dcdc87e77cd25cb262adf819f5e9ef8a0ab1ac0",
           "4": "b63ce91091259618498bdc6b2dcdc87e77cd25cb262adf819f5e9ef8a0ab1ac0",
-          "5": "b63ce91091259618498bdc6b2dcdc87e77cd25cb262adf819f5e9ef8a0ab1ac0"
+          "5": "b63ce91091259618498bdc6b2dcdc87e77cd25cb262adf819f5e9ef8a0ab1ac0",
+          "6": "b63ce91091259618498bdc6b2dcdc87e77cd25cb262adf819f5e9ef8a0ab1ac0"
         },
         "public/push-sw.js": {
           "1": "5e8a4ba2380383ab19ffe79dc49adc9c1bb7037a867dc529a7c908743f32e9d0",
           "2": "5e8a4ba2380383ab19ffe79dc49adc9c1bb7037a867dc529a7c908743f32e9d0",
           "3": "5e27c280cc381a5a572f891b3926fb596612d385699e7d69fa9721de12e7a803",
           "4": "be21f455b2f5deb24cb7cdd77e3e4c5ca23a90562818c18d8e2ed714dbb3ec6a",
-          "5": "be21f455b2f5deb24cb7cdd77e3e4c5ca23a90562818c18d8e2ed714dbb3ec6a"
+          "5": "be21f455b2f5deb24cb7cdd77e3e4c5ca23a90562818c18d8e2ed714dbb3ec6a",
+          "6": "be21f455b2f5deb24cb7cdd77e3e4c5ca23a90562818c18d8e2ed714dbb3ec6a"
         },
         "scripts/vapid.mjs": {
           "1": "8f2fef416c6d78e9e60062b9b62f95dfb50f52036f20adc1894b18f906da52b7",
           "2": "8f2fef416c6d78e9e60062b9b62f95dfb50f52036f20adc1894b18f906da52b7",
           "3": "8f2fef416c6d78e9e60062b9b62f95dfb50f52036f20adc1894b18f906da52b7",
           "4": "8f2fef416c6d78e9e60062b9b62f95dfb50f52036f20adc1894b18f906da52b7",
-          "5": "8f2fef416c6d78e9e60062b9b62f95dfb50f52036f20adc1894b18f906da52b7"
+          "5": "8f2fef416c6d78e9e60062b9b62f95dfb50f52036f20adc1894b18f906da52b7",
+          "6": "8f2fef416c6d78e9e60062b9b62f95dfb50f52036f20adc1894b18f906da52b7"
         },
         "test/web-push.test.ts": {
           "1": "71cde17d2f7d23c4778d23aa12c4dcc872eb9a18b8a742a006e7910c49fa317c",
           "2": "71cde17d2f7d23c4778d23aa12c4dcc872eb9a18b8a742a006e7910c49fa317c",
           "3": "71cde17d2f7d23c4778d23aa12c4dcc872eb9a18b8a742a006e7910c49fa317c",
           "4": "71cde17d2f7d23c4778d23aa12c4dcc872eb9a18b8a742a006e7910c49fa317c",
-          "5": "71cde17d2f7d23c4778d23aa12c4dcc872eb9a18b8a742a006e7910c49fa317c"
+          "5": "71cde17d2f7d23c4778d23aa12c4dcc872eb9a18b8a742a006e7910c49fa317c",
+          "6": "71cde17d2f7d23c4778d23aa12c4dcc872eb9a18b8a742a006e7910c49fa317c"
         },
         "ui/PushBanner.svelte": {
-          "5": "d6c1d8391593e7145867f481f9dde2a534d560ca7c987357501f73073d5207f9"
+          "5": "d6c1d8391593e7145867f481f9dde2a534d560ca7c987357501f73073d5207f9",
+          "6": "b384f036044f2eafc3001aa45dc9e0c3e34231968b63ff85c9256b71561247bf"
         }
       },
       "notes": {
@@ -434,9 +449,10 @@
         "2": "vapid.mjs: the header line was '#', which isn't JavaScript, so the script crashed on its first line. Now '//' like every other .mjs (found setting up Stack's reminders).",
         "3": "push-sw.js: no notification icon. Android shows the app icon on the left anyway; icon added a second one on the right and cost the message its room (found on Stack's reminders, Samsung).",
         "4": "push-sw.js: icon back. Without it Chrome draws a grey letter in the same spot on the right, so dropping it (v3) gained no room.",
-        "5": "PushBanner: the notifications ask, the install card's twin from the top; after engagement, only while push is off here, one ask at a time, dismissed comes back once a week later (timelog)"
+        "5": "PushBanner: the notifications ask, the install card's twin from the top; after engagement, only while push is off here, one ask at a time, dismissed comes back once a week later (timelog)",
+        "6": "PushBanner waits for the installed app instead of asking in the browser tab the install started from: try, install, use, then notifications (timelog)"
       },
-      "version": 5
+      "version": 6
     },
     "remote-log": {
       "current_files": [

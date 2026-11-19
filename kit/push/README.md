@@ -9,7 +9,7 @@ Web push for a PWA on Cloudflare: turning it on per device, sending from a Worke
 | `functions/web-push.ts` | `shared/functions/` (or the Worker's dir) | RFC 8291 encryption + RFC 8292 VAPID on WebCrypto; `fanOut(db, payload, env)` sends to every device and deletes the gone ones |
 | `functions/push-routes.ts` | next to it | `pushRoutes({ request, url, db, vapid, signedIn })`: key, subscribe, unsubscribe, test, renew. Returns `null` for other paths |
 | `lib/push.ts` | `shared/lib/` | `makePush({ apiJson, storageKey })`: `pushState`, `enablePush`, `disablePush`, `keepPush`, `testPush` |
-| `ui/PushBanner.svelte` | `shared/ui/` | the notifications ask: the install card's twin, from the top; shows only while push is off here, after engagement, never beside another ask; dismissed, back once a week later. Needs the icons kit (notifications, close) |
+| `ui/PushBanner.svelte` | `shared/ui/` | the notifications ask: the install card's twin, from the top; shows only while push is off here, after engagement, never beside another ask; dismissed, back once a week later. Needs the icons kit (notifications, close) and install's `lib/installed.ts`: once the app is installed it waits for the app instead of asking in a tab |
 | `public/push-sw.js` | `public/` | the service worker half: `push`, `notificationclick`, `pushsubscriptionchange` |
 | `db/push.sql` | a migration | the `push_subs` table |
 | `scripts/vapid.mjs` | run once | prints the key pair and subject for the app's secrets |
