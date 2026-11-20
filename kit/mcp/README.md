@@ -45,7 +45,7 @@ A Worker (Yara Reads) does the same in its `fetch`: `const r = await mcpAuth.rou
 `assets.run_worker_first` in wrangler so static assets don't swallow them.
 
 Settings endpoints (behind the app's own auth): `GET /api/agents` -> `mcpAuth.listClients(db, sub)`; `DELETE /api/agents/:id` ->
-`mcpAuth.revoke(db, id, sub)`. Render `AgentsPanel` with `address = location.origin + '/mcp'`; revoke optimistically, and re-fetch
+`mcpAuth.revoke(db, id, sub)`. Render `AgentsPanel` inside a `SettingsPage` (it draws two plain settings sections, "Connect an agent" and "Connected", in settings.css's classes, with no heading of its own; it needs the `settings` and `confirm` items) with `address = location.origin + '/mcp'`; revoke optimistically, and re-fetch
 the list when the panel opens (an agent may have been connected since).
 
 ## Decisions baked in

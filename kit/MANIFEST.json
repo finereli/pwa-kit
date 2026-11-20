@@ -288,28 +288,35 @@
       ],
       "files": {
         "db/mcp.sql": {
-          "1": "ffcf9475bb0e22665a8e6b8fcb3f446e5af90a8f6e1d3b7ff77b052350d168ab"
+          "1": "ffcf9475bb0e22665a8e6b8fcb3f446e5af90a8f6e1d3b7ff77b052350d168ab",
+          "2": "ffcf9475bb0e22665a8e6b8fcb3f446e5af90a8f6e1d3b7ff77b052350d168ab"
         },
         "functions/mcp-auth.ts": {
-          "1": "83831b653d40877e4610490aa33d69d07f6221cefc93d7a1935797fbdfcca51c"
+          "1": "83831b653d40877e4610490aa33d69d07f6221cefc93d7a1935797fbdfcca51c",
+          "2": "83831b653d40877e4610490aa33d69d07f6221cefc93d7a1935797fbdfcca51c"
         },
         "functions/mcp-server.ts": {
-          "1": "37e93a767cff6d86ad8049750a52ec06c0dde779aad2207b5c694a9017571b7a"
+          "1": "37e93a767cff6d86ad8049750a52ec06c0dde779aad2207b5c694a9017571b7a",
+          "2": "37e93a767cff6d86ad8049750a52ec06c0dde779aad2207b5c694a9017571b7a"
         },
         "scripts/dev-login.mjs": {
-          "1": "8738f970fe9b8f40df8959ea24ce68e9b3bfe556916fc720ed8846b10aff9305"
+          "1": "8738f970fe9b8f40df8959ea24ce68e9b3bfe556916fc720ed8846b10aff9305",
+          "2": "8738f970fe9b8f40df8959ea24ce68e9b3bfe556916fc720ed8846b10aff9305"
         },
         "scripts/mcp-flow-test.mjs": {
-          "1": "23669eb0f27a6027546fc504277dda053a74a7a480df6f21f8de58fe950b0598"
+          "1": "23669eb0f27a6027546fc504277dda053a74a7a480df6f21f8de58fe950b0598",
+          "2": "23669eb0f27a6027546fc504277dda053a74a7a480df6f21f8de58fe950b0598"
         },
         "ui/AgentsPanel.svelte": {
-          "1": "ef57d3551e51cfd5aa104c7582d602acc2863cb62be0c6a3e9cf4ffeb78e174a"
+          "1": "ef57d3551e51cfd5aa104c7582d602acc2863cb62be0c6a3e9cf4ffeb78e174a",
+          "2": "4151b7521b311db0d114d472f930fed771334e4ba5fb2aef357cc88fffeebf60"
         }
       },
       "notes": {
-        "1": "initial kit extraction (Accountant, Yara Reads)"
+        "1": "initial kit extraction (Accountant, Yara Reads)",
+        "2": "AgentsPanel is two plain settings sections (Connect an agent, Connected) in settings.css's classes, with ConfirmButton to disconnect; no heading or styles of its own, so it sits inside a SettingsPage like any other settings"
       },
-      "version": 1
+      "version": 2
     },
     "media": {
       "current_files": [
@@ -539,22 +546,26 @@
       "files": {
         "css/settings.css": {
           "1": "6bdf538e69791ef07699118246601d7a62c3d880481ca221f5a9260aa23aca2a",
-          "2": "6bdf538e69791ef07699118246601d7a62c3d880481ca221f5a9260aa23aca2a"
+          "2": "6bdf538e69791ef07699118246601d7a62c3d880481ca221f5a9260aa23aca2a",
+          "3": "6bdf538e69791ef07699118246601d7a62c3d880481ca221f5a9260aa23aca2a"
         },
         "ui/SettingsPage.svelte": {
           "1": "12bc20a2af6ef87e09b2e6d1513e2543bf1d0fff406018ea5cbac04a73721331",
-          "2": "12bc20a2af6ef87e09b2e6d1513e2543bf1d0fff406018ea5cbac04a73721331"
+          "2": "12bc20a2af6ef87e09b2e6d1513e2543bf1d0fff406018ea5cbac04a73721331",
+          "3": "4828471328851b5d88f10e18e925675d9ee659664d786c8e5a0cc861397897c0"
         },
         "ui/SettingsRow.svelte": {
           "1": "bfd8238a83f5bac6a23a0f3269f8630cc58a45ac6784e9ffdde809138c124614",
-          "2": "bfd8238a83f5bac6a23a0f3269f8630cc58a45ac6784e9ffdde809138c124614"
+          "2": "bfd8238a83f5bac6a23a0f3269f8630cc58a45ac6784e9ffdde809138c124614",
+          "3": "bfd8238a83f5bac6a23a0f3269f8630cc58a45ac6784e9ffdde809138c124614"
         }
       },
       "notes": {
         "1": "new: SettingsPage frame, SettingsRow, settings.css - flat first, multi-pane index of sub-pages when it grows (from Angel)",
-        "2": "point at the confirm item"
+        "2": "point at the confirm item",
+        "3": "SettingsPage draws no title or back link unless standalone: the kit's TopBar carries both at every width, and v2 said every page's title twice on desktop"
       },
-      "version": 2
+      "version": 3
     },
     "share": {
       "current_files": [

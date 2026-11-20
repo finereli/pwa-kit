@@ -28,7 +28,7 @@ Settings pages that start flat and grow into an index of sub-pages without a rew
 
 - Rows summarize current state, not contents (see SettingsRow's comment).
 - Account details (email, sign-out, delete my data) live on an Account page. The drawer footer shows avatar + name (`shell/ui/AccountMenu`), then the light/dark icon, the settings gear, the reload icon and the version (reference/shell.md → Sidebar).
-- On mobile the top bar shows the title and, on sub-pages, a back arrow (`TopBar leading="back"`, its target is the parent route); SettingsPage hides its own `h2` and back link there. On desktop SettingsPage shows both.
+- The top bar shows the title and, on sub-pages, a back arrow (`TopBar leading="back"`, its target is the parent route), at every width: the kit's TopBar keeps its title on desktop beside the sidebar. So SettingsPage draws no title or back link of its own. Pass `standalone` only in an app without a titled top bar; then it shows its `h2`, and on desktop sub-pages a link back up. (v2 showed both on desktop and every page said its title twice.)
 - Borderless rows with hairline separators, hover tint - not cards. Status dots: `.dot.ok / .warn / .error`.
 - Buttons: `.apply-btn` (primary pill), `.quiet-btn` (outline, `.neutral` for non-destructive), `.danger-btn` (`.solid` for the confirm step). Two-step inline confirms, never `confirm()` (kit `confirm/`, ConfirmButton).
 - Max width 42rem, centred.
