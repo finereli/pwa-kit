@@ -1,4 +1,4 @@
-<!-- pwa-kit: settings/ui/SettingsPage.svelte v2 -->
+<!-- pwa-kit: settings/ui/SettingsPage.svelte v3 -->
 <script lang="ts">
   import type { Snippet } from 'svelte'
   import '../css/settings.css'
